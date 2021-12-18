@@ -6,7 +6,6 @@ on:
 
 env:
   RESOURCE_GROUP: rg-aca
-  LOCATION: westeurope
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
