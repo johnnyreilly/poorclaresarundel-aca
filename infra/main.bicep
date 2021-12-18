@@ -1,14 +1,11 @@
 param subscriptionId string
 param name string
-param location string
-param kubeEnvironmentId string
-param containers array
-param secrets array
-param registries array
-param ingress object
-param environmentName string
-param workspaceName string
-param workspaceLocation string
+param secrets array = []
+
+var location = resourceGroup().location
+var kubeEnvironmentId = '/subscriptions/${subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/kubeEnvironments/Production'
+var environmentName = 'Production'
+var workspaceName = '${name}-log-analytics'
 
 resource name_resource 'Microsoft.Web/containerapps@2021-03-01' = {
   name: name
@@ -18,11 +15,24 @@ resource name_resource 'Microsoft.Web/containerapps@2021-03-01' = {
     kubeEnvironmentId: kubeEnvironmentId
     configuration: {
       secrets: secrets
-      registries: registries
-      ingress: ingress
+      registries: []
+      ingress: {
+        'external':true
+        'targetPort':80
+      }
     }
     template: {
-      containers: containers
+      containers: [
+        {
+          'name':'simple-hello-world-container'
+          'image':'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+          'command':[]
+          'resources':{
+            'cpu':'.25'
+            'memory':'.5Gi'
+          }
+        }
+      ]
     }
   }
   dependsOn: [
@@ -51,7 +61,7 @@ resource environmentName_resource 'Microsoft.Web/kubeEnvironments@2021-03-01' = 
 
 resource workspaceName_resource 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: workspaceName
-  location: workspaceLocation
+  location: location
   properties: {
     sku: {
       name: 'PerGB2018'
