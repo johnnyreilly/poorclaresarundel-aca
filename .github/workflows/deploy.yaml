@@ -25,8 +25,9 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az group create -g ${{ env.RESOURCE_GROUP }} -l ${{ env.LOCATION }}
-            az deployment group create -g ${{ env.RESOURCE_GROUP }} -f ./infra/main.bicep \
-             -p \
-                subscriptionId='${{ secrets.SUBSCRIPTION_ID }}'
+            az deployment group create \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --template-file ./infra/main.bicep \
+              --parameters \
+                subscriptionId='${{ secrets.SUBSCRIPTION_ID }}' \
                 name='container-app'
