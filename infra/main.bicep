@@ -7,7 +7,35 @@ var kubeEnvironmentId = '/subscriptions/${subscriptionId}/resourceGroups/${resou
 var environmentName = 'Production'
 var workspaceName = '${name}-log-analytics'
 
-resource name_resource 'Microsoft.Web/containerapps@2021-03-01' = {
+resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
+  name: workspaceName
+  location: location
+  properties: {
+    sku: {
+      name: 'PerGB2018'
+    }
+    retentionInDays: 30
+    workspaceCapping: {}
+  }
+}
+
+resource environment 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
+  name: environmentName
+  location: location
+  properties: {
+    type: 'managed'
+    internalLoadBalancerEnabled: false
+    appLogsConfiguration: {
+      destination: 'log-analytics'
+      logAnalyticsConfiguration: {
+        customerId: workspace.properties.customerId //  reference('Microsoft.OperationalInsights/workspaces/${workspaceName}', '2020-08-01').customerId
+        sharedKey: listKeys(workspace.id, workspace.apiVersion).primarySharedKey  // listKeys('Microsoft.OperationalInsights/workspaces/${workspaceName}', '2020-08-01').primarySharedKey
+      }
+    }
+  }
+}
+
+resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
   name: name
   kind: 'containerapps'
   location: location
@@ -36,38 +64,6 @@ resource name_resource 'Microsoft.Web/containerapps@2021-03-01' = {
     }
   }
   dependsOn: [
-    environmentName_resource
+    environment
   ]
-}
-
-resource environmentName_resource 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
-  name: environmentName
-  location: location
-  properties: {
-    type: 'managed'
-    internalLoadBalancerEnabled: false
-    appLogsConfiguration: {
-      destination: 'log-analytics'
-      logAnalyticsConfiguration: {
-        customerId: reference('Microsoft.OperationalInsights/workspaces/${workspaceName}', '2020-08-01').customerId
-        sharedKey: listKeys('Microsoft.OperationalInsights/workspaces/${workspaceName}', '2020-08-01').primarySharedKey
-      }
-    }
-  }
-  dependsOn: [
-    workspaceName_resource
-  ]
-}
-
-resource workspaceName_resource 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
-  name: workspaceName
-  location: location
-  properties: {
-    sku: {
-      name: 'PerGB2018'
-    }
-    retentionInDays: 30
-    workspaceCapping: {}
-  }
-  dependsOn: []
 }
