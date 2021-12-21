@@ -1,11 +1,18 @@
-param subscriptionId string
-param name string
-param secrets array = []
+param location string = resourceGroup().location
+param environmentName string = 'env-${uniqueString(resourceGroup().id)}'
+// param apimName string = 'store-api-mgmt-${uniqueString(resourceGroup().id)}'
+param minReplicas int = 0
+param nodeImage string = 'nginx'
+param nodePort int = 3000
+param isNodeExternalIngress bool = true
+param containerRegistry string
+param containerRegistryUsername string
 
-var location = resourceGroup().location
-var kubeEnvironmentId = '/subscriptions/${subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/kubeEnvironments/Production'
-var environmentName = 'Production'
-var workspaceName = '${name}-log-analytics'
+@secure()
+param containerRegistryPassword string
+
+var nodeServiceAppName = 'node-app'
+var workspaceName = '${nodeServiceAppName}-log-analytics'
 
 resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: workspaceName
@@ -16,6 +23,17 @@ resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
     }
     retentionInDays: 30
     workspaceCapping: {}
+  }
+}
+
+resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
+  name: '{nodeServiceAppName}-app-insights'
+  location: location
+  kind: 'web'
+  properties: { 
+    Application_Type: 'web'
+    Flow_Type: 'Bluefield'
+    // Request_Source: 'CustomDeployment'
   }
 }
 
@@ -32,38 +50,53 @@ resource environment 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
         sharedKey: listKeys(workspace.id, workspace.apiVersion).primarySharedKey
       }
     }
+    containerAppsConfiguration: {
+      daprAIInstrumentationKey: appInsights.properties.InstrumentationKey
+    }
   }
 }
 
 resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
-  name: name
+  name: nodeServiceAppName
   kind: 'containerapps'
   location: location
   properties: {
-    kubeEnvironmentId: kubeEnvironmentId
+    kubeEnvironmentId: environment.properties.id
     configuration: {
-      secrets: secrets
-      registries: []
+      secrets: [
+        {
+          name: 'container-registry-password'
+          value: containerRegistryPassword
+        }
+      ]
+      registries: [
+        {
+          server: containerRegistry
+          username: containerRegistryUsername
+          passwordSecretRef: 'container-registry-password'
+        }
+      ]
       ingress: {
-        'external':true
-        'targetPort':80
+        'external': isNodeExternalIngress
+        'targetPort': nodePort
       }
     }
     template: {
       containers: [
         {
-          'name':'simple-hello-world-container'
-          'image':'registry.hub.docker.com/library/johnnyreilly/poorclaresarundel:latest'
-          'command':[]
+          image: nodeImage
+          name: nodeServiceAppName
+          transport: 'auto'
+          // env: []
           'resources':{
             'cpu':'.25'
             'memory':'.5Gi'
           }
         }
       ]
+      scale: {
+        minReplicas: minReplicas
+      }
     }
   }
-  dependsOn: [
-    environment
-  ]
 }
