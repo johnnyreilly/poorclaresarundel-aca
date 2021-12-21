@@ -61,7 +61,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
   kind: 'containerapps'
   location: location
   properties: {
-    kubeEnvironmentId: environment.properties.id
+    kubeEnvironmentId: environment.id
     configuration: {
       secrets: [
         {
