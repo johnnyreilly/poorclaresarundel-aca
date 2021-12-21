@@ -28,8 +28,8 @@ resource environment 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
     appLogsConfiguration: {
       destination: 'log-analytics'
       logAnalyticsConfiguration: {
-        customerId: workspace.properties.customerId //  reference('Microsoft.OperationalInsights/workspaces/${workspaceName}', '2020-08-01').customerId
-        sharedKey: listKeys(workspace.id, workspace.apiVersion).primarySharedKey  // listKeys('Microsoft.OperationalInsights/workspaces/${workspaceName}', '2020-08-01').primarySharedKey
+        customerId: workspace.properties.customerId
+        sharedKey: listKeys(workspace.id, workspace.apiVersion).primarySharedKey
       }
     }
   }
@@ -53,7 +53,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
       containers: [
         {
           'name':'simple-hello-world-container'
-          'image':'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+          'image':'index.docker.io/v1/johnnyreilly/poorclaresarundel:latest'
           'command':[]
           'resources':{
             'cpu':'.25'

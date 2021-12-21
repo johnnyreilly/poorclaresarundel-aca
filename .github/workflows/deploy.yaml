@@ -5,8 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  RESOURCE_GROUP: rg-aca
-  IMAGE_NAME: ${{ github.repository }}
+  RESOURCE_GROUP: rg-poorclaresarundel
 
 jobs:
   deploy:
@@ -29,4 +28,4 @@ jobs:
               --template-file ./infra/main.bicep \
               --parameters \
                 subscriptionId='${{ secrets.SUBSCRIPTION_ID }}' \
-                name='container-app'
+                name='ca-poorclaresarundel'
