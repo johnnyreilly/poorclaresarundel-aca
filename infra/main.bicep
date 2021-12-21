@@ -53,7 +53,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
       containers: [
         {
           'name':'simple-hello-world-container'
-          'image':'index.docker.io/v1/johnnyreilly/poorclaresarundel:latest'
+          'image':'registry.hub.docker.com/library/johnnyreilly/poorclaresarundel:latest'
           'command':[]
           'resources':{
             'cpu':'.25'
