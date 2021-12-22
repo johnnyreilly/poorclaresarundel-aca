@@ -12,12 +12,15 @@ param containerRegistryUsername string
 @secure()
 param containerRegistryPassword string
 
+param tags object
+
 var nodeServiceAppName = 'node-app'
 var workspaceName = '${nodeServiceAppName}-log-analytics'
 
 resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: workspaceName
   location: location
+  tags: tags
   properties: {
     sku: {
       name: 'PerGB2018'
@@ -30,6 +33,7 @@ resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
 resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
   name: '${nodeServiceAppName}-app-insights'
   location: location
+  tags: tags
   kind: 'web'
   properties: { 
     Application_Type: 'web'
@@ -41,6 +45,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
 resource environment 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
   name: environmentName
   location: location
+  tags: tags
   properties: {
     type: 'managed'
     internalLoadBalancerEnabled: false
@@ -60,6 +65,7 @@ resource environment 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
 resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
   name: nodeServiceAppName
   kind: 'containerapps'
+  tags: tags
   location: location
   properties: {
     kubeEnvironmentId: environment.id

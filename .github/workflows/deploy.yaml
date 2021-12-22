@@ -2,7 +2,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: [ main ]
+    # branches: [ main ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   workflow_dispatch:
@@ -79,8 +79,10 @@ jobs:
 
       - name: Deploy bicep
         uses: azure/CLI@v1
+        if: github.event_name != 'pull_request'
         with:
           inlineScript: |
+            tags='{"Owner":"Contoso","Cost Center":"2345-324"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --template-file ./infra/main.bicep \
@@ -92,4 +94,24 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
+                  resourceTags="$tags"
+
+      - name: What-if bicep
+        uses: azure/CLI@v1
+        if: github.event_name == 'pull_request'
+        with:
+          inlineScript: |
+            tags='{"Owner":"Contoso","Cost Center":"2345-324"}'
+            az deployment group what-if \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --template-file ./infra/main.bicep \
+              --parameters \
+                  minReplicas=0 \
+                  nodeImage='${{ needs.build.outputs.containerImage-node }}' \
+                  nodePort=3000 \
+                  isNodeExternalIngress=true \
+                  containerRegistry=${{ env.REGISTRY }} \
+                  containerRegistryUsername=${{ github.actor }} \
+                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
+                  resourceTags="$tags"
 
