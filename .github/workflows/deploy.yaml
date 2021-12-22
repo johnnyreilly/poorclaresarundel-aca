@@ -81,6 +81,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
+            tags='{"Owner":"Contoso","Cost Center":"2345-324"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --template-file ./infra/main.bicep \
@@ -92,4 +93,5 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
+                  resourceTags="$tags"
 
