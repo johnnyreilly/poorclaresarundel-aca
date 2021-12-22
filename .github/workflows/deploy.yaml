@@ -88,7 +88,7 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           inlineScript: |
-            tags='{"Owner":"Contoso","Cost Center":"2345-324"}'
+            tags='{"Owner":"johnnyreilly"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --template-file ./infra/main.bicep \
@@ -107,7 +107,7 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           inlineScript: |
-            tags='{"Owner":"Contoso","Cost Center":"2345-324"}'
+            tags='{"Owner":"johnnyreilly"}'
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --template-file ./infra/main.bicep \
