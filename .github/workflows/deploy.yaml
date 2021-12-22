@@ -99,7 +99,7 @@ jobs:
                   isNodeExternalIngress=true \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
-                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
+                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
                   tags="$tags"
 
       - name: What-if bicep
@@ -118,6 +118,6 @@ jobs:
                   isNodeExternalIngress=true \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
-                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
+                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
                   tags="$tags"
 
