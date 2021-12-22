@@ -16,6 +16,7 @@ param tags object
 
 var nodeServiceAppName = 'node-app'
 var workspaceName = '${nodeServiceAppName}-log-analytics'
+var containerRegistryPasswordRef = 'container-registry-password'
 
 resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: workspaceName
@@ -72,7 +73,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
     configuration: {
       secrets: [
         {
-          name: 'container-registry-password'
+          name: containerRegistryPasswordRef
           value: containerRegistryPassword
         }
       ]
@@ -80,7 +81,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         {
           server: containerRegistry
           username: containerRegistryUsername
-          passwordSecretRef: 'container-registry-password'
+          passwordSecretRef: containerRegistryPasswordRef
         }
       ]
       ingress: {
