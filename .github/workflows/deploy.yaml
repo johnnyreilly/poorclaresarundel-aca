@@ -100,7 +100,7 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
-                  resourceTags="$tags"
+                  tags="$tags"
 
       - name: What-if bicep
         uses: azure/CLI@v1
@@ -119,5 +119,5 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
-                  resourceTags="$tags"
+                  tags="$tags"
 
