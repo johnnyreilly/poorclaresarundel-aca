@@ -91,4 +91,4 @@ jobs:
                   isNodeExternalIngress=true \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
-                  containerRegistryPassword=broken
+                  containerRegistryPassword=${{ secrets.GITHUB_TOKEN }}
