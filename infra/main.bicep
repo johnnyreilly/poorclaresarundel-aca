@@ -14,6 +14,12 @@ param containerRegistryPassword string
 
 param tags object
 
+@secure()
+param APPSETTINGS_API_KEY string
+param APPSETTINGS_DOMAIN string
+param APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL string
+param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
+
 var nodeServiceAppName = 'node-app'
 var workspaceName = '${nodeServiceAppName}-log-analytics'
 var containerRegistryPasswordRef = 'container-registry-password'
@@ -76,6 +82,10 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
           name: containerRegistryPasswordRef
           value: containerRegistryPassword
         }
+        {
+          name: 'APPSETTINGS_API_KEY'
+          value: APPSETTINGS_API_KEY
+        }
       ]
       registries: [
         {
@@ -95,6 +105,24 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
           image: nodeImage
           name: nodeServiceAppName
           transport: 'auto'
+          env: [
+            {
+              name: 'APPSETTINGS_API_KEY'
+              secretref: 'APPSETTINGS_API_KEY'
+            }
+            {
+              name: 'APPSETTINGS_DOMAIN'
+              value: APPSETTINGS_DOMAIN
+            }
+            {
+              name: 'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL'
+              value: APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL
+            }
+            {
+              name: 'APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL'
+              value: APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL
+            }
+          ]
           // 'resources':{
           //   'cpu':'.25'
           //   'memory':'.5Gi'
