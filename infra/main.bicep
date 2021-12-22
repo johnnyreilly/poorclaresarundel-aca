@@ -1,10 +1,11 @@
 param location string = resourceGroup().location
 param environmentName string = 'env-${uniqueString(resourceGroup().id)}'
-// param apimName string = 'store-api-mgmt-${uniqueString(resourceGroup().id)}'
 param minReplicas int = 0
+
 param nodeImage string = 'nginx'
 param nodePort int = 3000
 param isNodeExternalIngress bool = true
+
 param containerRegistry string
 param containerRegistryUsername string
 
@@ -27,7 +28,7 @@ resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
 }
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
-  name: '{nodeServiceAppName}-app-insights'
+  name: '${nodeServiceAppName}-app-insights'
   location: location
   kind: 'web'
   properties: { 
@@ -87,11 +88,10 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
           image: nodeImage
           name: nodeServiceAppName
           transport: 'auto'
-          // env: []
-          'resources':{
-            'cpu':'.25'
-            'memory':'.5Gi'
-          }
+          // 'resources':{
+          //   'cpu':'.25'
+          //   'memory':'.5Gi'
+          // }
         }
       ]
       scale: {
