@@ -100,10 +100,10 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
-                  tags="$tags"
-                  APPSETTINGS_API_KEY={{ secrets.APPSETTINGS_API_KEY }}
-                  APPSETTINGS_DOMAIN={{ secrets.APPSETTINGS_DOMAIN }}
-                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL={{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}
+                  tags="$tags" \
+                  APPSETTINGS_API_KEY={{ secrets.APPSETTINGS_API_KEY }} \
+                  APPSETTINGS_DOMAIN={{ secrets.APPSETTINGS_DOMAIN }} \
+                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL={{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }} \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL={{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}
 
       - name: What-if bicep
@@ -123,9 +123,9 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
-                  tags="$tags"
-                  APPSETTINGS_API_KEY={{ secrets.APPSETTINGS_API_KEY }}
-                  APPSETTINGS_DOMAIN={{ secrets.APPSETTINGS_DOMAIN }}
-                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL={{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}
+                  tags="$tags" \
+                  APPSETTINGS_API_KEY={{ secrets.APPSETTINGS_API_KEY }} \
+                  APPSETTINGS_DOMAIN={{ secrets.APPSETTINGS_DOMAIN }} \
+                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL={{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }} \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL={{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}
 
