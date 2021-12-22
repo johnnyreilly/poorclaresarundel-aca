@@ -92,3 +92,4 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.GITHUB_TOKEN }}
+
