@@ -1,8 +1,14 @@
 # yaml-language-server: $schema=./build.yaml
 name: Build and Deploy
 on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
   push:
-    # branches: [ main ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   workflow_dispatch:
@@ -82,7 +88,7 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           inlineScript: |
-            tags='{"Owner":"Contoso","Cost Center":"2345-324"}'
+            tags='{"Owner":"johnnyreilly"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --template-file ./infra/main.bicep \
@@ -93,15 +99,19 @@ jobs:
                   isNodeExternalIngress=true \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
-                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
-                  resourceTags="$tags"
+                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
+                  tags="$tags" \
+                  APPSETTINGS_API_KEY="{{ secrets.APPSETTINGS_API_KEY }}" \
+                  APPSETTINGS_DOMAIN="{{ secrets.APPSETTINGS_DOMAIN }}" \
+                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="{{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
+                  APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="{{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
 
       - name: What-if bicep
         uses: azure/CLI@v1
         if: github.event_name == 'pull_request'
         with:
           inlineScript: |
-            tags='{"Owner":"Contoso","Cost Center":"2345-324"}'
+            tags='{"Owner":"johnnyreilly"}'
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --template-file ./infra/main.bicep \
@@ -112,6 +122,10 @@ jobs:
                   isNodeExternalIngress=true \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
-                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }}
-                  resourceTags="$tags"
+                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
+                  tags="$tags" \
+                  APPSETTINGS_API_KEY="{{ secrets.APPSETTINGS_API_KEY }}" \
+                  APPSETTINGS_DOMAIN="{{ secrets.APPSETTINGS_DOMAIN }}" \
+                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="{{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
+                  APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="{{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
 
