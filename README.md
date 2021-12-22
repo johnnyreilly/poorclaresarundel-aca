@@ -1,5 +1,7 @@
 # Poor Clares Arundel
 
+[![Build and Deploy](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml/badge.svg)](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml)
+
 Poor Clares Arundel ported to run on Azure Container Apps
 
 The work here is heavily inspired by: https://github.com/Azure-Samples/container-apps-store-api-microservice
