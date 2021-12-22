@@ -22,7 +22,9 @@ param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
 var nodeServiceAppName = 'node-app'
 var workspaceName = '${nodeServiceAppName}-log-analytics'
+
 var containerRegistryPasswordRef = 'container-registry-password'
+var mailgunApiKeyRef = 'mailgun-api-key'
 
 resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: workspaceName
@@ -83,7 +85,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
           value: containerRegistryPassword
         }
         {
-          name: 'APPSETTINGS_API_KEY'
+          name: mailgunApiKeyRef
           value: APPSETTINGS_API_KEY
         }
       ]
@@ -108,7 +110,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
           env: [
             {
               name: 'APPSETTINGS_API_KEY'
-              secretref: 'APPSETTINGS_API_KEY'
+              secretref: mailgunApiKeyRef
             }
             {
               name: 'APPSETTINGS_DOMAIN'
