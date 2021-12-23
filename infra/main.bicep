@@ -1,14 +1,9 @@
-param location string = resourceGroup().location
-param environmentName string = 'env-${uniqueString(resourceGroup().id)}'
-param minReplicas int = 0
-
-param nodeImage string = 'nginx'
-param nodePort int = 3000
-param isNodeExternalIngress bool = true
+param nodeImage string
+param nodePort int
+param nodeIsExternalIngress bool
 
 param containerRegistry string
 param containerRegistryUsername string
-
 @secure()
 param containerRegistryPassword string
 
@@ -20,8 +15,13 @@ param APPSETTINGS_DOMAIN string
 param APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL string
 param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
+var location = resourceGroup().location
+var environmentName = 'env-${uniqueString(resourceGroup().id)}'
+var minReplicas = 0
+
 var nodeServiceAppName = 'node-app'
 var workspaceName = '${nodeServiceAppName}-log-analytics'
+var appInsightsName = '${nodeServiceAppName}-app-insights'
 
 var containerRegistryPasswordRef = 'container-registry-password'
 var mailgunApiKeyRef = 'mailgun-api-key'
@@ -40,14 +40,13 @@ resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
 }
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
-  name: '${nodeServiceAppName}-app-insights'
+  name: appInsightsName
   location: location
   tags: tags
   kind: 'web'
   properties: { 
     Application_Type: 'web'
     Flow_Type: 'Bluefield'
-    // Request_Source: 'CustomDeployment'
   }
 }
 
@@ -97,7 +96,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         }
       ]
       ingress: {
-        'external': isNodeExternalIngress
+        'external': nodeIsExternalIngress
         'targetPort': nodePort
       }
     }
@@ -125,10 +124,6 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
               value: APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL
             }
           ]
-          // 'resources':{
-          //   'cpu':'.25'
-          //   'memory':'.5Gi'
-          // }
         }
       ]
       scale: {

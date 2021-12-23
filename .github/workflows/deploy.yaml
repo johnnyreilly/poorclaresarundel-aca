@@ -88,15 +88,14 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           inlineScript: |
-            tags='{"Owner":"johnnyreilly"}'
+            tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --template-file ./infra/main.bicep \
               --parameters \
-                  minReplicas=0 \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
                   nodePort=3000 \
-                  isNodeExternalIngress=true \
+                  nodeIsExternalIngress=true \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
@@ -111,15 +110,14 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           inlineScript: |
-            tags='{"Owner":"johnnyreilly"}'
+            tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --template-file ./infra/main.bicep \
               --parameters \
-                  minReplicas=0 \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
                   nodePort=3000 \
-                  isNodeExternalIngress=true \
+                  nodeIsExternalIngress=true \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
