@@ -42,3 +42,12 @@ The generated JSON should look something like this:
 Store this value in a secret named `AZURE_CREDENTIALS`.
 
 We also need a secret for accessing packages from Azure. We're going to be publishing packages to the GitHub container registry.  Azure is going to need to be able to access this when we're deploying; so we'll set up a `PACKAGES_TOKEN` secret. This is a GitHub personal access token with the `read:packages` scope. [Learn more](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+## Secrets for the app
+
+The app also needs a number of secrets created:
+
+- `APPSETTINGS_API_KEY` - an API key for Mailgun which will be used to send emails
+- `APPSETTINGS_DOMAIN` - the domain for the email eg `mg.poorclaresarundel.org`
+- `APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL` - who automated emails should come from eg `noreply@mg.poorclaresarundel.org`
+- `APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL` - the email address emails should be sent to
