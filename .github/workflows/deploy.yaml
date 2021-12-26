@@ -95,7 +95,7 @@ jobs:
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name $DEPLOYMENT_NAME \
+              --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
@@ -137,7 +137,7 @@ jobs:
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name '$DEPLOYMENT_NAME' \
+              --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
