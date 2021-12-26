@@ -132,3 +132,5 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
     }
   }
 }
+
+output nodeUrl string = containerApp.properties.latestRevisionFqdn

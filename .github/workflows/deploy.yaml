@@ -88,9 +88,11 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           inlineScript: |
+            deploymentName='${{ github.ref }}.${{ github.sha }}'
             tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
+              --name $deploymentName
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
@@ -104,15 +106,18 @@ jobs:
                   APPSETTINGS_DOMAIN="${{ secrets.APPSETTINGS_DOMAIN }}" \
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
+              # --query properties.outputs.nodeUrl
 
       - name: What-if bicep
         uses: azure/CLI@v1
         if: github.event_name == 'pull_request'
         with:
           inlineScript: |
+            deploymentName='${{ github.ref }}.${{ github.sha }}'
             tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
+              --name $deploymentName
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
