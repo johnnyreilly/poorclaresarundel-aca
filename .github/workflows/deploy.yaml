@@ -92,7 +92,7 @@ jobs:
             tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name $deploymentName
+              --name $deploymentName \
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
@@ -106,7 +106,21 @@ jobs:
                   APPSETTINGS_DOMAIN="${{ secrets.APPSETTINGS_DOMAIN }}" \
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
-              # --query properties.outputs.nodeUrl
+
+            echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $deploymentName"
+            deploymentoutputs=$(az deployment group show \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --name $deploymentName \
+              --query properties.outputs)
+
+            echo 'convert outputs to variables'
+            echo $deploymentoutputs | jq -c '. | to_entries[] | [.key, .value.value]' |
+              while IFS=$"\n" read -r c; do
+                outputname=$(echo "$c" | jq -r '.[0]')
+                outputvalue=$(echo "$c" | jq -r '.[1]')
+                echo "setting variable RGDO_$outputname=$outputvalue"
+                # echo "##vso[task.setvariable variable=RGDO_$outputname]$outputvalue"
+              done              # --query properties.outputs.nodeUrl
 
       - name: What-if bicep
         uses: azure/CLI@v1
@@ -117,7 +131,7 @@ jobs:
             tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name $deploymentName
+              --name $deploymentName \
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
