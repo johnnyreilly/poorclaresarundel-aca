@@ -90,7 +90,7 @@ jobs:
           inlineScript: |
             REF_SHA='${{ github.ref }}.${{ github.sha }}'
             DEPLOYMENT_NAME="${REF_SHA////-}"
-            echo "Deploy $DEPLOYMENT_NAME"
+            echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
@@ -111,19 +111,19 @@ jobs:
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
 
             echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
-            deploymentoutputs=$(az deployment group show \
+            DEPLOYMENT_OUTPUTS=$(az deployment group show \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --name $DEPLOYMENT_NAME \
               --query properties.outputs)
 
             echo 'convert outputs to variables'
-            echo $deploymentoutputs | jq -c '. | to_entries[] | [.key, .value.value]' |
+            echo $DEPLOYMENT_OUTPUTS | jq -c '. | to_entries[] | [.key, .value.value]' |
               while IFS=$"\n" read -r c; do
-                outputname=$(echo "$c" | jq -r '.[0]')
-                outputvalue=$(echo "$c" | jq -r '.[1]')
-                echo "setting variable RGDO_$outputname=$outputvalue"
-                # echo "##vso[task.setvariable variable=RGDO_$outputname]$outputvalue"
-              done              # --query properties.outputs.nodeUrl
+                OUTPUT_NAME=$(echo "$c" | jq -r '.[0]')
+                OUTPUT_VALUE=$(echo "$c" | jq -r '.[1]')
+                echo "setting variable $OUTPUT_NAME=$OUTPUT_VALUE"
+                echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
+              done # --query properties.outputs.nodeUrl
 
       - name: What-if bicep
         uses: azure/CLI@v1
@@ -132,7 +132,7 @@ jobs:
           inlineScript: |
             REF_SHA='${{ github.ref }}.${{ github.sha }}'
             DEPLOYMENT_NAME="${REF_SHA////-}"
-            echo "What-if $DEPLOYMENT_NAME"
+            echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group what-if \
