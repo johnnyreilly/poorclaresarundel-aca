@@ -88,11 +88,13 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           inlineScript: |
-            deploymentName='${{ github.ref }}.${{ github.sha }}'
+            REF_SHA='${{ github.ref }}.${{ github.sha }}'
+            DEPLOYMENT_NAME="${github_ref////-}"
+
             tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name $deploymentName \
+              --name $DEPLOYMENT_NAME \
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
@@ -107,10 +109,10 @@ jobs:
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
 
-            echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $deploymentName"
+            echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
             deploymentoutputs=$(az deployment group show \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name $deploymentName \
+              --name $DEPLOYMENT_NAME \
               --query properties.outputs)
 
             echo 'convert outputs to variables'
@@ -127,11 +129,13 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           inlineScript: |
-            deploymentName='${{ github.ref }}.${{ github.sha }}'
+            REF_SHA='${{ github.ref }}.${{ github.sha }}'
+            DEPLOYMENT_NAME="${github_ref////-}"
+
             tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name $deploymentName \
+              --name $DEPLOYMENT_NAME \
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
