@@ -88,9 +88,14 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           inlineScript: |
-            tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
+            REF_SHA='${{ github.ref }}.${{ github.sha }}'
+            DEPLOYMENT_NAME="${REF_SHA////-}"
+            echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
+
+            TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
+              --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
@@ -99,20 +104,40 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
-                  tags="$tags" \
+                  tags="$TAGS" \
                   APPSETTINGS_API_KEY="${{ secrets.APPSETTINGS_API_KEY }}" \
                   APPSETTINGS_DOMAIN="${{ secrets.APPSETTINGS_DOMAIN }}" \
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
+
+            echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
+            DEPLOYMENT_OUTPUTS=$(az deployment group show \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --name $DEPLOYMENT_NAME \
+              --query properties.outputs)
+
+            echo 'convert outputs to variables'
+            echo $DEPLOYMENT_OUTPUTS | jq -c '. | to_entries[] | [.key, .value.value]' |
+              while IFS=$"\n" read -r c; do
+                OUTPUT_NAME=$(echo "$c" | jq -r '.[0]')
+                OUTPUT_VALUE=$(echo "$c" | jq -r '.[1]')
+                echo "setting variable $OUTPUT_NAME=$OUTPUT_VALUE"
+                echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
+              done # --query properties.outputs.nodeUrl
 
       - name: What-if bicep
         uses: azure/CLI@v1
         if: github.event_name == 'pull_request'
         with:
           inlineScript: |
-            tags='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
+            REF_SHA='${{ github.ref }}.${{ github.sha }}'
+            DEPLOYMENT_NAME="${REF_SHA////-}"
+            echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
+
+            TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
+              --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
                   nodeImage='${{ needs.build.outputs.containerImage-node }}' \
@@ -121,7 +146,7 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
-                  tags="$tags" \
+                  tags="$TAGS" \
                   APPSETTINGS_API_KEY="${{ secrets.APPSETTINGS_API_KEY }}" \
                   APPSETTINGS_DOMAIN="${{ secrets.APPSETTINGS_DOMAIN }}" \
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ secrets.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
