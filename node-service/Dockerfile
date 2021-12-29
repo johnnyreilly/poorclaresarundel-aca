@@ -4,10 +4,10 @@
 FROM node:16 AS build-client
 WORKDIR /client
 
-COPY src/client/package.json src/client/yarn.lock ./
+COPY client/package.json client/yarn.lock ./
 RUN yarn --network-timeout 100000
 
-COPY src/client ./
+COPY client ./
 RUN yarn build
 
 ##
@@ -16,10 +16,10 @@ RUN yarn build
 FROM node:16 AS build-server
 WORKDIR /server
 
-COPY src/server/package.json src/server/yarn.lock ./
+COPY server/package.json server/yarn.lock ./
 RUN yarn --network-timeout 100000
 
-COPY src/server ./
+COPY server ./
 RUN yarn build
 
 ##

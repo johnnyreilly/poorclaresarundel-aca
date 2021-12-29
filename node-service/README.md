@@ -29,7 +29,7 @@ yarn build:client
 If you want to debug the client then:
 
 ```bash
-cd src/client
+cd client
 yarn start
 ```
 
