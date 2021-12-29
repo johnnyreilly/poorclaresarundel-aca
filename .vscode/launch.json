@@ -9,11 +9,11 @@
             "request": "launch",
             "name": "Debug server",
             "preLaunchTask": "server build",
-            "program": "${workspaceFolder}/node-service/src/server/server/index.ts",
+            "program": "${workspaceFolder}/node-service/server/server/index.ts",
             "cwd": "${workspaceFolder}",
             "env": { "NODE_ENV": "development" },
             "protocol": "inspector",
-            "outFiles": ["${workspaceFolder}/node-service/src/server/dist/**/*.js"]
+            "outFiles": ["${workspaceFolder}/node-service/server/dist/**/*.js"]
         }
     ]
 }
