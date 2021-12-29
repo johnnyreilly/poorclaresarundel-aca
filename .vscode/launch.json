@@ -3,11 +3,22 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+    "compounds": [
+        {
+          "name": "All Container Apps",
+          "configurations": ["Node service", ".NET service"],
+          "presentation": {
+              "hidden": false,
+              "group": "",
+              "order": 1
+          }
+        }
+    ],
     "configurations": [
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug server",
+            "name": "Node service",
             "preLaunchTask": "server build",
             "program": "${workspaceFolder}/node-service/server/server/index.ts",
             "cwd": "${workspaceFolder}",
