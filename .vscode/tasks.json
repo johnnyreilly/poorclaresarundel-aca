@@ -5,7 +5,7 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "yarn",
+            "label": "yarn-install",
             "command": "yarn",
             "options": {
                 "cwd": "${workspaceFolder}/node-service"
@@ -13,15 +13,15 @@
         },
         {
             "type": "shell",
-            "label": "client build",
+            "label": "client-build",
             "command": "yarn build",
             "options": {
                 "cwd": "${workspaceFolder}/node-service/client"
             },
-            "dependsOn":["yarn"]
+            "dependsOn":["yarn-install"]
         },
         {
-            "label": "server build",
+            "label": "server-build",
             "type": "typescript",
             "tsconfig": "node-service/server/tsconfig.json",
             "problemMatcher": [
@@ -31,19 +31,22 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "dependsOn":["client build"]
+            "dependsOn":["client-build"]
         },
         {
-            "label": "server watch",
-            "type": "typescript",
-            "tsconfig": "node-service/server/tsconfig.json",
-            "option": "watch",
-            "isBackground": true,
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": "$tsc-watch"
+            "appId": "node-app",
+            "appPort": 3000,
+            "label": "daprd-debug-node",
+            "httpPort": 3501,
+            "grpcPort": 50001,
+            "metricsPort": 9091,
+            "type": "daprd",
+            "dependsOn":["server-build"]
+        },
+        {
+            "appId": "node-app",
+            "label": "daprd-down-node",
+            "type": "daprd-down"
         }
     ]
 }

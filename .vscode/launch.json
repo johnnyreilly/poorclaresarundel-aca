@@ -19,10 +19,19 @@
             "type": "node",
             "request": "launch",
             "name": "Node service",
-            "preLaunchTask": "server build",
+            "preLaunchTask": "daprd-debug-node",
+            "postDebugTask": "daprd-down-node",
             "program": "${workspaceFolder}/node-service/server/server/index.ts",
             "cwd": "${workspaceFolder}",
-            "env": { "NODE_ENV": "development" },
+            "env": {
+                "NODE_ENV": "development",
+                "DAPR_HTTP_PORT": "3501",
+                "DAPR_GRPC_PORT": "50001",
+                "DAPR_METRICS_PORT": "9091",
+                "INVENTORY_SERVICE_NAME": "go-app",
+                "ORDER_SERVICE_NAME": "python-app",
+                "PORT": "3000"
+            },
             "protocol": "inspector",
             "outFiles": ["${workspaceFolder}/node-service/server/dist/**/*.js"]
         }
