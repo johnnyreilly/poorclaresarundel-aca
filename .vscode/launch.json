@@ -16,6 +16,23 @@
     ],
     "configurations": [
         {
+            "name": ".NET service",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet-build",
+            "program": "${workspaceFolder}/MyBackEnd/bin/Debug/net6.0/MyBackEnd.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Node service",
