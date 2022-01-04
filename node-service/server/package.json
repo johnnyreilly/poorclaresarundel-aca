@@ -9,6 +9,7 @@
     "watch": "cross-env NODE_ENV=development nodemon --watch src/**/* -e ts,tsx --exec ts-node server/server.ts"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "koa": "^2.5.2",
     "koa-body": "^4.0.4",
     "koa-helmet": "^6.1.0",

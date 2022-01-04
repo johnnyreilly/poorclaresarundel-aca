@@ -3,6 +3,7 @@ import * as koaBody from 'koa-body';
 import * as Router from 'koa-router';
 import * as Mailgun from 'mailgun-js';
 import * as path from 'path';
+import axios from 'axios';
 
 const router = new Router();
 
@@ -10,6 +11,12 @@ const apiKey = process.env.APPSETTINGS_API_KEY; // long guid from mailgun
 const domain = process.env.APPSETTINGS_DOMAIN; // eg 'mg.priou.co.uk';
 const prayerRequestFromEmail = process.env.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL;
 const prayerRequestRecipientEmail = process.env.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL;
+
+const mailerService = process.env.MAILER_SERVICE_NAME || 'dotnet-app';
+const daprPort = process.env.DAPR_HTTP_PORT || 5000;
+
+//use dapr http proxy (header) to call inventory service with normal /inventory route URL in axios.get call
+const daprSidecar = `http://localhost:${daprPort}`
 
 function readFileAsPromise(filePath: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -28,6 +35,15 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
     // Invokes the method to send emails given the above data with the helper library
     try {
         const { email, prayFor } = ctx.request.body;
+
+        var data = await axios.get(`${daprSidecar}/weatherForecast`, {
+            headers: {'dapr-app-id' : `${mailerService}`} //sets app name for service discovery
+        });
+
+        console.log(`mailerService: ${data}`);
+
+        if (data) return;
+        if (!data) return;
 
         if (!apiKey || !domain) {
             throw new Error('APPSETTINGS_API_KEY and / or APPSETTINGS_DOMAIN not configured');

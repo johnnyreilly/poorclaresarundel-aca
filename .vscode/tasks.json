@@ -16,6 +16,21 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "appId": "dotnet-app",
+            "appPort": 5000,
+            "label": "daprd-debug-dotnet",
+            "httpPort": 3500,
+            "grpcPort": 50000,
+            "metricsPort": 9090,
+            "type": "daprd",
+            "dependsOn":["dotnet-build"]
+        },
+        {
+            "appId": "dotnet-app",
+            "label": "daprd-down-dotnet",
+            "type": "daprd-down"
+        },
+        {
             "type": "shell",
             "label": "yarn-install",
             "command": "yarn",
