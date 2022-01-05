@@ -23,12 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        services: [ {'imageName': 'node-service', 'directory': './node-service'}  ]
+        services: [ {'imageName': 'node-service', 'directory': './Web'}, {'imageName': 'dotnet-service', 'directory': './Mailer'} ]
     permissions:
       contents: read
       packages: write
     outputs:
       containerImage-node: ${{ steps.image-tag.outputs.image-node-service }}
+      containerImage-dotnet: ${{ steps.image-tag.outputs.image-dotnet-service }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
