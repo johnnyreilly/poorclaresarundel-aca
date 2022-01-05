@@ -4,8 +4,8 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Mailer/Mailer.csproj", "Mailer/"]
-RUN dotnet restore "Mailer/Mailer.csproj"
+COPY ["Mailer.csproj", "./"]
+RUN dotnet restore "Mailer.csproj"
 COPY . .
 WORKDIR "/src/Mailer"
 RUN dotnet build "Mailer.csproj" -c Release -o /app/build
