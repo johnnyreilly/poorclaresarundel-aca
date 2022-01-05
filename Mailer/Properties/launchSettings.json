@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "MyBackEnd": {
+    "Mailer": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

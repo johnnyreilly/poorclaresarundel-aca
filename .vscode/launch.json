@@ -21,7 +21,7 @@
             "request": "launch",
             "preLaunchTask": "daprd-debug-dotnet",
             "postDebugTask": "daprd-down-dotnet",
-            "program": "${workspaceFolder}/MyBackEnd/bin/Debug/net6.0/MyBackEnd.dll",
+            "program": "${workspaceFolder}/Mailer/bin/Debug/net6.0/Mailer.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

@@ -1,4 +1,4 @@
-namespace MyBackEnd;
+namespace Mailer;
 
 public class WeatherForecast
 {

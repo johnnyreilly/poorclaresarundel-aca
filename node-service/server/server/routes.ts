@@ -36,7 +36,7 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
     try {
         const { email, prayFor } = ctx.request.body;
 
-        var data = await axios.get(`${daprSidecar}/weatherForecast`, {
+        const data = await axios.get(`${daprSidecar}/weatherForecast`, {
             headers: {'dapr-app-id' : `${mailerService}`} //sets app name for service discovery
         });
 

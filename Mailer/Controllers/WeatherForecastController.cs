@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyBackEnd.Controllers;
+namespace Mailer.Controllers;
 
 [ApiController]
 [Route("[controller]")]
