@@ -28,8 +28,8 @@ jobs:
       contents: read
       packages: write
     outputs:
-      containerImage-node: ${{ steps.image-tag.outputs.image-node-service }}
-      containerImage-dotnet: ${{ steps.image-tag.outputs.image-dotnet-service }}
+      image-node: ${{ steps.image-tag.outputs.image-node-service }}
+      image-dotnet: ${{ steps.image-tag.outputs.image-dotnet-service }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -99,9 +99,13 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  nodeImage='${{ needs.build.outputs.containerImage-node }}' \
-                  nodePort=3000 \
-                  nodeIsExternalIngress=true \
+                  branchName='${{ github.ref }}'
+                  webImage='${{ needs.build.outputs.image-node }}' \
+                  webPort=3000 \
+                  webIsExternalIngress=true \
+                  dotnetImage='${{ needs.build.outputs.image-dotnet }}' \
+                  dotnetPort=5000 \
+                  dotnetIsExternalIngress=false \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
@@ -141,9 +145,13 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  nodeImage='${{ needs.build.outputs.containerImage-node }}' \
-                  nodePort=3000 \
-                  nodeIsExternalIngress=true \
+                  branchName='${{ github.ref }}'
+                  webImage='${{ needs.build.outputs.image-node }}' \
+                  webPort=3000 \
+                  webIsExternalIngress=true \
+                  dotnetImage='${{ needs.build.outputs.image-dotnet }}' \
+                  dotnetPort=5000 \
+                  dotnetIsExternalIngress=false \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \

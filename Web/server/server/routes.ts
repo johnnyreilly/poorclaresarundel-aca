@@ -42,9 +42,6 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
 
         console.log(`mailerService: ${data}`);
 
-        if (data) return;
-        if (!data) return;
-
         if (!apiKey || !domain) {
             throw new Error('APPSETTINGS_API_KEY and / or APPSETTINGS_DOMAIN not configured');
         }

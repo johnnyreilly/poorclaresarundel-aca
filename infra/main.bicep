@@ -1,6 +1,12 @@
-param nodeImage string
-param nodePort int
-param nodeIsExternalIngress bool
+param branchName string
+
+param webImage string
+param webPort int
+param webIsExternalIngress bool
+
+param mailerImage string
+param mailerPort int
+param mailerIsExternalIngress bool
 
 param containerRegistry string
 param containerRegistryUsername string
@@ -16,12 +22,16 @@ param APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL string
 param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
 var location = resourceGroup().location
-var environmentName = 'env-${uniqueString(resourceGroup().id)}'
 var minReplicas = 0
 
-var nodeServiceAppName = 'node-app'
-var workspaceName = '${nodeServiceAppName}-log-analytics'
-var appInsightsName = '${nodeServiceAppName}-app-insights'
+var branch = toLower(last(split(branchName, '/')))
+
+var environmentName = '${branch}-env'
+
+var workspaceName = '${branch}-log-analytics'
+var appInsightsName = '${branch}-app-insights'
+var webContainerAppName = '${branch}-web'
+var mailerContainerAppName = '${branch}-mailer'
 
 var containerRegistryPasswordRef = 'container-registry-password'
 var mailgunApiKeyRef = 'mailgun-api-key'
@@ -70,8 +80,8 @@ resource environment 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
   }
 }
 
-resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
-  name: nodeServiceAppName
+resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
+  name: webContainerAppName
   kind: 'containerapps'
   tags: tags
   location: location
@@ -96,15 +106,15 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         }
       ]
       ingress: {
-        'external': nodeIsExternalIngress
-        'targetPort': nodePort
+        'external': webIsExternalIngress
+        'targetPort': webPort
       }
     }
     template: {
       containers: [
         {
-          image: nodeImage
-          name: nodeServiceAppName
+          image: webImage
+          name: webContainerAppName
           transport: 'auto'
           env: [
             {
@@ -129,8 +139,83 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
       scale: {
         minReplicas: minReplicas
       }
+      dapr: {
+        enabled: true
+        appPort: webPort
+        appId: webContainerAppName
+        // components: daprComponents
+      }
     }
   }
 }
 
-output nodeUrl string = containerApp.properties.latestRevisionFqdn
+resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
+  name: mailerContainerAppName
+  kind: 'containerapps'
+  tags: tags
+  location: location
+  properties: {
+    kubeEnvironmentId: environment.id
+    configuration: {
+      secrets: [
+        {
+          name: containerRegistryPasswordRef
+          value: containerRegistryPassword
+        }
+        {
+          name: mailgunApiKeyRef
+          value: APPSETTINGS_API_KEY
+        }
+      ]
+      registries: [
+        {
+          server: containerRegistry
+          username: containerRegistryUsername
+          passwordSecretRef: containerRegistryPasswordRef
+        }
+      ]
+      ingress: {
+        'external': mailerIsExternalIngress
+        'targetPort': mailerPort
+      }
+    }
+    template: {
+      containers: [
+        {
+          image: mailerImage
+          name: mailerContainerAppName
+          transport: 'auto'
+          env: [
+            {
+              name: 'APPSETTINGS_API_KEY'
+              secretref: mailgunApiKeyRef
+            }
+            {
+              name: 'APPSETTINGS_DOMAIN'
+              value: APPSETTINGS_DOMAIN
+            }
+            {
+              name: 'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL'
+              value: APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL
+            }
+            {
+              name: 'APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL'
+              value: APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL
+            }
+          ]
+        }
+      ]
+      scale: {
+        minReplicas: minReplicas
+      }
+      dapr: {
+        enabled: true
+        appPort: mailerPort
+        appId: mailerContainerAppName
+        // components: daprComponents
+      }
+    }
+  }
+}
+
+output webUrl string = webContainerApp.properties.latestRevisionFqdn
