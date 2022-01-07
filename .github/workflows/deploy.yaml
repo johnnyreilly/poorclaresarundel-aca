@@ -103,9 +103,9 @@ jobs:
                   webImage='${{ needs.build.outputs.image-node }}' \
                   webPort=3000 \
                   webIsExternalIngress=true \
-                  dotnetImage='${{ needs.build.outputs.image-dotnet }}' \
-                  dotnetPort=5000 \
-                  dotnetIsExternalIngress=false \
+                  mailerImage='${{ needs.build.outputs.image-dotnet }}' \
+                  mailerPort=5000 \
+                  mailerIsExternalIngress=false \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
@@ -150,9 +150,9 @@ jobs:
                   webImage='${{ needs.build.outputs.image-node }}' \
                   webPort=3000 \
                   webIsExternalIngress=true \
-                  dotnetImage='${{ needs.build.outputs.image-dotnet }}' \
-                  dotnetPort=5000 \
-                  dotnetIsExternalIngress=false \
+                  mailerImage='${{ needs.build.outputs.image-dotnet }}' \
+                  mailerPort=5000 \
+                  mailerIsExternalIngress=false \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
