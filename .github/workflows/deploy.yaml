@@ -99,7 +99,7 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  branchName='${{ github.ref }}'
+                  branchName='${{ github.ref }}' \
                   webImage='${{ needs.build.outputs.image-node }}' \
                   webPort=3000 \
                   webIsExternalIngress=true \
@@ -146,7 +146,7 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  branchName='${{ github.ref }}'
+                  branchName='${{ github.ref }}' \
                   webImage='${{ needs.build.outputs.image-node }}' \
                   webPort=3000 \
                   webIsExternalIngress=true \
