@@ -140,8 +140,8 @@ jobs:
             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
-            # az deployment group create \
-            az deployment group what-if \
+            # az deployment group what-if \
+            az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
