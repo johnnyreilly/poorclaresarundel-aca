@@ -58,11 +58,11 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-        
+
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
+        # if: github.event_name != 'pull_request'
         uses: docker/login-action@v1
         with:
           registry: ${{ env.REGISTRY }}
@@ -124,7 +124,7 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  branchName='${{ github.ref_name }}' \
+                  branchName='${{ github.head_ref }}' \
                   webImage='${{ needs.build.outputs.image-node }}' \
                   webPort=3000 \
                   webIsExternalIngress=true \
@@ -171,7 +171,7 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  branchName='${{ github.ref_name }}' \
+                  branchName='${{ github.head_ref }}' \
                   webImage='${{ needs.build.outputs.image-node }}' \
                   webPort=3000 \
                   webIsExternalIngress=true \
