@@ -64,7 +64,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ matrix.services.directory }}
-          push: ${{ github.event_name != 'pull_request' }}
+          # push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       
@@ -140,6 +140,7 @@ jobs:
             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
+            # az deployment group create \
             az deployment group what-if \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --name "$DEPLOYMENT_NAME" \
