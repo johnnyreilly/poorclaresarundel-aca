@@ -13,9 +13,9 @@ const prayerRequestFromEmail = process.env.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL
 const prayerRequestRecipientEmail = process.env.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL;
 
 const mailerService = process.env.MAILER_SERVICE_NAME || 'dotnet-app';
-const daprPort = process.env.DAPR_HTTP_PORT || 5000;
 
 //use dapr http proxy (header) to call inventory service with normal /inventory route URL in axios.get call
+const daprPort = process.env.DAPR_HTTP_PORT || 3501;
 const daprSidecar = `http://localhost:${daprPort}`
 
 function readFileAsPromise(filePath: string): Promise<string> {
