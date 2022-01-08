@@ -162,10 +162,10 @@ resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
           name: containerRegistryPasswordRef
           value: containerRegistryPassword
         }
-        {
-          name: mailgunApiKeyRef
-          value: APPSETTINGS_API_KEY
-        }
+        // {
+        //   name: mailgunApiKeyRef
+        //   value: APPSETTINGS_API_KEY
+        // }
       ]
       registries: [
         {
@@ -185,24 +185,24 @@ resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
           image: mailerImage
           name: mailerContainerAppName
           transport: 'auto'
-          env: [
-            {
-              name: 'APPSETTINGS_API_KEY'
-              secretref: mailgunApiKeyRef
-            }
-            {
-              name: 'APPSETTINGS_DOMAIN'
-              value: APPSETTINGS_DOMAIN
-            }
-            {
-              name: 'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL'
-              value: APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL
-            }
-            {
-              name: 'APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL'
-              value: APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL
-            }
-          ]
+          // env: [
+          //   {
+          //     name: 'APPSETTINGS_API_KEY'
+          //     secretref: mailgunApiKeyRef
+          //   }
+          //   {
+          //     name: 'APPSETTINGS_DOMAIN'
+          //     value: APPSETTINGS_DOMAIN
+          //   }
+          //   {
+          //     name: 'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL'
+          //     value: APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL
+          //   }
+          //   {
+          //     name: 'APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL'
+          //     value: APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL
+          //   }
+          // ]
         }
       ]
       scale: {
