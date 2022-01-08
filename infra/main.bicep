@@ -175,7 +175,7 @@ resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         }
       ]
       ingress: {
-        'external': mailerIsExternalIngress
+        'external': true// mailerIsExternalIngress
         'targetPort': mailerPort
       }
     }
