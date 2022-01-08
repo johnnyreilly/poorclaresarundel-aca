@@ -158,74 +158,74 @@ resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
   }
 }
 
-// resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
-//   name: webContainerAppName
-//   kind: 'containerapps'
-//   tags: tags
-//   location: location
-//   properties: {
-//     kubeEnvironmentId: environment.id
-//     configuration: {
-//       secrets: [
-//         {
-//           name: containerRegistryPasswordRef
-//           value: containerRegistryPassword
-//         }
-//         {
-//           name: mailgunApiKeyRef
-//           value: APPSETTINGS_API_KEY
-//         }
-//       ]
-//       registries: [
-//         {
-//           server: containerRegistry
-//           username: containerRegistryUsername
-//           passwordSecretRef: containerRegistryPasswordRef
-//         }
-//       ]
-//       ingress: {
-//         'external': webIsExternalIngress
-//         'targetPort': webPort
-//       }
-//     }
-//     template: {
-//       containers: [
-//         {
-//           image: webImage
-//           name: webContainerAppName
-//           transport: 'auto'
-//           env: [
-//             {
-//               name: 'APPSETTINGS_API_KEY'
-//               secretref: mailgunApiKeyRef
-//             }
-//             {
-//               name: 'APPSETTINGS_DOMAIN'
-//               value: APPSETTINGS_DOMAIN
-//             }
-//             {
-//               name: 'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL'
-//               value: APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL
-//             }
-//             {
-//               name: 'APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL'
-//               value: APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL
-//             }
-//           ]
-//         }
-//       ]
-//       scale: {
-//         minReplicas: minReplicas
-//       }
-//       dapr: {
-//         enabled: true
-//         appPort: webPort
-//         appId: webContainerAppName
-//         // components: daprComponents
-//       }
-//     }
-//   }
-// }
+resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
+  name: webContainerAppName
+  kind: 'containerapps'
+  tags: tags
+  location: location
+  properties: {
+    kubeEnvironmentId: environment.id
+    configuration: {
+      secrets: [
+        {
+          name: containerRegistryPasswordRef
+          value: containerRegistryPassword
+        }
+        {
+          name: mailgunApiKeyRef
+          value: APPSETTINGS_API_KEY
+        }
+      ]
+      registries: [
+        {
+          server: containerRegistry
+          username: containerRegistryUsername
+          passwordSecretRef: containerRegistryPasswordRef
+        }
+      ]
+      ingress: {
+        'external': webIsExternalIngress
+        'targetPort': webPort
+      }
+    }
+    template: {
+      containers: [
+        {
+          image: webImage
+          name: webContainerAppName
+          transport: 'auto'
+          env: [
+            {
+              name: 'APPSETTINGS_API_KEY'
+              secretref: mailgunApiKeyRef
+            }
+            {
+              name: 'APPSETTINGS_DOMAIN'
+              value: APPSETTINGS_DOMAIN
+            }
+            {
+              name: 'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL'
+              value: APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL
+            }
+            {
+              name: 'APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL'
+              value: APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL
+            }
+          ]
+        }
+      ]
+      scale: {
+        minReplicas: minReplicas
+      }
+      dapr: {
+        enabled: true
+        appPort: webPort
+        appId: webContainerAppName
+        // components: daprComponents
+      }
+    }
+  }
+}
 
 
 //output webUrl string = webContainerApp.properties.latestRevisionFqdn
