@@ -22,7 +22,7 @@ param APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL string
 param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
 var location = resourceGroup().location
-var minReplicas = 1
+var minReplicas = 0
 var maxReplicas = 1
 
 var branch = toLower(last(split(branchName, '/')))
@@ -104,21 +104,6 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
   }
 }
 
-// resource kubeEnvironments_containerapps_env_name_resource 'Microsoft.Web/kubeEnvironments@2021-02-01' = {
-//   kind: 'containerenvironment'
-//   location: 'canadacentral'
-//   name: kubeEnvironments_containerapps_env_name
-//   properties: {
-//     appLogsConfiguration: {
-//       destination: 'log-analytics'
-//       logAnalyticsConfiguration: {
-//         customerId: '7dfdfae9-f1ec-4ea8-a7a5-84d14a88356e'
-//       }
-//     }
-//     staticIp: '20.104.107.83'
-//   }
-// }
-
 resource environment 'Microsoft.Web/kubeEnvironments@2021-02-01' = {
   name: environmentName
   kind: 'containerenvironment'
@@ -175,10 +160,10 @@ resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         {
           image: mailerImage
           name: mailerContainerAppName
-          resources: {
-            cpu: '0.5'
-            memory: '1Gi'
-          }
+          // resources: {
+          //   cpu: '0.5'
+          //   memory: '1Gi'
+          // }
           transport: 'auto'
           env: [
             {
@@ -249,10 +234,10 @@ resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         {
           image: webImage
           name: webContainerAppName
-          resources: {
-            cpu: '0.5'
-            memory: '1Gi'
-          }
+          // resources: {
+          //   cpu: '0.5'
+          //   memory: '1Gi'
+          // }
           transport: 'auto'
           env: [
             {
@@ -293,5 +278,4 @@ resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
 }
 
 
-//output webUrl string = webContainerApp.properties.latestRevisionFqdn
-output webUrl string = 'webContainerApp.properties.latestRevisionFqdn'
+output webUrl string = webContainerApp.properties.latestRevisionFqdn
