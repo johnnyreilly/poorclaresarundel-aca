@@ -49,11 +49,11 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
         });
 
         if (data) {
-            ctx.body = { ok: true, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} worked`, data };
+            ctx.body = { ok: true, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} worked` };
             return;
         }
         if (!data) {
-            ctx.body = { ok: false, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} didn't return`, data };
+            ctx.body = { ok: false, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} didn't return` };
             return;
         }
 
