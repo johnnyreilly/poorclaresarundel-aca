@@ -22,7 +22,8 @@ param APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL string
 param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
 var location = resourceGroup().location
-var minReplicas = 0
+var minReplicas = 1
+var maxReplicas = 1
 
 var branch = toLower(last(split(branchName, '/')))
 
@@ -201,6 +202,7 @@ resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
       ]
       scale: {
         minReplicas: minReplicas
+        maxReplicas: maxReplicas
       }
       dapr: {
         enabled: true
@@ -254,6 +256,10 @@ resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
           transport: 'auto'
           env: [
             {
+              name: 'MAILER_SERVICE_NAME'
+              value: mailerContainerAppName
+            }
+            {
               name: 'APPSETTINGS_API_KEY'
               secretref: mailgunApiKeyRef
             }
@@ -274,6 +280,7 @@ resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
       ]
       scale: {
         minReplicas: minReplicas
+        maxReplicas: maxReplicas
       }
       dapr: {
         enabled: true

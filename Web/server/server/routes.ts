@@ -12,7 +12,7 @@ const domain = process.env.APPSETTINGS_DOMAIN; // eg 'mg.priou.co.uk';
 const prayerRequestFromEmail = process.env.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL;
 const prayerRequestRecipientEmail = process.env.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL;
 
-const mailerService = process.env.MAILER_SERVICE_NAME || 'dotnet-app';
+const mailerService = process.env.MAILER_SERVICE_NAME || 'MAILER_SERVICE_NAME';
 
 //use dapr http proxy (header) to call inventory service with normal /inventory route URL in axios.get call
 const daprPort = process.env.DAPR_HTTP_PORT || 3501;
@@ -37,12 +37,12 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
     try {
         const { email, prayFor } = ctx.request.body;
 
-        const data2 = await axios.get(`${daprSidecar}/v1.0/invoke/${mailerService}/method/weatherForecast`);
+        // const data2 = await axios.get(`${daprSidecar}/v1.0/invoke/${mailerService}/method/weatherForecast`);
 
-        if (data2) {
-            ctx.body = { ok: true, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} worked`, data2 };
-            return;
-        }
+        // if (data2) {
+        //     ctx.body = { ok: true, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} worked`, data2 };
+        //     return;
+        // }
 
         const data = await axios.get(`${daprSidecar}/weatherForecast`, {
             headers: {'dapr-app-id' : `${mailerService}`} //sets app name for service discovery
