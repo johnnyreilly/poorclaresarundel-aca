@@ -23,20 +23,46 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        services: [ {'imageName': 'node-service', 'directory': './node-service'}  ]
+        services: [ {'imageName': 'node-service', 'directory': './Web'}, {'imageName': 'dotnet-service', 'directory': './Mailer'} ]
     permissions:
       contents: read
       packages: write
     outputs:
-      containerImage-node: ${{ steps.image-tag.outputs.image-node-service }}
+      image-node: ${{ steps.image-tag.outputs.image-node-service }}
+      image-dotnet: ${{ steps.image-tag.outputs.image-dotnet-service }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      # - name: Dump GitHub context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJSON(github) }}
+      #   run: echo "$GITHUB_CONTEXT"
+      # - name: Dump job context
+      #   env:
+      #     JOB_CONTEXT: ${{ toJSON(job) }}
+      #   run: echo "$JOB_CONTEXT"
+      # - name: Dump steps context
+      #   env:
+      #     STEPS_CONTEXT: ${{ toJSON(steps) }}
+      #   run: echo "$STEPS_CONTEXT"
+      # - name: Dump runner context
+      #   env:
+      #     RUNNER_CONTEXT: ${{ toJSON(runner) }}
+      #   run: echo "$RUNNER_CONTEXT"
+      # - name: Dump strategy context
+      #   env:
+      #     STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+      #   run: echo "$STRATEGY_CONTEXT"
+      # - name: Dump matrix context
+      #   env:
+      #     MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+      #   run: echo "$MATRIX_CONTEXT"
+
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
+        # if: github.event_name != 'pull_request'
         uses: docker/login-action@v1
         with:
           registry: ${{ env.REGISTRY }}
@@ -63,7 +89,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ matrix.services.directory }}
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
+          # push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       
@@ -98,9 +125,13 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  nodeImage='${{ needs.build.outputs.containerImage-node }}' \
-                  nodePort=3000 \
-                  nodeIsExternalIngress=true \
+                  branchName='${{ github.head_ref }}' \
+                  webImage='${{ needs.build.outputs.image-node }}' \
+                  webPort=3000 \
+                  webIsExternalIngress=true \
+                  mailerImage='${{ needs.build.outputs.image-dotnet }}' \
+                  mailerPort=5000 \
+                  mailerIsExternalIngress=false \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
@@ -135,14 +166,19 @@ jobs:
             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
-            az deployment group what-if \
+            # az deployment group what-if \
+            az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  nodeImage='${{ needs.build.outputs.containerImage-node }}' \
-                  nodePort=3000 \
-                  nodeIsExternalIngress=true \
+                  branchName='${{ github.head_ref }}' \
+                  webImage='${{ needs.build.outputs.image-node }}' \
+                  webPort=3000 \
+                  webIsExternalIngress=true \
+                  mailerImage='${{ needs.build.outputs.image-dotnet }}' \
+                  mailerPort=5000 \
+                  mailerIsExternalIngress=false \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \

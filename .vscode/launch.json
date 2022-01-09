@@ -3,17 +3,58 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+    "compounds": [
+        {
+          "name": "All Container Apps",
+          "configurations": ["Node service", ".NET service"],
+          "presentation": {
+              "hidden": false,
+              "group": "",
+              "order": 1
+          }
+        }
+    ],
     "configurations": [
+        {
+            "name": ".NET service",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "daprd-debug-dotnet",
+            "postDebugTask": "daprd-down-dotnet",
+            "program": "${workspaceFolder}/Mailer/bin/Debug/net6.0/Mailer.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "DOTNET_ENVIRONMENT": "Development",
+                "DOTNET_URLS": "http://localhost:5000",
+                "DAPR_HTTP_PORT": "3500",
+                "DAPR_GRPC_PORT": "50000",
+                "DAPR_METRICS_PORT": "9090"
+            }
+        },
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug server",
-            "preLaunchTask": "server build",
-            "program": "${workspaceFolder}/node-service/server/server/index.ts",
+            "name": "Node service",
+            "preLaunchTask": "daprd-debug-node",
+            "postDebugTask": "daprd-down-node",
+            "program": "${workspaceFolder}/Web/server/server/index.ts",
             "cwd": "${workspaceFolder}",
-            "env": { "NODE_ENV": "development" },
+            "env": {
+                "NODE_ENV": "development",
+                "PORT": "3000",
+                "DAPR_HTTP_PORT": "3501",
+                "DAPR_GRPC_PORT": "50001",
+                "DAPR_METRICS_PORT": "9091",
+                "MAILER_SERVICE_NAME": "dotnet-app"
+            },
             "protocol": "inspector",
-            "outFiles": ["${workspaceFolder}/node-service/server/dist/**/*.js"]
+            "outFiles": ["${workspaceFolder}/Web/server/dist/**/*.js"]
         }
     ]
 }
