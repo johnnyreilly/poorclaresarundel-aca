@@ -40,6 +40,15 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
             headers: {'dapr-app-id' : `${mailerService}`} //sets app name for service discovery
         });
 
+        if (data) {
+            ctx.body = { ok: true, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} worked`, data };
+            return;
+        }
+        if (!data) {
+            ctx.body = { ok: false, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} didn't return`, data };
+            return;
+        }
+
         console.log(`mailerService: ${data}`);
 
         if (!apiKey || !domain) {
@@ -78,12 +87,14 @@ ${prayFor}`
 
         ctx.body = { ok: true, text: 'Thanks for sending your prayer request - we will pray.' };
     } catch (exc) {
+        ctx.body = { ok: false, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} errored`, exc };
+
         console.error(exc instanceof Error ? exc.message : exc);
 
-        ctx.body = {
-            success: false,
-            text: `Your prayer request has not been sent - please try mailing: ${prayerRequestFromEmail}`
-        };
+        // ctx.body = {
+        //     success: false,
+        //     text: `Your prayer request has not been sent - please try mailing: ${prayerRequestFromEmail}`
+        // };
     }
 });
 

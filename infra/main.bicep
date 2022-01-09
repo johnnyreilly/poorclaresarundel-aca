@@ -27,7 +27,6 @@ var minReplicas = 0
 var branch = toLower(last(split(branchName, '/')))
 
 var environmentName = '${branch}-env'
-
 var workspaceName = '${branch}-log-analytics'
 var appInsightsName = '${branch}-app-insights'
 var webContainerAppName = '${branch}-web'
