@@ -43,7 +43,7 @@
             "name": "Node service",
             "preLaunchTask": "daprd-debug-node",
             "postDebugTask": "daprd-down-node",
-            "program": "${workspaceFolder}/node-service/server/server/index.ts",
+            "program": "${workspaceFolder}/Web/server/server/index.ts",
             "cwd": "${workspaceFolder}",
             "env": {
                 "NODE_ENV": "development",
@@ -54,7 +54,7 @@
                 "MAILER_SERVICE_NAME": "dotnet-app"
             },
             "protocol": "inspector",
-            "outFiles": ["${workspaceFolder}/node-service/server/dist/**/*.js"]
+            "outFiles": ["${workspaceFolder}/Web/server/dist/**/*.js"]
         }
     ]
 }

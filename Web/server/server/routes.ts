@@ -17,6 +17,7 @@ const mailerService = process.env.MAILER_SERVICE_NAME || 'dotnet-app';
 //use dapr http proxy (header) to call inventory service with normal /inventory route URL in axios.get call
 const daprPort = process.env.DAPR_HTTP_PORT || 3501;
 const daprSidecar = `http://localhost:${daprPort}`
+//const daprSidecar = `http://localhost:${daprPort}/v1.0/invoke/${inventoryService}/method`
 
 function readFileAsPromise(filePath: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -35,6 +36,13 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
     // Invokes the method to send emails given the above data with the helper library
     try {
         const { email, prayFor } = ctx.request.body;
+
+        const data2 = await axios.get(`${daprSidecar}/v1.0/invoke/${mailerService}/method/weatherForecast`);
+
+        if (data2) {
+            ctx.body = { ok: true, text: `${daprSidecar}/weatherForecast with headers: {'dapr-app-id' : '${mailerService}'} worked`, data2 };
+            return;
+        }
 
         const data = await axios.get(`${daprSidecar}/weatherForecast`, {
             headers: {'dapr-app-id' : `${mailerService}`} //sets app name for service discovery

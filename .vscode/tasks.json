@@ -35,7 +35,7 @@
             "label": "yarn-install",
             "command": "yarn",
             "options": {
-                "cwd": "${workspaceFolder}/node-service"
+                "cwd": "${workspaceFolder}/Web"
             }
         },
         {
@@ -43,14 +43,14 @@
             "label": "client-build",
             "command": "yarn build",
             "options": {
-                "cwd": "${workspaceFolder}/node-service/client"
+                "cwd": "${workspaceFolder}/Web/client"
             },
             "dependsOn":["yarn-install"]
         },
         {
             "label": "server-build",
             "type": "typescript",
-            "tsconfig": "node-service/server/tsconfig.json",
+            "tsconfig": "Web/server/tsconfig.json",
             "problemMatcher": [
                 "$tsc"
             ],
