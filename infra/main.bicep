@@ -22,7 +22,7 @@ param APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL string
 param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
 var location = resourceGroup().location
-var minReplicas = 1
+var minReplicas = 0
 
 var branch = toLower(last(split(branchName, '/')))
 
