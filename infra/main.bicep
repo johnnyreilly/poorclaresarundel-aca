@@ -55,6 +55,41 @@ az storage account create \
   --location "northeurope" \
   --sku Standard_RAGRS \
   --kind StorageV2
+
+resource storageAccounts_storagereilly001_name_resource 'Microsoft.Storage/storageAccounts@2021-06-01' = {
+  kind: 'StorageV2'
+  location: location
+  name: storageAccounts_storagereilly001_name
+  properties: {
+    accessTier: 'Hot'
+    allowBlobPublicAccess: true
+    encryption: {
+      keySource: 'Microsoft.Storage'
+      services: {
+        blob: {
+          enabled: true
+          keyType: 'Account'
+        }
+        file: {
+          enabled: true
+          keyType: 'Account'
+        }
+      }
+    }
+    minimumTlsVersion: 'TLS1_0'
+    networkAcls: {
+      bypass: 'AzureServices'
+      defaultAction: 'Allow'
+      ipRules: []
+      virtualNetworkRules: []
+    }
+    supportsHttpsTrafficOnly: true
+  }
+  sku: {
+    name: 'Standard_RAGRS'
+    tier: 'Standard'
+  }
+}
   */
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
@@ -68,8 +103,24 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
   }
 }
 
-resource environment 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
+// resource kubeEnvironments_containerapps_env_name_resource 'Microsoft.Web/kubeEnvironments@2021-02-01' = {
+//   kind: 'containerenvironment'
+//   location: 'canadacentral'
+//   name: kubeEnvironments_containerapps_env_name
+//   properties: {
+//     appLogsConfiguration: {
+//       destination: 'log-analytics'
+//       logAnalyticsConfiguration: {
+//         customerId: '7dfdfae9-f1ec-4ea8-a7a5-84d14a88356e'
+//       }
+//     }
+//     staticIp: '20.104.107.83'
+//   }
+// }
+
+resource environment 'Microsoft.Web/kubeEnvironments@2021-02-01' = {
   name: environmentName
+  kind: 'containerenvironment'
   location: location
   tags: tags
   properties: {
@@ -114,8 +165,8 @@ resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         }
       ]
       ingress: {
-        'external': mailerIsExternalIngress
-        'targetPort': mailerPort
+        external: mailerIsExternalIngress
+        targetPort: mailerPort
       }
     }
     template: {
@@ -123,6 +174,10 @@ resource mailerContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         {
           image: mailerImage
           name: mailerContainerAppName
+          resources: {
+            cpu: '0.5'
+            memory: '1Gi'
+          }
           transport: 'auto'
           env: [
             {
@@ -183,8 +238,8 @@ resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         }
       ]
       ingress: {
-        'external': webIsExternalIngress
-        'targetPort': webPort
+        external: webIsExternalIngress
+        targetPort: webPort
       }
     }
     template: {
@@ -192,6 +247,10 @@ resource webContainerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         {
           image: webImage
           name: webContainerAppName
+          resources: {
+            cpu: '0.5'
+            memory: '1Gi'
+          }
           transport: 'auto'
           env: [
             {
