@@ -100,11 +100,13 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2022-10-01' = {
           //     certificateId: '/subscriptions/subscription-id/resourceGroups/rg-poor-clares-arundel-aca/providers/Microsoft.App/managedEnvironments/shared-env/certificates/poorclaresarundel.org'
           //     bindingType: 'SniEnabled'
           // }
-          {
-              name: 'www.poorclaresarundel.org'
-              certificateId: '${environment.id}/certificates/poorclaresarundel.org'
-              bindingType: 'SniEnabled'
-          }
+
+          // uncomment when the domain is ready
+          // {
+          //     name: 'www.poorclaresarundel.org'
+          //     certificateId: '${environment.id}/certificates/poorclaresarundel.org'
+          //     bindingType: 'SniEnabled'
+          // }
       ]
       }
     }
