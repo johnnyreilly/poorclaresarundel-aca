@@ -4,7 +4,7 @@ import seekerAngela from './images/SeekerAngela.jpg';
 
 export const angelaPath = '/angela';
 
-export const Angela: React.FC = _props => (
+export const Angela: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Card className="float-right">
             <CardImg top src={seekerAngela} />

@@ -15,7 +15,7 @@ import communityFoundationsHollington from '../../static/communityFoundationsHol
 
 export const arundelPath = '/community-arundel';
 
-export const Arundel: React.FC = _props => (
+export const Arundel: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>The Arundel Community</h3>
 

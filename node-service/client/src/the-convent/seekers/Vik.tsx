@@ -4,7 +4,7 @@ import seekerVik from './images/SeekerVik.jpg';
 
 export const vikPath = '/vik';
 
-export const Vik: React.FC = _props => (
+export const Vik: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Card className="float-right">
             <CardImg top src={seekerVik} />

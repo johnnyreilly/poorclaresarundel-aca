@@ -5,7 +5,7 @@ import statues from './images/olivewood_statue_selection.jpg';
 
 export const ourShopPath = '/our-shop';
 
-export const OurShop: React.FC = _props => (
+export const OurShop: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>Our Shop</h3>
 

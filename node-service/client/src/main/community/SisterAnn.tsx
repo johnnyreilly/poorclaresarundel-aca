@@ -4,7 +4,7 @@ import srAnn from './images/SrAnn.jpg';
 
 export const sisterAnnPath = '/community-sister-ann';
 
-export const SisterAnn: React.FC = _props => (
+export const SisterAnn: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Card className="float-right">
             <CardImg top src={srAnn} />

@@ -1,6 +1,6 @@
-param nodeImage string
-param nodePort int
-param nodeIsExternalIngress bool
+param branchName string
+
+param webServiceImage string
 
 param containerRegistry string
 param containerRegistryUsername string
@@ -15,18 +15,19 @@ param APPSETTINGS_DOMAIN string
 param APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL string
 param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
-var location = resourceGroup().location
-var environmentName = 'env-${uniqueString(resourceGroup().id)}'
-var minReplicas = 0
+param location string = resourceGroup().location
 
-var nodeServiceAppName = 'node-app'
-var workspaceName = '${nodeServiceAppName}-log-analytics'
-var appInsightsName = '${nodeServiceAppName}-app-insights'
+var branch = toLower(last(split(branchName, '/')))
+
+var environmentName = 'shared-env'
+var workspaceName = '${branch}-log-analytics'
+var appInsightsName = '${branch}-app-insights'
+var webServiceContainerAppName = '${branch}-web'
 
 var containerRegistryPasswordRef = 'container-registry-password'
 var mailgunApiKeyRef = 'mailgun-api-key'
 
-resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
+resource workspace 'Microsoft.OperationalInsights/workspaces@2021-12-01-preview' = {
   name: workspaceName
   location: location
   tags: tags
@@ -39,7 +40,7 @@ resource workspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   }
 }
 
-resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
+resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: appInsightsName
   location: location
   tags: tags
@@ -50,33 +51,28 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
   }
 }
 
-resource environment 'Microsoft.Web/kubeEnvironments@2021-03-01' = {
+resource environment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: environmentName
   location: location
   tags: tags
   properties: {
-    type: 'managed'
-    internalLoadBalancerEnabled: false
+    daprAIInstrumentationKey: appInsights.properties.InstrumentationKey
     appLogsConfiguration: {
       destination: 'log-analytics'
       logAnalyticsConfiguration: {
         customerId: workspace.properties.customerId
-        sharedKey: listKeys(workspace.id, workspace.apiVersion).primarySharedKey
+        sharedKey: workspace.listKeys().primarySharedKey
       }
-    }
-    containerAppsConfiguration: {
-      daprAIInstrumentationKey: appInsights.properties.InstrumentationKey
     }
   }
 }
 
-resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
-  name: nodeServiceAppName
-  kind: 'containerapps'
+resource webServiceContainerApp 'Microsoft.App/containerApps@2022-10-01' = {
+  name: webServiceContainerAppName
   tags: tags
   location: location
   properties: {
-    kubeEnvironmentId: environment.id
+    managedEnvironmentId: environment.id
     configuration: {
       secrets: [
         {
@@ -86,7 +82,7 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         {
           name: mailgunApiKeyRef
           value: APPSETTINGS_API_KEY
-        }
+        }      
       ]
       registries: [
         {
@@ -96,20 +92,35 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         }
       ]
       ingress: {
-        'external': nodeIsExternalIngress
-        'targetPort': nodePort
+        external: true
+        targetPort: 3000
+        customDomains: [
+          // {
+          //     name: 'poorclaresarundel.org'
+          //     certificateId: '/subscriptions/subscription-id/resourceGroups/rg-poor-clares-arundel-aca/providers/Microsoft.App/managedEnvironments/shared-env/certificates/poorclaresarundel.org'
+          //     bindingType: 'SniEnabled'
+          // }
+          {
+              name: 'www.poorclaresarundel.org'
+              certificateId: '${environment.id}/certificates/poorclaresarundel.org'
+              bindingType: 'SniEnabled'
+          }
+      ]
       }
     }
     template: {
       containers: [
         {
-          image: nodeImage
-          name: nodeServiceAppName
-          transport: 'auto'
+          image: webServiceImage
+          name: webServiceContainerAppName
+          resources: {
+            cpu: json('0.25')
+            memory: '0.5Gi'
+          }
           env: [
             {
               name: 'APPSETTINGS_API_KEY'
-              secretref: mailgunApiKeyRef
+              secretRef: mailgunApiKeyRef
             }
             {
               name: 'APPSETTINGS_DOMAIN'
@@ -127,10 +138,11 @@ resource containerApp 'Microsoft.Web/containerapps@2021-03-01' = {
         }
       ]
       scale: {
-        minReplicas: minReplicas
+        minReplicas: 0
+        maxReplicas: 1
       }
     }
   }
 }
 
-output nodeUrl string = containerApp.properties.latestRevisionFqdn
+output webServiceUrl string = webServiceContainerApp.properties.latestRevisionFqdn

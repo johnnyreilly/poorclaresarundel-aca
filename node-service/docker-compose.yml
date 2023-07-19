@@ -7,8 +7,8 @@ services:
     environment:
       NODE_ENV: production
       APPSETTINGS_API_KEY: 'this is the guid from mailgun'
-      APPSETTINGS_DOMAIN: 'mg.priou.co.uk'
-      APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL: 'noreply@mg.priou.co.uk'
-      APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL: 'info@priou.co.uk'
+      APPSETTINGS_DOMAIN: 'mg.poorclaresarundel.org'
+      APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL: 'noreply@mg.poorclaresarundel.org'
+      APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL: 'johnny_reilly@hotmail.com'
     ports:
       - 3000:3000

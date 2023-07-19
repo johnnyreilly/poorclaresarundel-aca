@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const claresPrayersPath = '/beginnings-clares-prayers';
 
-export const ClaresPrayers: React.FC = _props => (
+export const ClaresPrayers: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>St Clare of Assisi – Her Prayers</h3>
         <p>A way of meditating with St Clare through letting the message of her letters touch you.</p>

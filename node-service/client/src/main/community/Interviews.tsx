@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const interviewsPath = '/community-interviews';
 
-export const Interviews: React.FC = _props => (
+export const Interviews: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>Interviews with Sisters</h3>
 

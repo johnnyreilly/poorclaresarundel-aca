@@ -13,7 +13,7 @@ import tripAroundGuestHouse from '../../static/tripAroundGuestHouse.pdf';
 
 export const ourWorkPath = '/our-work';
 
-export const OurWork: React.FC = _props => (
+export const OurWork: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Card className="float-right">
             <CardImg top src={workSrMariaIcon} />

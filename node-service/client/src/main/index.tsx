@@ -33,7 +33,7 @@ import { LightForTheWorld, lightForTheWorldPath } from './LightForTheWorld';
 
 type Props = RouteComponentProps<{}>;
 
-const Main: React.FC<Props> = props => (
+const Main: React.FC<React.PropsWithChildren<Props>> = props => (
     <>
         <Menu location={props.location.pathname} />
         <Container>

@@ -2,7 +2,6 @@ import * as fs from 'fs';
 import * as koaBody from 'koa-body';
 import * as Router from 'koa-router';
 import * as Mailgun from 'mailgun-js';
-import * as path from 'path';
 
 const router = new Router();
 
@@ -10,17 +9,6 @@ const apiKey = process.env.APPSETTINGS_API_KEY; // long guid from mailgun
 const domain = process.env.APPSETTINGS_DOMAIN; // eg 'mg.priou.co.uk';
 const prayerRequestFromEmail = process.env.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL;
 const prayerRequestRecipientEmail = process.env.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL;
-
-function readFileAsPromise(filePath: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-        fs.readFile(filePath, (err, data) => {
-            if (err) { reject(err); }
-            else {
-                resolve(data.toString());
-            }
-        });
-    });
-}
 
 // Send a message to the specified email address when you navigate to /submit/someaddr@email.com
 // The index redirects here
@@ -52,8 +40,30 @@ ${prayFor}`
         };
         await mailgun.messages().send(prayerRequest);
 
-        const text = await readFileAsPromise(path.join(__dirname, 'prayerResponse.txt'));
-        const html = await readFileAsPromise(path.join(__dirname, 'prayerResponse.html'));
+        const text = `Thank you for your prayer request.
+
+You are in our thoughts and prayers.
+
+Your Poor Clare sisters, Arundel.`;
+
+        const html = `<html>
+<head>
+    <title>Thank you for your prayer request.</title>
+</head>
+<body>
+    <div>
+        <img src="https://www.poorclaresarundel.org/images/main/SanDamianoCrucifix.jpg" />
+    </div>
+    <div style="padding:10px;font-family: Verdana, Helvetica, Sans-Serif;">
+        <p>Thank you for your prayer request.</p>
+
+        <p>You are in our thoughts and prayers.</p>
+
+        <p>Your Poor Clare sisters, Arundel.</p>
+    </div>
+</body>
+</html>`;
+
         const reassuringResponse = {
             from: prayerRequestFromEmail,
             to: email,

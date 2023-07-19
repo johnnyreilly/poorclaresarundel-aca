@@ -8,7 +8,7 @@ import oComeEmmanuelSmall from '../images/o-come-emmanuel-small.jpg';
 
 export const lightForTheWorldPath = '/light-for-the-world';
 
-export const LightForTheWorld: React.FC = (_props) => (
+export const LightForTheWorld: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
         <Card className="float-right">
             <CardImg top src={new Date().getMonth() === 11 ? oComeEmmanuelSmall : lightForTheWorldSmall} />
