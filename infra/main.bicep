@@ -45,7 +45,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   location: location
   tags: tags
   kind: 'web'
-  properties: { 
+  properties: {
     Application_Type: 'web'
     Flow_Type: 'Bluefield'
   }
@@ -67,6 +67,13 @@ resource environment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   }
 }
 
+resource managedEnvironmentsCertificate 'Microsoft.App/managedEnvironments/certificates@2023-04-01-preview' = {
+  parent: environment
+  name: 'poorclaresarundel'
+  location: location
+  properties: {}
+}
+
 resource webServiceContainerApp 'Microsoft.App/containerApps@2022-10-01' = {
   name: webServiceContainerAppName
   tags: tags
@@ -82,7 +89,7 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2022-10-01' = {
         {
           name: mailgunApiKeyRef
           value: APPSETTINGS_API_KEY
-        }      
+        }
       ]
       registries: [
         {
@@ -101,13 +108,12 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2022-10-01' = {
           //     bindingType: 'SniEnabled'
           // }
 
-          // uncomment when the domain is ready
-          // {
-          //     name: 'www.poorclaresarundel.org'
-          //     certificateId: '${environment.id}/certificates/poorclaresarundel.org'
-          //     bindingType: 'SniEnabled'
-          // }
-      ]
+          {
+            name: 'www.poorclaresarundel.org'
+            certificateId: managedEnvironmentsCertificate.id
+            bindingType: 'SniEnabled'
+          }
+        ]
       }
     }
     template: {

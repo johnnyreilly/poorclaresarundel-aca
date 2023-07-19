@@ -1,8 +1,8 @@
 # Poor Clares Arundel
 
-[![Build and Deploy](https://github.com/johnnyreilly/poor-clares-arundel-aca/actions/workflows/build-and-deploy.yaml/badge.svg)](https://github.com/johnnyreilly/poor-clares-arundel-aca/actions/workflows/build-and-deploy.yaml)
+[![Build and Deploy](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml/badge.svg)](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml)
 
-Built with Azure Container Apps and deployed here: ...
+Built with Azure Container Apps and deployed here: https://main-web.blackmeadow-04548954.uksouth.azurecontainerapps.io
 
 Test locally with:
 
@@ -55,7 +55,7 @@ Certificate created with:
 ```shell
 sudo openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
   -keyout poorclaresarundel.org.key -out poorclaresarundel.org.crt -subj "/CN=poorclaresarundel.org" \
-  -addext "subjectAltName=DNS:poorclaresarundel.org,DNS:www.poorclaresarundel.org,IP:20.31.220.24"
+  -addext "subjectAltName=DNS:poorclaresarundel.org,DNS:www.poorclaresarundel.org,IP:20.49.157.17"
 sudo chmod +r poorclaresarundel.org.key
 cat poorclaresarundel.org.crt poorclaresarundel.org.key > poorclaresarundel.org.pem
 ```
