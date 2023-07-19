@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const glossaryPath = '/misc-glossary';
 
-export const Glossary: React.FC = _props => (
+export const Glossary: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>Glossary</h3>
 

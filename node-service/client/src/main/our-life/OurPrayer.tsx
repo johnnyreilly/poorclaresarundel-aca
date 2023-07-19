@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import prayerOur1 from './images/prayerOur1.jpg';
-import prayerOur2 from './images/prayerOur2.jpg';
-import prayerOur3 from './images/prayerOur3.jpg';
+import prayerOur2 from './images/prayerOur2.webp';
+import prayerOur3 from './images/prayerOur3.webp';
 import { prayerRequestsPath } from '../PrayerRequests';
 
 export const ourPrayerPath = '/our-prayer';
 
-export const OurPrayer: React.FC = _props => (
+export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
-        <img className="float-right img-thumbnail img-space-right-and-bottom" src={prayerOur2} alt="" />
         <h3>Our Prayer</h3>
+        <img className="float-right img-thumbnail img-space-right-and-bottom" src={prayerOur2} alt="Helen sitting in the cemetary" />
 
         <p>Our life of prayer falls into three natural parts. These are:</p>
 
@@ -30,8 +30,8 @@ export const OurPrayer: React.FC = _props => (
             private moments throughout the day.
         </p>
 
-        <img className="float-right img-thumbnail img-space-right-and-bottom" src={prayerOur3} alt="" />
         <h3>Our usual timetable</h3>
+        <img className="float-right img-thumbnail img-space-right-and-bottom" src={prayerOur3} alt="ikon of Clare washing the sisters feet" />
 
         <ul>
             <li>5.30 Rise. A quick breakfast followed by time for personal prayer, reading, study until 7.30</li>
@@ -39,7 +39,7 @@ export const OurPrayer: React.FC = _props => (
             <li>7.30 Morning Prayer, the Prayer of Praise to God followed by Spiritual reading.</li>
 
             <li>
-                8.30 Holy Mass followed by the Office of the Passion (A short Prayer written by Francis of Assisi) and
+                8.30 Holy Mass  (Mondays and Wednesdays, other days usually a Liturgy of the Word) followed by the Office of the Passion (A short Prayer written by Francis of Assisi) and
                 then work until 11.50
             </li>
 
@@ -67,26 +67,13 @@ export const OurPrayer: React.FC = _props => (
             space, each praying alone.
         </p>
 
-        <img className="float-right img-thumbnail img-space-right-and-bottom" src={prayerOur1} alt="" />
         <h3>Holy Mass</h3>
 
-        <p>
-            Weekday Mass is usually at 8.30am.
-            <br />
-            Vigil Mass for Sunday is at 6.15pm on Saturday evening.
-            <br />
-            There is no Mass on Sunday.
-            <br />
-            There is not usually Mass Saturday morning.
-        </p>
+        <p>Weekday Mass is usually at 8.30am (Mondays and Wednesdays). Vigil Mass for Sunday is at 6.00pm Saturday preceded by Evening Prayer at 5.15pm.</p>
 
         <h4>Other forms of prayer</h4>
 
-        <p>Sunday afternoons we usually have Exposition of the Blessed Sacrament at 4.30pm, followed by Benediction.</p>
-
-        <p>The last Friday of the month,Evening Prayer is usually at 5.30pm.</p>
-
-        <p>Saturdays Evening Prayer is usually at 5.30pm</p>
+        <p>Sunday afternoons we usually have Exposition of the Blessed Sacrament at 4.30pm.</p>
 
         <p>
             Christian Meditation (John Main) group: Tuesday evenings, c.7pm - 8.30pm.
@@ -99,6 +86,7 @@ export const OurPrayer: React.FC = _props => (
             Taize style prayer meeting: last Friday of each month (except December), c.7.15pm – 8.30pm. All are welcome.
         </p>
 
+        <img className="float-right img-thumbnail img-space-right-and-bottom" src={prayerOur1} alt="" />
         <h3>Prayer Requests</h3>
 
         <p>If you would like to ask the community to pray for a special intention <Link to={prayerRequestsPath}>mail us a prayer request</Link>.</p>

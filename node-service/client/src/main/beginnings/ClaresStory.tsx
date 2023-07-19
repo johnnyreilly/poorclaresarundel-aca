@@ -8,7 +8,7 @@ import churchSanDamiano from './images/ChurchSanDamiano.jpg';
 
 export const claresStoryPath = '/beginnings-clares-story';
 
-export const ClaresStory: React.FC = _props => (
+export const ClaresStory: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Card className="float-left">
             <CardImg top src={sanDamianoCrucifix} />

@@ -10,11 +10,20 @@ const TheConvent = React.lazy(() => import('./the-convent'));
 
 const theConventPath = 'the-convent';
 
-const Loading: React.FunctionComponent = _ => (
-    <h1 className="loader">
-        <FontAwesomeIcon icon={faSnowflake} spin /> Loading...
-    </h1>
-);
+interface LoadingProps {
+    noHeader?: boolean;
+}
+
+const Loading: React.FunctionComponent<React.PropsWithChildren<LoadingProps>> = (props) =>
+    props.noHeader ? (
+        <>
+            <FontAwesomeIcon icon={faSnowflake} spin /> Loading {props.children} ...
+        </>
+    ) : (
+        <h1 className="loader">
+            <FontAwesomeIcon icon={faSnowflake} spin /> Loading {props.children} ...
+        </h1>
+    );
 
 export class App extends React.Component {
     public render() {
@@ -23,15 +32,15 @@ export class App extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route
                     path={`/${theConventPath}`}
-                    render={props => (
-                        <React.Suspense fallback={<Loading />}>
+                    render={(props) => (
+                        <React.Suspense fallback={<Loading>the Convent</Loading>}>
                             <TheConvent {...props} />
                         </React.Suspense>
                     )}
                 />
                 <Route
                     path="/"
-                    render={props => (
+                    render={(props) => (
                         <React.Suspense fallback={<Loading />}>
                             <Main {...props} />
                         </React.Suspense>

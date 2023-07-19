@@ -4,7 +4,7 @@ import communityPhoto from './images/CommunityPhoto.jpg';
 
 export const whyPath = '/why';
 
-export const Why: React.FC = _props => (
+export const Why: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>Why?</h3>
 

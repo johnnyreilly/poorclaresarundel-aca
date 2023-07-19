@@ -4,7 +4,7 @@ import seekerIona from './images/SeekerIona.jpg';
 
 export const ionaPath = '/iona';
 
-export const Iona: React.FC = _props => (
+export const Iona: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Card className="float-right">
             <CardImg top src={seekerIona} />

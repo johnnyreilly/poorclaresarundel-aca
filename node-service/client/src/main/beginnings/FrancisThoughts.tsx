@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const francisThoughtsPath = '/beginnings-francis-thoughts';
 
-export const FrancisThoughts: React.FC = _props => (
+export const FrancisThoughts: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>St Francis of Assisi – His Thoughts</h3>
 

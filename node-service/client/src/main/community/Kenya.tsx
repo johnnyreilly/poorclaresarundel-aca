@@ -8,7 +8,7 @@ import africanStClare from './images/AfricanStClare.jpg';
 
 export const kenyaPath = '/community-kenya';
 
-export const Kenya: React.FC = _props => (
+export const Kenya: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Card className="float-right">
             <CardImg top src={kenyaContractSigning} />

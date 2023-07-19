@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const addressesPath = '/misc-addresses';
 
-export const Addresses: React.FC = _props => (
+export const Addresses: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>Addresses of Poor Clare convents in the English Association</h3>
 

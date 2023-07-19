@@ -4,7 +4,7 @@ import statue from './images/Statue.jpg';
 
 export const francisPrayersPath = '/beginnings-francis-prayers';
 
-export const FrancisPrayers: React.FC = _props => (
+export const FrancisPrayers: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Card className="float-right">
             <CardImg top src={statue} />

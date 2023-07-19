@@ -7,7 +7,7 @@ import tiggers4 from './images/Tiggers4.jpg';
 
 export const photoGalleryPath = '/photo-gallery';
 
-export const PhotoGallery: React.FC = _props => (
+export const PhotoGallery: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <h3>Photo Gallery of the Tigger Team</h3>
 

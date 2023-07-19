@@ -4,7 +4,7 @@ import ionaComingInDoor from './images/IonaComingInDoor.jpg';
 
 export const homePath = '/home';
 
-export const Home: React.FC = _props => (
+export const Home: React.FC<React.PropsWithChildren<unknown>> = _props => (
     <>
         <Jumbotron>
             <h2>"The Convent"</h2>
