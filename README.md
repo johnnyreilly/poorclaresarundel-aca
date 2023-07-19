@@ -59,3 +59,5 @@ sudo openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
 sudo chmod +r poorclaresarundel.org.key
 cat poorclaresarundel.org.crt poorclaresarundel.org.key > poorclaresarundel.org.pem
 ```
+
+and uploaded to environment in the Azure portal.
