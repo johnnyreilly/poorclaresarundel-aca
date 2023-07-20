@@ -56,7 +56,6 @@ resource environment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   location: location
   tags: tags
   properties: {
-    daprAIInstrumentationKey: appInsights.properties.InstrumentationKey
     appLogsConfiguration: {
       destination: 'log-analytics'
       logAnalyticsConfiguration: {
@@ -110,10 +109,10 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2022-10-01' = {
 
           {
               name: 'www.poorclaresarundel.org'
-              certificateId: '${environment.id}/certificates/poorclaresarundel.org'
+              certificateId: '${environment.id}/certificates/poorclaresarundel'
               bindingType: 'SniEnabled'
           }
-      ]
+        ]
       }
     }
     template: {
