@@ -109,7 +109,7 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2022-10-01' = {
 
           {
               name: 'www.poorclaresarundel.org'
-              certificateId: '${environment.id}/certificates/poorclaresarundel'
+              certificateId: '${environment.id}/certificates/poorclaresarundel.org'
               bindingType: 'SniEnabled'
           }
         ]
