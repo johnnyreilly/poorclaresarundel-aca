@@ -29,7 +29,7 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
         const mailgun = new Mailgun({ apiKey, domain });
 
         const prayerRequest = {
-            from: prayerRequestFromEmail,
+            from: email, // prayerRequestFromEmail,
             to: prayerRequestRecipientEmail,
             subject: 'Please could you pray for me',
             text: `Hi,
