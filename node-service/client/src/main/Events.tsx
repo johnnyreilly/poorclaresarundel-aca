@@ -43,7 +43,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{
-            __html: JSON.stringify(articleStructuredData),
+            __html: JSON.stringify(eventStructuredData),
             }} />
             <h3>Events</h3>
 
