@@ -42,7 +42,9 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
     return (
         <>
-            <script type="application/ld+json">{JSON.stringify(eventStructuredData)}</script>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{
+            __html: JSON.stringify(articleStructuredData),
+            }} />
             <h3>Events</h3>
 
             <h4>Regular Events</h4>
@@ -74,9 +76,9 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
             <h5>Sundays</h5>
 
             <ul>
-                <li><b>4.30 pm</b> Exposition of the Blessed Sacrament</li>
+                <li><b>4.45 pm</b> Exposition of the Blessed Sacrament</li>
 
-                <li><b>5.25 pm</b> Evening Prayer</li>
+                <li><b>5.30 pm</b> Evening Prayer</li>
             </ul>
 
             <p>All times can be subject to occasional change, so if travelling a distance you might like to phone to check. Sometimes we have a visiting priest, so Mass on other days of the week too, but this is not the norm.</p>
@@ -136,9 +138,9 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h5>Christmas Eve</h5>
 
-            <p>1st Vespers: 5.30pm</p>
+            <p>5pm Evening Prayer</p>
 
-            <p>10.30: Office of Readings and blessing of the Crib.</p>
+            <p>8pm Office of Readings and blessing of the Crib</p>
 
             <Card className="float-right">
                 <CardImg top src={crib} />
@@ -146,7 +148,9 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h5>Christmas Day</h5>
 
-            <p>Mass at 8am.</p>
+            <p>7.15am Morning Prayer</p>
+
+            <p>8am Holy Mass</p>
 
             <Card className="float-left">
                 <CardImg top src={taize} />
@@ -156,10 +160,6 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>Every last Friday of the month (except December): 7.15 - 8.15</p>
             <p>...round the Cross with Scripture, song and silence</p>
-
-            <h6>Every Sunday</h6>
-            <p>Exposition: 4:30pm</p>
-            <p>Vespers with Benediction: 5:30pm</p>
 
             <h6>Every Tuesday</h6>
             <p>John Main Meditation Group: 7:15pm</p>
