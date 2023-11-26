@@ -1,24 +1,22 @@
 import * as React from 'react';
 import { Card, CardText, CardImg, CardBody } from 'reactstrap';
-import workSrMariaIcon from './images/workSrMariaIcon.jpg';
+import sisterCooking from './images/sister-cooking.webp';
 import work1 from './images/Work1.jpg';
 import work2 from './images/Work2.jpg';
-import work3 from './images/Work3.jpg';
-import vestments1 from './images/vestments1.jpg';
+import knittedBabyClothes from './images/knitted-baby-clothes.webp';
+import leatherWork from './images/leather-work.webp';
 import vestments2 from './images/vestments2.jpg';
-import vestments3 from './images/vestments3.jpg';
-import vestments4 from './images/vestments4.jpg';
-import vestments5 from './images/vestments5.jpg';
+import selectionOfCards from './images/selection-of-cards.webp';
 import tripAroundGuestHouse from '../../static/tripAroundGuestHouse.pdf';
 
 export const ourWorkPath = '/our-work';
 
-export const OurWork: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const OurWork: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
-            <CardImg top src={workSrMariaIcon} />
+        <Card className="float-right" style={{ marginLeft: '1em', marginTop: '1em' }}>
+            <CardImg top src={sisterCooking} />
             <CardBody>
-                <CardText>Sister Maria painting an icon</CardText>
+                <CardText>Sister cooking</CardText>
             </CardBody>
         </Card>
 
@@ -41,69 +39,47 @@ export const OurWork: React.FC<React.PropsWithChildren<unknown>> = _props => (
         </p>
 
         <p>
-            You can see round our guest house{' '}
-            <a href={tripAroundGuestHouse}>
-                here
-            </a>
-            .
+            You can see round our guest house <a href={tripAroundGuestHouse}>here</a>.
         </p>
 
-        <p>One of our Sisters paints icons, a slow and prayerful work.</p>
-
         <p>
-            There are numerous crafts practised in the community, the fruits of which are on sale in our small shop. One
-            sister turns wood, several others make garments on knitting machines. Others make candles, encaustic wax
-            cards, as well as cards created and printed on our computer.
+            Sisters do a variety of craft work, some of which is on sale in our shop and some things can be made on
+            request (eg. leather work).
         </p>
 
         <div className="row">
             <div className="col-md-4">
                 <div className="thumbnail">
-                    <img src={work1} alt="" />
+                    <img src={work1} alt="Sister painting an ikon" />
+                    <p>Sister painting an ikon</p>
                 </div>
             </div>
             <div className="col-md-4">
                 <div className="thumbnail">
-                    <img src={work2} alt="" />
+                    <img src={work2} alt="Candles" />
+                    <p>Candles</p>
                 </div>
             </div>
             <div className="col-md-4">
-                <div className="thumbnail">
-                    <img src={work3} alt="" />
-                </div>
+                <img src={knittedBabyClothes} alt="Knitted baby clothes photo" />
+                <p>Knitted baby clothes</p>
             </div>
         </div>
 
-        <p>
-            We also make vestments for liturgical use. There are albs, purificators, etc and many other designs than the
-            ones pictured below.
-        </p>
-
         <div className="row">
-            <div className="col-md-2">
+            <div className="col-md-4">
                 <div className="thumbnail">
-                    <img src={vestments1} alt="Vestment" />
+                    <img src={leatherWork} alt="Leather work photo" />
+                    <p>Leather work</p>
                 </div>
             </div>
-            <div className="col-md-3">
-                <div className="thumbnail">
-                    <img src={vestments2} alt="Vestment" />
-                </div>
+            <div className="col-md-4">
+                <img src={vestments2} alt="Small alter linen photo" />
+                <p>Small alter linen</p>
             </div>
-            <div className="col-md-3">
-                <div className="thumbnail">
-                    <img src={vestments3} alt="Vestment" />
-                </div>
-            </div>
-            <div className="col-md-2">
-                <div className="thumbnail">
-                    <img src={vestments4} alt="Vestment" />
-                </div>
-            </div>
-            <div className="col-md-2">
-                <div className="thumbnail">
-                    <img src={vestments5} alt="Vestment" />
-                </div>
+            <div className="col-md-4">
+                <img src={selectionOfCards} alt="Selection of cards photo" />
+                <p>Selection of cards</p>
             </div>
         </div>
     </>

@@ -51,7 +51,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource environment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource environment 'Microsoft.App/managedEnvironments@2023-05-01' = {
   name: environmentName
   location: location
   tags: tags
@@ -73,7 +73,7 @@ resource environment 'Microsoft.App/managedEnvironments@2022-10-01' = {
 //   properties: {}
 // }
 
-resource webServiceContainerApp 'Microsoft.App/containerApps@2022-10-01' = {
+resource webServiceContainerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: webServiceContainerAppName
   tags: tags
   location: location
