@@ -15,7 +15,7 @@
     "install:server": "cd node-service/server && yarn",
     "postinstall": "run-s install:client install:server",
     "start": "cd node-service/server && yarn start",
-    "start:client": "cd node-service/client && yarn start"
+    "start:client": "cd node-service/client && yarn run dev"
   },
   "main": "dist/index.js",
   "repository": "https://github.com/johnnyreilly/poor-clares-arundel-koa.git",

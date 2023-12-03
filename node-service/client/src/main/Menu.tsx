@@ -26,10 +26,10 @@ import { ourWorkPath } from './our-life/OurWork';
 import { sisterAnnPath } from './community/SisterAnn';
 import { sisterClareAgnesPath } from './community/SisterClareAgnes';
 import { sisterClareRuvaPath } from './community/SisterClareRuva';
-import { sisterGabrielPath } from './community/SisterGabriel';
+// import { sisterGabrielPath } from './community/SisterGabriel';
 import { sisterGracaPath } from './community/SisterGraca';
 import { sisterJosephPath } from './community/SisterJoseph';
-import { sisterMariaPath } from './community/SisterMaria';
+// import { sisterMariaPath } from './community/SisterMaria';
 import { interviewsPath } from './community/Interviews';
 import { arundelPath } from './community/Arundel';
 import { claresStoryPath } from './beginnings/ClaresStory';
@@ -123,18 +123,18 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         <DropdownItem>
                                             <Link to={sisterClareRuvaPath}>Sister Clare Ruva</Link>
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        {/* <DropdownItem>
                                             <Link to={sisterGabrielPath}>Sister Gabriel</Link>
-                                        </DropdownItem>
+                                        </DropdownItem> */}
                                         <DropdownItem>
                                             <Link to={sisterGracaPath}>Sister Graça</Link>
                                         </DropdownItem>
                                         <DropdownItem>
                                             <Link to={sisterJosephPath}>Sister Joseph</Link>
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        {/* <DropdownItem>
                                             <Link to={sisterMariaPath}>Sister Maria</Link>
-                                        </DropdownItem>
+                                        </DropdownItem> */}
                                         <DropdownItem>
                                             <Link to={interviewsPath}>Interviews with Sisters</Link>
                                         </DropdownItem>

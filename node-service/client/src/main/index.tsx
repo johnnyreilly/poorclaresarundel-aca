@@ -9,10 +9,10 @@ import { OurShop, ourShopPath } from './our-life/OurShop';
 import { SisterAnn, sisterAnnPath } from './community/SisterAnn';
 import { SisterClareAgnes, sisterClareAgnesPath } from './community/SisterClareAgnes';
 import { SisterClareRuva, sisterClareRuvaPath } from './community/SisterClareRuva';
-import { SisterGabriel, sisterGabrielPath } from './community/SisterGabriel';
+// import { SisterGabriel, sisterGabrielPath } from './community/SisterGabriel';
 import { SisterGraca, sisterGracaPath } from './community/SisterGraca';
 import { SisterJoseph, sisterJosephPath } from './community/SisterJoseph';
-import { SisterMaria, sisterMariaPath } from './community/SisterMaria';
+// import { SisterMaria, sisterMariaPath } from './community/SisterMaria';
 import { Interviews, interviewsPath } from './community/Interviews';
 import { Arundel, arundelPath } from './community/Arundel';
 import { ClaresStory, claresStoryPath } from './beginnings/ClaresStory';
@@ -45,10 +45,10 @@ const Main: React.FC<React.PropsWithChildren<Props>> = props => (
                 <Route path={sisterAnnPath} component={SisterAnn} />
                 <Route path={sisterClareAgnesPath} component={SisterClareAgnes} />
                 <Route path={sisterClareRuvaPath} component={SisterClareRuva} />
-                <Route path={sisterGabrielPath} component={SisterGabriel} />
+                {/* <Route path={sisterGabrielPath} component={SisterGabriel} /> */}
                 <Route path={sisterGracaPath} component={SisterGraca} />
                 <Route path={sisterJosephPath} component={SisterJoseph} />
-                <Route path={sisterMariaPath} component={SisterMaria} />
+                {/* <Route path={sisterMariaPath} component={SisterMaria} /> */}
                 <Route path={vocationPath} component={Vocation} />
                 <Route path={interviewsPath} component={Interviews} />
                 <Route path={arundelPath} component={Arundel} />
