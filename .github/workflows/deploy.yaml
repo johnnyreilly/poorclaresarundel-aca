@@ -96,7 +96,7 @@ jobs:
         id: image-tag
         run: |
           name="image-${{ matrix.services.imageName }}"
-          value="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:${{ steps.meta.outputs.tags }}:sha-$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]'"
+          value="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:${{ steps.meta.outputs.tags }}:sha-$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]'
           echo "setting output $name=$value"
           echo "{$name}={$value}" >> $GITHUB_OUTPUT
         # run: echo "::set-output name=image-${{ matrix.services.imageName }}::${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]'
