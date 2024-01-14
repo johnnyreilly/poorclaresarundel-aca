@@ -9,15 +9,27 @@ import conventFromTheBack from './images/ConventFromTheBack.jpg';
 import spire from './images/Spire.jpg';
 import woodchester from './images/Woodchester.jpg';
 import bulwell from './images/Bulwell.jpg';
-import communityPresent from './images/CommunityPresent.jpg';
+import community2018 from './images/Community2018.webp';
+import community2024 from './images/Community2024.webp';
 import communityTripAroundHouse from '../../static/communityTripAroundHouse.pdf';
 import communityFoundationsHollington from '../../static/communityFoundationsHollington.pdf';
 
 export const arundelPath = '/community-arundel';
 
-export const Arundel: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const Arundel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
         <h3>The Arundel Community</h3>
+
+        <img src={community2024} alt="The Community, in 2024" />
+
+        <p>
+            We are a group of women who love God and seek to live together a life centred on prayer and praise. The
+            heart of our house is the Chapel, where we meet regularly for prayer throughout the day, but prayer runs
+            through all we do. Working in silence, and rarely going out, leaves us free to live the day before the Lord,
+            holding the world and its needs before Him.
+        </p>
+
+        <h4>Our History</h4>
 
         <Card className="float-right">
             <CardImg top src={dukeNDuchess} />
@@ -105,7 +117,7 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = _props => (
             </div>
         </div>
 
-        <Card style={{ maxWidth: "430px" }}>
+        <Card style={{ maxWidth: '430px' }}>
             <CardImg top src={conventFromTheBack} />
             <CardBody>
                 <CardText>
@@ -162,11 +174,13 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = _props => (
             </a>
         </p>
 
-        <h4>Present</h4>
+        <h4>2010 - 2011</h4>
         <p>
             In January 2010 M. Francis and Sr Margaret came from Bulwell, Nottingham, to join us. Their community had
             gradually become smaller and they were now the only two remaining from the original community.
         </p>
+
+        <img alt="Bulwell" src={bulwell} />
 
         <p>
             The Woodchester Convent closed in 2011 and sisters from there came to join us. Woodchester had been founded
@@ -174,20 +188,7 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = _props => (
             amalgamated with Arundel in 1972.
         </p>
 
-        <CardGroup>
-            <Card>
-                <CardImg top src={bulwell} />
-                <CardBody>
-                    <CardText>Bulwell</CardText>
-                </CardBody>
-            </Card>
-            <Card>
-                <CardImg top src={woodchester} />
-                <CardBody>
-                    <CardText>Woodchester</CardText>
-                </CardBody>
-            </Card>
-        </CardGroup>
+        <img alt="Woodchester" src={woodchester} />
 
         <p>
             We continue to follow the way of life St Clare wanted, filled with prayer, working together to be a
@@ -200,11 +201,6 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = _props => (
 
         <p>Now in 2018 we are 22 sisters.</p>
 
-        <Card>
-            <CardImg top src={communityPresent} />
-            <CardBody>
-                <CardText>The Community, Now</CardText>
-            </CardBody>
-        </Card>
+        <img alt="The Community, in 2018" src={community2018} />
     </>
 );
