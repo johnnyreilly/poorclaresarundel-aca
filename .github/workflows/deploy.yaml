@@ -94,8 +94,12 @@ jobs:
       
       - name: Output image tag
         id: image-tag
-        run: echo "::set-output name=image-${{ matrix.services.imageName }}::${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]'
-        # run: echo "{image-${{ matrix.services.imageName }}}={${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-$(git rev-parse --short HEAD)}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_OUTPUT
+        run: |
+          name="image-${{ matrix.services.imageName }}"
+          value="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:${{ steps.meta.outputs.tags }}:sha-$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]"
+          echo "setting output $name=$value"
+          echo "{$name}={$value}" >> $GITHUB_OUTPUT
+        # run: echo "::set-output name=image-${{ matrix.services.imageName }}::${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]'
 
   deploy:
     runs-on: ubuntu-latest
@@ -158,7 +162,8 @@ jobs:
                 OUTPUT_NAME=$(echo "$c" | jq -r '.[0]')
                 OUTPUT_VALUE=$(echo "$c" | jq -r '.[1]')
                 echo "setting variable $OUTPUT_NAME=$OUTPUT_VALUE"
-                echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
+                echo "{$OUTPUT_NAME}={$OUTPUT_VALUE}" >> $GITHUB_OUTPUT
+                # echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
               done # --query properties.outputs.nodeUrl
 
       - name: What-if bicep
@@ -186,3 +191,4 @@ jobs:
                   APPSETTINGS_DOMAIN="${{ vars.APPSETTINGS_DOMAIN }}" \
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
+
