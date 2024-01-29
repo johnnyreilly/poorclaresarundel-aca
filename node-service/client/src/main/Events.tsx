@@ -54,7 +54,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
             <ul>
                 <li><b>7.30 am</b> Morning Prayer</li>
 
-                <li><b>8.30 am Mondays and Wednesdays</b> Holy Mass, other days of the week a liturgy of the Word.</li>
+                <li><b>8.30am Wednesdays</b> Holy Mass</li>
 
                 <li><b>9 am (ish)</b> Office of the Passion</li>
 
