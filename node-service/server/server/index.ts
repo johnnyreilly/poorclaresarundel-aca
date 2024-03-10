@@ -18,7 +18,7 @@ app.use(
             useDefaults: true,
             directives: {
                 scriptSrc: ["'self'", "'unsafe-inline'", 'storage.googleapis.com', 'www.google-analytics.com'],
-                frameSrc: ["www.youtube.com"]
+                frameSrc: ["www.youtube.com", "www.youtube-nocookie.com"],
             },
         } as any // see https://github.com/venables/koa-helmet/pull/69
     )

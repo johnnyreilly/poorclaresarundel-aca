@@ -28,9 +28,7 @@ export const Events: React.FC<React.PropsWithChildren<unknown>> = (_props) => {
                 streetAddress: 'Convent of Poor Clares',
             },
         },
-        image: [
-            crib,
-        ],
+        image: [crib],
         description: `Christmas Eve - 5.30pm: 1st Vespers, 11.15pm: Blessing of the Crib and Midnight Mass.
 Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments afterwards`,
         organizer: {
@@ -42,47 +40,80 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
     return (
         <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{
-            __html: JSON.stringify(eventStructuredData),
-            }} />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(eventStructuredData),
+                }}
+            />
             <h3>Events</h3>
 
             <h4>Regular Events</h4>
 
-            <p>The Poor Clares are glad to be able to welcome anyone who comes to join them in their times of prayer. Our regular timetable is:</p>
+            <p>
+                The Poor Clares are glad to be able to welcome anyone who comes to join them in their times of prayer.
+                Our regular timetable is:
+            </p>
 
             <ul>
-                <li><b>7.30 am</b> Morning Prayer</li>
+                <li>
+                    <b>7.30 am</b> Morning Prayer
+                </li>
 
-                <li><b>8.30am Wednesdays</b> Holy Mass</li>
+                <li>
+                    <b>8.30am Wednesdays</b> Holy Mass
+                </li>
 
-                <li><b>9 am (ish)</b> Office of the Passion</li>
+                <li>
+                    <b>9 am (ish)</b> Office of the Passion
+                </li>
 
-                <li><b>12 noon</b> Office of Readings</li>
+                <li>
+                    <b>12 noon</b> Office of Readings
+                </li>
 
-                <li><b>5.50 pm</b> Monday to Friday Evening Prayer</li>
+                <li>
+                    <b>5.50 pm</b> Monday to Friday Evening Prayer
+                </li>
 
-                <li><b>8 pm</b> Night Prayer</li>
+                <li>
+                    <b>8 pm</b> Night Prayer
+                </li>
             </ul>
 
             <h5>Saturdays</h5>
 
             <ul>
-                <li><b>5.15 pm</b> Evening Prayer</li>
+                <li>
+                    <b>5.15 pm</b> Evening Prayer
+                </li>
 
-                <li><b>6 pm</b> Holy Mass</li>
+                <li>
+                    <b>6 pm</b> Holy Mass
+                </li>
             </ul>
 
             <h5>Sundays</h5>
 
             <ul>
-                <li><b>4.45 pm</b> Exposition of the Blessed Sacrament</li>
+                <li>
+                    <b>8-9 am</b> Exposition of the Blessed Sacrament
+                </li>
 
-                <li><b>5.30 pm</b> Evening Prayer</li>
+                <li>
+                    <b>4.45 pm</b> Exposition of the Blessed Sacrament
+                </li>
+
+                <li>
+                    <b>5.30 pm</b> Evening Prayer
+                </li>
             </ul>
 
-            <p>All times can be subject to occasional change, so if travelling a distance you might like to phone to check. Sometimes we have a visiting priest, so Mass on other days of the week too, but this is not the norm.</p>
-
+            <p>
+                All times can be subject to occasional change, so if travelling a distance you might like to phone to
+                check. Sometimes we have a visiting priest, so Mass on other days of the week too, but this is not the
+                norm.
+            </p>
 
             <h4>Annual Events</h4>
             <p>Come and join us for these events which take place throughout the year!</p>
@@ -158,8 +189,10 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h5>Taize Evening</h5>
 
-            <p>Every last Friday of the month (except December): 7.15 - 8.15</p>
+            <p>Usually every last Friday of the month (except December): 7.15 - 8.15</p>
             <p>...round the Cross with Scripture, song and silence</p>
+
+            <p>Taize 22nd March this year, due to Friday 29th March being Good Friday.</p>
 
             <h6>Every Tuesday</h6>
             <p>John Main Meditation Group: 7:15pm</p>

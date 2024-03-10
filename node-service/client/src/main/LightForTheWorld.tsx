@@ -17,7 +17,7 @@ export const LightForTheWorld: React.FC<React.PropsWithChildren<unknown>> = (_pr
         <h3>Light for the World</h3>
 
         <p>
-            Here is our new album, 'Light for the World' . Enjoy listening to our music. We hope it will help you find a
+            Here is our album, 'Light for the World' . Enjoy listening to our music. We hope it will help you find a
             place of peace and inner calm.
         </p>
 
