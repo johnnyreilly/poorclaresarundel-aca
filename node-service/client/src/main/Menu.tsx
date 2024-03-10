@@ -39,6 +39,7 @@ import { francisLifePath } from './beginnings/FrancisLife';
 import { francisThoughtsPath } from './beginnings/FrancisThoughts';
 import { francisPrayersPath } from './beginnings/FrancisPrayers';
 import { eventsPath } from './Events';
+import { donatePath } from './Donate';
 import { faqsPath } from './misc/FAQs';
 import { linksPath } from './misc/Links';
 import { glossaryPath } from './misc/Glossary';
@@ -181,11 +182,6 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <NavItem>
-                                    <Link className="nav-link" to={eventsPath}>
-                                        Events
-                                    </Link>
-                                </NavItem>
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>
                                         Misc
@@ -205,6 +201,16 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
+                                <NavItem>
+                                    <Link className="nav-link" to={eventsPath}>
+                                        Events
+                                    </Link>
+                                </NavItem>
+                                <NavItem>
+                                    <Link className="nav-link" to={donatePath}>
+                                        Donate
+                                    </Link>
+                                </NavItem>
                                 <NavItem>
                                     <Link className="nav-link" to={prayerRequestsPath}>
                                         Prayer Requests
