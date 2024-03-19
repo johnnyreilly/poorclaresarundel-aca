@@ -7,8 +7,9 @@ Built with Azure Container Apps and deployed here: https://main-web.blackmeadow-
 Test locally with:
 
 ```shell
-cd node-service
-docker compose up --build
+cd node-service/client
+yarn install
+yarn run dev
 ```
 
 ## What this needs to run in GitHub / Azure
