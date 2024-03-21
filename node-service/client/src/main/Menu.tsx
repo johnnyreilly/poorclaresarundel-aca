@@ -50,7 +50,7 @@ import { prayerRequestsPath } from './PrayerRequests';
 // import { usPath } from './Us';
 import { lightForTheWorldPath } from './LightForTheWorld';
 import { homePath } from '../the-convent/Home';
-import { myPeaceIGiveYouPath } from './MyPeaceIGiveYou';
+// import { myPeaceIGiveYouPath } from './MyPeaceIGiveYou';
 
 // const theConventPath = 'the-convent';
 
@@ -241,9 +241,9 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         <DropdownItem>
                                             <Link to={lightForTheWorldPath}>Light for the World</Link>
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        {/* <DropdownItem>
                                             <Link to={myPeaceIGiveYouPath}>My Peace I Give You</Link>
-                                        </DropdownItem>
+                                        </DropdownItem> */}
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
 
