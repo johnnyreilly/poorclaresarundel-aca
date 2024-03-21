@@ -6,7 +6,9 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import house from './images/house.jpg';
 // import lightForTheWorldSmall from './images/light-for-the-world-small.jpg';
 // import oComeEmmanuelSmall from './images/o-come-emmanuel-small.jpg';
+import myPeaceIGiveYou from './images/my-peace-i-give-you.avif';
 import './Home.css';
+import { myPeaceIGiveYouPath } from './main/MyPeaceIGiveYou';
 
 // https://schema.org/CatholicChurch
 const catholicChurchStructuredData = {
@@ -60,6 +62,14 @@ export class Home extends React.Component {
                                 />
                             </Link>
                         )} */}
+                            <Link to={myPeaceIGiveYouPath} title="We made an album...">
+                                <img
+                                    id="my-peace-i-give-you"
+                                    src={myPeaceIGiveYou}
+                                    alt="We made an album..."
+                                    className="img-fluid img-rounded"
+                                />
+                            </Link>
 
                             <Link to="/us" title="Learn more about us...">
                                 <img
@@ -82,7 +92,7 @@ export class Home extends React.Component {
                         <footer className="mastfoot mt-auto">
                             <div className="inner">
                                 <p>
-                                    © Community of Poor Clares, Arundel 2014-{new Date().getFullYear()} 
+                                    © Community of Poor Clares, Arundel 2014-{new Date().getFullYear()}
                                     <br /> Convent of Poor Clares, Crossbush, Arundel, BN18 9PJ
                                 </p>
                                 <p>

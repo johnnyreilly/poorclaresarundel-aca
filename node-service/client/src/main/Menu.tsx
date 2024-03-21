@@ -50,14 +50,15 @@ import { prayerRequestsPath } from './PrayerRequests';
 // import { usPath } from './Us';
 import { lightForTheWorldPath } from './LightForTheWorld';
 import { homePath } from '../the-convent/Home';
+import { myPeaceIGiveYouPath } from './MyPeaceIGiveYou';
 
 // const theConventPath = 'the-convent';
 
 const initialState = {
-    isOpen: false
+    isOpen: false,
 };
 
-type Props = { location: string; } 
+type Props = { location: string };
 
 export class Menu extends React.Component<Props, typeof initialState> {
     state = initialState;
@@ -65,14 +66,14 @@ export class Menu extends React.Component<Props, typeof initialState> {
     componentDidUpdate(prevProps: Props) {
         if (this.props.location !== prevProps.location) {
             this.setState(() => ({
-                isOpen: false
+                isOpen: false,
             }));
         }
-      }
+    }
 
     toggle = () =>
         this.setState(() => ({
-            isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen,
         }));
 
     render() {
@@ -82,7 +83,9 @@ export class Menu extends React.Component<Props, typeof initialState> {
 
                 <Navbar dark className="bg-primary" expand="md">
                     <Container>
-                        <Link className="navbar-brand" to={homePath}>Poor Clares</Link>
+                        <Link className="navbar-brand" to={homePath}>
+                            Poor Clares
+                        </Link>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
@@ -230,15 +233,20 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         The Convent
                                     </Link>
                                 </NavItem> */}
-                                <NavItem>
-                                    <Link
-                                        className="nav-link"
-                                        to={lightForTheWorldPath}
-                                        title="We made an album..."
-                                    >
-                                        Light for the World
-                                    </Link>
-                                </NavItem>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Our Music
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem>
+                                            <Link to={lightForTheWorldPath}>Light for the World</Link>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <Link to={myPeaceIGiveYouPath}>My Peace I Give You</Link>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+
                                 <NavItem>
                                     <a className="nav-link" href="https://youtu.be/URlqwrgphRc">
                                         The Convent

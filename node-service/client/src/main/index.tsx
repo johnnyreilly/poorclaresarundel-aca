@@ -30,11 +30,12 @@ import { Vocation, vocationPath } from './community/Vocation';
 import { Kenya, kenyaPath } from './community/Kenya';
 import { PrayerRequests, prayerRequestsPath } from './PrayerRequests';
 import { LightForTheWorld, lightForTheWorldPath } from './LightForTheWorld';
+import { MyPeaceIGiveYou, myPeaceIGiveYouPath } from './MyPeaceIGiveYou';
 import { Donate, donatePath } from './Donate';
 
 type Props = RouteComponentProps<{}>;
 
-const Main: React.FC<React.PropsWithChildren<Props>> = props => (
+const Main: React.FC<React.PropsWithChildren<Props>> = (props) => (
     <>
         <Menu location={props.location.pathname} />
         <Container>
@@ -68,6 +69,7 @@ const Main: React.FC<React.PropsWithChildren<Props>> = props => (
                 <Route path={donatePath} component={Donate} />
                 <Route path={prayerRequestsPath} component={PrayerRequests} />
                 <Route path={lightForTheWorldPath} component={LightForTheWorld} />
+                <Route path={myPeaceIGiveYouPath} component={MyPeaceIGiveYou} />
                 <Redirect to="/" />
             </Switch>
         </Container>
