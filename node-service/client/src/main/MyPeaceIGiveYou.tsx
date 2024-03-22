@@ -36,11 +36,11 @@ export const MyPeaceIGiveYou: React.FC<React.PropsWithChildren<unknown>> = (_pro
         </p>
 
         <p>
-            <a href="https://youtu.be/YBWjI2PmTfc">Album Trailer (This will go live on Friday 22nd)</a>
+            <a href="https://youtu.be/YBWjI2PmTfc">Album Trailer</a>
         </p>
 
         <p>
-            <a href="https://youtu.be/YBWjI2PmTfc">My Peace I Give You Video (This will go live on Monday 24th)</a>
+            <a href="https://youtu.be/YBWjI2PmTfc">My Peace I Give You Video</a>
         </p>
 
         {/* <p>
