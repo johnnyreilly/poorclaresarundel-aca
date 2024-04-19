@@ -199,8 +199,6 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             of her great gifts to us. It demonstrates that God is always faithful.
         </p>
 
-        <p>Now in 2018 we are 22 sisters.</p>
-
         <img alt="The Community, in 2018" src={community2018} />
     </>
 );

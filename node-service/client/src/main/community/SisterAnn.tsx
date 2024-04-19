@@ -4,7 +4,7 @@ import srAnn from './images/SrAnn.jpg';
 
 export const sisterAnnPath = '/community-sister-ann';
 
-export const SisterAnn: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const SisterAnn: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
         <Card className="float-right">
             <CardImg top src={srAnn} />
@@ -60,5 +60,7 @@ export const SisterAnn: React.FC<React.PropsWithChildren<unknown>> = _props => (
             ‘gave them the once-over’ and felt that this was where God wanted me. Forty-six years later I am still
             getting the ‘nunbug’ out of my system, but I think I shall stay, if they will have me!
         </p>
+
+        <p>Sr Ann died January 2015, RIP.</p>
     </>
 );

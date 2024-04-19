@@ -126,7 +126,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h5>Solemnity of St Clare</h5>
 
-            <p>11th August - 12 noon Mass of St Clare</p>
+            <p>12th August - 12 noon Mass of St Clare</p>
 
             <Card className="float-right">
                 <CardImg top src={stFrancis} />
@@ -191,8 +191,6 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>Usually every last Friday of the month (except December): 7.15 - 8.15</p>
             <p>...round the Cross with Scripture, song and silence</p>
-
-            <p>Taize 22nd March this year, due to Friday 29th March being Good Friday.</p>
 
             <h6>Every Tuesday</h6>
             <p>John Main Meditation Group: 7:15pm</p>
