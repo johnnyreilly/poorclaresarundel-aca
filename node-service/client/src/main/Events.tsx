@@ -50,6 +50,10 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h4>Regular Events</h4>
 
+            <p>Starting from Saturday 11th May, there will no longer be Saturday evening Mass.</p>
+
+            <p>On Sunday 12th May, Mass will be at 6pm and each Sunday thereafter.</p>
+
             <p>
                 The Poor Clares are glad to be able to welcome anyone who comes to join them in their times of prayer.
                 Our regular timetable is:
