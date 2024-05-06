@@ -2,14 +2,34 @@ import * as React from 'react';
 import { Card, CardImg, CardBody, CardText } from 'reactstrap';
 import kenyaContractSigning from './images/KenyaContractSigning.jpg';
 import kenyaHomePic from './images/KenyaHomePic.jpg';
-import kenyaHouseChurch from './images/KenyaHouseChurch.jpg';
-import kenyaCommunity2019 from './images/KenyaCommunity2019.jpg';
+import whereWeLive from './images/where-we-live-kenya.avif';
+import communityKenya from './images/community-kenya.avif';
 import africanStClare from './images/AfricanStClare.jpg';
+import guestHouseKenya from './images/guest-house-kenya.avif';
 
 export const kenyaPath = '/community-kenya';
 
-export const Kenya: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
+        <h3>
+            Clare in Kenya
+            <br />
+            Monastery of Our Lady of Light, Myanga
+        </h3>
+
+        <Card style={{ maxWidth: '700px', marginBottom: '1em' }}>
+            <CardImg top src={communityKenya} />
+            <CardBody>
+                <CardText>
+                    <a target="_blank" href="https://poorclaresmonastery.co.ke">
+                        poorclaresmonastery.co.ke
+                    </a>
+                </CardText>
+            </CardBody>
+        </Card>
+
+        <h4>Beginnings</h4>
+
         <Card className="float-right">
             <CardImg top src={kenyaContractSigning} />
             <CardBody>
@@ -22,14 +42,6 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = _props => (
                 </CardText>
             </CardBody>
         </Card>
-
-        <h3>
-            Clare in Kenya
-            <br />
-            Monastery of Our Lady of Light, Myanga
-        </h3>
-
-        <h4>Beginnings</h4>
 
         <p>
             On 3 June 1990 the Arundel community voted to make a foundation in Kenya. In October 1991 three sisters
@@ -70,7 +82,7 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = _props => (
         </p>
 
         <Card style={{ maxWidth: '430px' }}>
-            <CardImg top src={kenyaHouseChurch} />
+            <CardImg top src={whereWeLive} />
             <CardBody>
                 <CardText>The House and the Church</CardText>
             </CardBody>
@@ -79,24 +91,12 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = _props => (
         <h4>The Community</h4>
 
         <p>
-            The community are 12 in number at present. One sister from Arundel, six solemnly professed Kenyans, one
-            novice and four postulants.
-        </p>
-
-        <p>
             We are in contact with many young Kenyan women who are beginning the process of discerning whether they are
             called to Poor Clare life and we pray daily for more young women to join us. Once a young lady has made the
             decision to start her discernment with us, she has a year outside living in her own environment while she
             follows a program with a member of the professed community appointed to look after aspirants. The program is
             designed to gently introduce her to our way of life
         </p>
-
-        <Card style={{ maxWidth: '430px' }}>
-            <CardImg top src={kenyaCommunity2019} />
-            <CardBody>
-                <CardText>The Community in 2019</CardText>
-            </CardBody>
-        </Card>
 
         <p>
             Over the years many sisters from our founding community in Arundel have visited us and they are still
@@ -121,12 +121,19 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = _props => (
 
         <h4>Hospitality</h4>
 
-        <p>We have a small guesthouse and welcome people for a time of quiet, rest or for private retreats.</p>
+        <p>We have a guesthouse and welcome people for a time of quiet, rest or for private retreats.</p>
 
         <p>
             Please contact us if you would like us to pray for you. Also for booking a place in the guesthouse or if you
             would like more information about our community and way of life.
         </p>
+
+        <Card style={{ maxWidth: '700px' }}>
+            <CardImg top src={guestHouseKenya} />
+            <CardBody>
+                <CardText>The guesthouse</CardText>
+            </CardBody>
+        </Card>
 
         <address>
             <strong>Monastery of Poor Clares</strong>
@@ -139,7 +146,7 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = _props => (
             <abbr title="Phone">Tel:</abbr> 073342562 / 0722345334
             <br />
             <br />
-            Email: <a href="mailto:poorclaresmyanga@hotmail.com">poorclaresmyanga@hotmail.com</a>
+            Email: <a href="mailto:poorclaresmyanga@gmail.com">poorclaresmyanga@gmail.com</a>
         </address>
     </>
 );
