@@ -89,11 +89,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <ul>
                 <li>
-                    <b>5.15 pm</b> Evening Prayer
-                </li>
-
-                <li>
-                    <b>6 pm</b> Holy Mass
+                    <b>5.30 pm</b> Evening Prayer
                 </li>
             </ul>
 
@@ -105,11 +101,11 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
                 </li>
 
                 <li>
-                    <b>4.45 pm</b> Exposition of the Blessed Sacrament
+                    <b>5.15 pm</b> Evening Prayer
                 </li>
 
                 <li>
-                    <b>5.30 pm</b> Evening Prayer
+                    <b>6 pm</b> Holy Mass
                 </li>
             </ul>
 
@@ -130,7 +126,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h5>Solemnity of St Clare</h5>
 
-            <p>12th August - 12 noon Mass of St Clare</p>
+            <p>10th August - 10 am Mass of St Clare</p>
 
             <Card className="float-right">
                 <CardImg top src={stFrancis} />
