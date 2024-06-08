@@ -126,7 +126,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h5>Solemnity of St Clare</h5>
 
-            <p>10th August - 10 am Mass of St Clare</p>
+            <p>10th August - 12 noon Mass of St Clare</p>
 
             <Card className="float-right">
                 <CardImg top src={stFrancis} />
