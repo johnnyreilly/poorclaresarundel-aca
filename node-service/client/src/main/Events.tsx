@@ -65,7 +65,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
                 </li>
 
                 <li>
-                    <b>8.30am Monday to Saturday</b> Holy Mass
+                    <b>8.30am</b> Holy Mass (Weekdays)
                 </li>
 
                 <li>
