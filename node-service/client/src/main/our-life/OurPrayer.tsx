@@ -47,8 +47,8 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
             <li>7.30 Morning Prayer, the Prayer of Praise to God followed by Spiritual reading.</li>
 
             <li>
-                8.30 Holy Mass (Wednesdays, other days usually a Liturgy of the Word) followed by the Office of the
-                Passion (A short Prayer written by Francis of Assisi) and then work until 11.50
+                8.30 Holy Mass (Weekdays Mass is usually at 8.30am) followed by the Office of the Passion (A short
+                Prayer written by Francis of Assisi) and then work until 11.50
             </li>
 
             <li>
