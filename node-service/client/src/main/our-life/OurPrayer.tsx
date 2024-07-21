@@ -77,16 +77,11 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
 
         <h3>Holy Mass</h3>
 
-        <p>
-            Weekday Mass is usually at 8.30am (Mondays and Wednesdays). Vigil Mass for Sunday is at 6.00pm Saturday
-            preceded by Evening Prayer at 5.15pm.
-        </p>
+        <p>Weekday Mass is usually at 8.30am. Sunday Mass is at 6pm, preceeded by Evening Prayer at 5.15pm.</p>
 
         <h4>Other forms of prayer</h4>
 
-        <p>
-            Sundays we usually have Exposition of the Blessed Sacrament from 8am to 9am and again from 4.45pm to 5.30pm.
-        </p>
+        <p>Sundays we usually have Exposition of the Blessed Sacrament from 8am to 9am.</p>
 
         <p>
             Christian Meditation (John Main) group: Tuesday evenings, c.7pm - 8.30pm.

@@ -61,11 +61,11 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <ul>
                 <li>
-                    <b>7.30 am</b> Morning Prayer
+                    <b>7.30 am</b> Morning Prayer (except Thursday)
                 </li>
 
                 <li>
-                    <b>8.30am Wednesdays</b> Holy Mass
+                    <b>8.30am Monday to Saturday</b> Holy Mass
                 </li>
 
                 <li>
@@ -77,7 +77,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
                 </li>
 
                 <li>
-                    <b>5.50 pm</b> Monday to Friday Evening Prayer
+                    <b>5.50 pm</b> Weekdays Evening Prayer (except Wednesday)
                 </li>
 
                 <li>
@@ -111,8 +111,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>
                 All times can be subject to occasional change, so if travelling a distance you might like to phone to
-                check. Sometimes we have a visiting priest, so Mass on other days of the week too, but this is not the
-                norm.
+                check.
             </p>
 
             <h4>Annual Events</h4>
