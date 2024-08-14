@@ -105,7 +105,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         </DropdownItem>
                                         <DropdownItem divider />                                        
                                         <DropdownItem>
-                                            <a target="_blank" href="https://youtu.be/y_d-T74WEO0?si=HQFtzZpi6UEnPA2A">Sister Gabriel answers your questions on LADbible</a>
+                                            <a target="_blank" href="https://youtu.be/y_d-T74WEO0">Sister Gabriel answers your questions on LADbible</a>
                                         </DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem>
