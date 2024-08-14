@@ -7,7 +7,7 @@ export const FAQs: React.FC<React.PropsWithChildren<unknown>> = _props => (
         <h3>FAQs</h3>
 
         <div className="embed-responsive embed-responsive-16by9">
-            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/y_d-T74WEO0?si=eHpK8fyHVxK4XB-N" allowFullScreen title="Sister Gabriel interview on LADbible" />
+            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/y_d-T74WEO0" allowFullScreen title="Sister Gabriel interview on LADbible" />
         </div>
 
         <h4>Do you miss male company/Do you ever feel attracted to others in a romantic way?</h4>
