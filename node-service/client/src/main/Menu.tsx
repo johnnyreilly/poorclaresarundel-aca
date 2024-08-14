@@ -103,6 +103,10 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         <DropdownItem>
                                             <Link to={ourShopPath}>Our shop</Link>
                                         </DropdownItem>
+                                        <DropdownItem divider />                                        
+                                        <DropdownItem>
+                                            <a target="_blank" href="https://youtu.be/y_d-T74WEO0?si=HQFtzZpi6UEnPA2A">Sister Gabriel answers your questions on LADbible</a>
+                                        </DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem>
                                             <a href={tripAroundGuestHouse}>Trip around the guesthouse</a>
