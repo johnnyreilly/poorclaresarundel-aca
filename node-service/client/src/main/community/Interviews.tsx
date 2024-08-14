@@ -11,26 +11,26 @@ export const Interviews: React.FC<React.PropsWithChildren<unknown>> = _props => 
         <h4>Sister Pat</h4>
 
         <div className="embed-responsive embed-responsive-16by9">
-            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/Z13ZVI5ZARw?si=iOYV4fC72QRzosx3" title="Sister Pat inverview" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/Z13ZVI5ZARw" allowFullScreen title="Sister Pat inverview" />
+            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/Z13ZVI5ZARw" allowFullScreen title="Sister Pat interview" />
         </div>
 
         <h4>Sister Gabriel</h4>
 
         <div className="embed-responsive embed-responsive-16by9">
-            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/4wwaRR4jnuc" allowFullScreen title="Sister Gabriel inverview" />
+            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/4wwaRR4jnuc" allowFullScreen title="Sister Gabriel interview" />
+            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/y_d-T74WEO0" allowFullScreen title="Sister Gabriel interview on LADbible" />
         </div>
 
         <h4>Sister Angela</h4>
 
         <div className="embed-responsive embed-responsive-16by9">
-            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/RCWEawlX4Tc" allowFullScreen title="Sister Angela inverview" />
+            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/RCWEawlX4Tc" allowFullScreen title="Sister Angela interview" />
         </div>
 
         <h4>Sister Aelred</h4>
 
         <div className="embed-responsive embed-responsive-16by9">
-            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/qpXROehsm48" allowFullScreen title="Sister Aelred inverview" />
+            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/qpXROehsm48" allowFullScreen title="Sister Aelred interview" />
         </div>
     </>
 );
