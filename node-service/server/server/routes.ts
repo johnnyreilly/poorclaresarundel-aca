@@ -22,7 +22,9 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
         }
 
         if (!prayerRequestFromEmail || !prayerRequestRecipientEmail) {
-            throw new Error('APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL and / or APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL not configured');
+            throw new Error(
+                'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL and / or APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL not configured'
+            );
         }
 
         // We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails
@@ -36,7 +38,7 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
 
 I'd love it if you could pray for me about this:
 
-${prayFor}`
+${prayFor}`,
         };
         await mailgun.messages().send(prayerRequest);
 
@@ -52,7 +54,7 @@ Your Poor Clare sisters, Arundel.`;
 </head>
 <body>
     <div>
-        <img src="https://www.poorclaresarundel.org/images/main/SanDamianoCrucifix.jpg" />
+        <img src="https://www.poorclaresarundel.org/prayer-request-image.webp" />
     </div>
     <div style="padding:10px;font-family: Verdana, Helvetica, Sans-Serif;">
         <p>Thank you for your prayer request.</p>
@@ -69,7 +71,7 @@ Your Poor Clare sisters, Arundel.`;
             to: email,
             subject: 'Your prayer request',
             text,
-            html
+            html,
         };
         await mailgun.messages().send(reassuringResponse);
 
@@ -79,7 +81,7 @@ Your Poor Clare sisters, Arundel.`;
 
         ctx.body = {
             success: false,
-            text: `Your prayer request has not been sent - please try mailing: ${prayerRequestFromEmail}`
+            text: `Your prayer request has not been sent - please try mailing: ${prayerRequestFromEmail}`,
         };
     }
 });
