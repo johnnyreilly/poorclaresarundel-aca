@@ -10,7 +10,7 @@ on:
     branches:
       - main
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: ["v*.*.*"]
   workflow_dispatch:
 
 env:
@@ -23,7 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        services: [ {'imageName': 'node-service', 'directory': './node-service'}  ]
+        services:
+          [{ "imageName": "node-service", "directory": "./node-service" }]
     permissions:
       contents: read
       packages: write
@@ -81,7 +82,7 @@ jobs:
             type=semver,pattern={{major}}
             type=ref,event=branch
             type=sha
-  
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -91,7 +92,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      
+
       - name: Output image tag
         id: image-tag
         run: |
@@ -111,23 +112,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+
       # - name: Azure Login
       #   uses: azure/login@v1
       #   with:
       #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: 'Az CLI login'
+      - name: "Az CLI login"
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          
+
       - name: Deploy bicep
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         if: github.event_name != 'pull_request'
         with:
+          azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
           inlineScript: |
             REF_SHA='${{ github.ref }}.${{ github.sha }}'
             DEPLOYMENT_NAME="${REF_SHA////-}"
@@ -167,9 +169,10 @@ jobs:
               done # --query properties.outputs.nodeUrl
 
       - name: What-if bicep
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         if: github.event_name == 'pull_request'
         with:
+          azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
           inlineScript: |
             REF_SHA='${{ github.ref }}.${{ github.sha }}'
             DEPLOYMENT_NAME="${REF_SHA////-}"
@@ -191,4 +194,3 @@ jobs:
                   APPSETTINGS_DOMAIN="${{ vars.APPSETTINGS_DOMAIN }}" \
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
-
