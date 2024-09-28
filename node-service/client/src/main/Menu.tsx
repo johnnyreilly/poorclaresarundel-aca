@@ -103,9 +103,19 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         <DropdownItem>
                                             <Link to={ourShopPath}>Our shop</Link>
                                         </DropdownItem>
-                                        <DropdownItem divider />                                        
+                                        <DropdownItem divider />
                                         <DropdownItem>
-                                            <a target="_blank" href="https://youtu.be/y_d-T74WEO0">Sister Gabriel answers your questions on LADbible</a>
+                                            <a target="_blank" href="https://youtu.be/y_d-T74WEO0">
+                                                Sister Gabriel answers your questions on LADbible
+                                            </a>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <a
+                                                target="_blank"
+                                                href="https://canartsaveus.podbean.com/e/number-one-albums-in-hearts-minds-everywhere/"
+                                            >
+                                                Sister Gabriel on the <em>Can Art Save Us</em> podcast
+                                            </a>
                                         </DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem>
