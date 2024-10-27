@@ -1,11 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import * as ReactGA from 'react-ga';
-import { Router } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { App } from './App';
 import reportWebVitals from './reportWebVitals';
+import { createRoot } from 'react-dom/client';
+import { Home } from './Home';
+import React, { Suspense } from 'react';
+import { Loading } from './Loading';
+
+const Main = React.lazy(() => import('./main'));
+const TheConvent = React.lazy(() => import('./the-convent'));
 
 function initializeTracking() {
     ReactGA.initialize('UA-51754530-1'); // poorclaresarundel.org
@@ -15,7 +19,7 @@ function initializeTracking() {
         ReactGA.pageview(pathname);
     };
 
-    history.listen(({ pathname }) => historyListener(pathname));
+    history.listen((update) => historyListener(update.location.pathname));
     historyListener(window.location.pathname);
 }
 
@@ -23,12 +27,30 @@ const history = createBrowserHistory();
 
 initializeTracking();
 
-ReactDOM.render(
-    <Router history={history}>
-        <App />
-    </Router>,
-    document.getElementById('root')
-);
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Home />,
+    },
+    {
+        path: '/*',
+        element: (
+            <Suspense fallback={<Loading />}>
+                <Main />
+            </Suspense>
+        ),
+    },
+    {
+        path: 'the-convent',
+        element: (
+            <Suspense fallback={<Loading />}>
+                <TheConvent />
+            </Suspense>
+        ),
+    },
+]);
+
+createRoot(document.getElementById('root')!).render(<RouterProvider router={router} />);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
