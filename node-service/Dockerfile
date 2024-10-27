@@ -23,6 +23,7 @@ RUN pnpm run build
 ## IMAGE: build-server
 ##
 FROM base AS build-server
+
 WORKDIR /server
 
 COPY server/package.json server/pnpm-lock.yaml ./
@@ -35,6 +36,7 @@ RUN pnpm run build
 ## IMAGE: runtime
 ##
 FROM base AS runtime
+
 ENV NODE_ENV production
 
 WORKDIR /app
