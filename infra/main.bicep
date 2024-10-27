@@ -45,7 +45,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   location: location
   tags: tags
   kind: 'web'
-  properties: { 
+  properties: {
     Application_Type: 'web'
     Flow_Type: 'Bluefield'
   }
@@ -73,7 +73,7 @@ resource environment 'Microsoft.App/managedEnvironments@2023-05-01' = {
 //   properties: {}
 // }
 
-resource webServiceContainerApp 'Microsoft.App/containerApps@2023-05-01' = {
+resource webServiceContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
   name: webServiceContainerAppName
   tags: tags
   location: location
@@ -88,7 +88,7 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2023-05-01' = {
         {
           name: mailgunApiKeyRef
           value: APPSETTINGS_API_KEY
-        }      
+        }
       ]
       registries: [
         {
@@ -108,9 +108,9 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2023-05-01' = {
           // }
 
           {
-              name: 'www.poorclaresarundel.org'
-              certificateId: '${environment.id}/certificates/poorclaresarundel.org'
-              bindingType: 'SniEnabled'
+            name: 'www.poorclaresarundel.org'
+            certificateId: '${environment.id}/certificates/poorclaresarundel.org'
+            bindingType: 'SniEnabled'
           }
         ]
       }
