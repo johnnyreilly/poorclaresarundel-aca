@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { Container } from 'reactstrap';
-import { Route, RouteComponentProps, Switch, Redirect } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Menu } from './Menu';
 import { Us, usPath } from './Us';
 import { OurPrayer, ourPrayerPath } from './our-life/OurPrayer';
@@ -33,47 +32,48 @@ import { LightForTheWorld, lightForTheWorldPath } from './LightForTheWorld';
 import { MyPeaceIGiveYou, myPeaceIGiveYouPath } from './MyPeaceIGiveYou';
 import { Donate, donatePath } from './Donate';
 
-type Props = RouteComponentProps<{}>;
-
-const Main: React.FC<React.PropsWithChildren<Props>> = (props) => (
-    <>
-        <Menu location={props.location.pathname} />
-        <Container>
-            <Switch>
-                <Route path={usPath} component={Us} />
-                <Route path={ourPrayerPath} component={OurPrayer} />
-                <Route path={ourWorkPath} component={OurWork} />
-                <Route path={ourShopPath} component={OurShop} />
-                <Route path={sisterAnnPath} component={SisterAnn} />
-                <Route path={sisterClareAgnesPath} component={SisterClareAgnes} />
-                <Route path={sisterClareRuvaPath} component={SisterClareRuva} />
-                {/* <Route path={sisterGabrielPath} component={SisterGabriel} /> */}
-                <Route path={sisterGracaPath} component={SisterGraca} />
-                <Route path={sisterJosephPath} component={SisterJoseph} />
-                {/* <Route path={sisterMariaPath} component={SisterMaria} /> */}
-                <Route path={vocationPath} component={Vocation} />
-                <Route path={interviewsPath} component={Interviews} />
-                <Route path={arundelPath} component={Arundel} />
-                <Route path={kenyaPath} component={Kenya} />
-                <Route path={claresStoryPath} component={ClaresStory} />
-                <Route path={claresThoughtsPath} component={ClaresThoughts} />
-                <Route path={claresPrayersPath} component={ClaresPrayers} />
-                <Route path={francisLifePath} component={FrancisLife} />
-                <Route path={francisThoughtsPath} component={FrancisThoughts} />
-                <Route path={francisPrayersPath} component={FrancisPrayers} />
-                <Route path={eventsPath} component={Events} />
-                <Route path={faqsPath} component={FAQs} />
-                <Route path={linksPath} component={Links} />
-                <Route path={glossaryPath} component={Glossary} />
-                <Route path={addressesPath} component={Addresses} />
-                <Route path={donatePath} component={Donate} />
-                <Route path={prayerRequestsPath} component={PrayerRequests} />
-                <Route path={lightForTheWorldPath} component={LightForTheWorld} />
-                <Route path={myPeaceIGiveYouPath} component={MyPeaceIGiveYou} />
-                <Redirect to="/" />
-            </Switch>
-        </Container>
-    </>
-);
+function Main() {
+    const location = useLocation();
+    return (
+        <>
+            <Menu location={location.pathname} />
+            <Container>
+                <Routes>
+                    <Route path={usPath} element={<Us />} />
+                    <Route path={ourPrayerPath} element={<OurPrayer />} />
+                    <Route path={ourWorkPath} element={<OurWork />} />
+                    <Route path={ourShopPath} element={<OurShop />} />
+                    <Route path={sisterAnnPath} element={<SisterAnn />} />
+                    <Route path={sisterClareAgnesPath} element={<SisterClareAgnes />} />
+                    <Route path={sisterClareRuvaPath} element={<SisterClareRuva />} />
+                    {/* <Route path={sisterGabrielPath} element={SisterGabriel} /> */}
+                    <Route path={sisterGracaPath} element={<SisterGraca />} />
+                    <Route path={sisterJosephPath} element={<SisterJoseph />} />
+                    {/* <Route path={sisterMariaPath} element={SisterMaria} /> */}
+                    <Route path={vocationPath} element={<Vocation />} />
+                    <Route path={interviewsPath} element={<Interviews />} />
+                    <Route path={arundelPath} element={<Arundel />} />
+                    <Route path={kenyaPath} element={<Kenya />} />
+                    <Route path={claresStoryPath} element={<ClaresStory />} />
+                    <Route path={claresThoughtsPath} element={<ClaresThoughts />} />
+                    <Route path={claresPrayersPath} element={<ClaresPrayers />} />
+                    <Route path={francisLifePath} element={<FrancisLife />} />
+                    <Route path={francisThoughtsPath} element={<FrancisThoughts />} />
+                    <Route path={francisPrayersPath} element={<FrancisPrayers />} />
+                    <Route path={eventsPath} element={<Events />} />
+                    <Route path={faqsPath} element={<FAQs />} />
+                    <Route path={linksPath} element={<Links />} />
+                    <Route path={glossaryPath} element={<Glossary />} />
+                    <Route path={addressesPath} element={<Addresses />} />
+                    <Route path={donatePath} element={<Donate />} />
+                    <Route path={prayerRequestsPath} element={<PrayerRequests />} />
+                    <Route path={lightForTheWorldPath} element={<LightForTheWorld />} />
+                    <Route path={myPeaceIGiveYouPath} element={<MyPeaceIGiveYou />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </Container>
+        </>
+    );
+}
 
 export default Main;

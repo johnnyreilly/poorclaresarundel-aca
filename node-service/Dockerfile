@@ -1,19 +1,24 @@
 ##
 ## IMAGE: build-client
 ##
-FROM node:18 AS build-client
+FROM node:20 AS build-client
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
 WORKDIR /client
 
-COPY client/package.json client/yarn.lock ./
-RUN yarn --network-timeout 100000
+COPY client/package.json client/pnpm-lock.yaml ./
+RUN pnpm i --frozen-lockfile --network-timeout 100000
 
 COPY client ./
-RUN yarn build
+RUN pnpm run build
 
 ##
 ## IMAGE: build-server
 ##
-FROM node:18 AS build-server
+FROM node:20 AS build-server
 WORKDIR /server
 
 COPY server/package.json server/yarn.lock ./
@@ -25,7 +30,7 @@ RUN yarn build
 ##
 ## IMAGE: runtime
 ##
-FROM node:18 AS runtime
+FROM node:20 AS runtime
 ENV NODE_ENV production
 
 WORKDIR /app

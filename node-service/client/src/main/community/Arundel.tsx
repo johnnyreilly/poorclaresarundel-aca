@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText, CardGroup } from 'reactstrap';
+import { Card, CardImg, CardBody, CardText } from 'reactstrap';
 import dukeNDuchess from './images/DukeNDuchess.jpg';
 import motherAbbessAgnesGasquet from './images/MotherAbbessAgnesGasquet.jpg';
 import motherClareCampbell from './images/MotherClareCampbell.jpg';

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Jumbotron } from 'reactstrap';
 import communityAtPrayer from './images/Page2CommunityAtPrayer.jpg';
 import prayingInChapel from './images/praying_in_chapel.jpg';
@@ -12,37 +11,35 @@ import './Us.css';
 const items = [
     {
         src: communityAtPrayer,
-        caption: 'Called to a life of prayer'
+        caption: 'Called to a life of prayer',
     },
     {
         src: prayingInChapel,
-        caption: 'we seek to live the Gospel'
+        caption: 'we seek to live the Gospel',
     },
     {
         src: coffeeTime,
-        caption: 'in and for'
+        caption: 'in and for',
     },
     {
         src: librarian,
-        caption: 'our world of today.'
+        caption: 'our world of today.',
     },
     {
         src: vegTeam,
-        caption: 'We share our lives'
+        caption: 'We share our lives',
     },
     {
         src: providenceGroup,
-        caption: 'and all that we do.'
-    }
+        caption: 'and all that we do.',
+    },
 ];
 
 export const usPath = '/us';
 
-type Props = RouteComponentProps<{}>;
-
 const defaultState = { activeIndex: 0 };
 
-export class Us extends React.Component<Props, typeof defaultState> {
+export class Us extends React.Component<unknown, typeof defaultState> {
     animating = false;
 
     state = defaultState;
@@ -59,7 +56,7 @@ export class Us extends React.Component<Props, typeof defaultState> {
         if (this.animating) {
             return;
         }
-        this.setState(prevState => {
+        this.setState((prevState) => {
             const nextIndex = prevState.activeIndex === items.length - 1 ? 0 : prevState.activeIndex + 1;
             return { activeIndex: nextIndex };
         });
@@ -69,7 +66,7 @@ export class Us extends React.Component<Props, typeof defaultState> {
         if (this.animating) {
             return;
         }
-        this.setState(prevState => {
+        this.setState((prevState) => {
             const nextIndex = prevState.activeIndex === 0 ? items.length - 1 : prevState.activeIndex - 1;
             return { activeIndex: nextIndex };
         });
@@ -85,7 +82,7 @@ export class Us extends React.Component<Props, typeof defaultState> {
     render() {
         const { activeIndex } = this.state;
 
-        const slides = items.map(item => {
+        const slides = items.map((item) => {
             return (
                 <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
                     <img src={item.src} alt={item.caption} />
