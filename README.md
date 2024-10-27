@@ -8,8 +8,8 @@ Test locally with:
 
 ```shell
 cd node-service/client
-yarn install
-yarn run dev
+pnpm install
+pnpm run dev
 ```
 
 ## What this needs to run in GitHub / Azure

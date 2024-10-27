@@ -1,49 +1,47 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "shell",
-            "label": "yarn",
-            "command": "yarn",
-            "options": {
-                "cwd": "${workspaceFolder}/node-service"
-            }
-        },
-        {
-            "type": "shell",
-            "label": "client build",
-            "command": "yarn build",
-            "options": {
-                "cwd": "${workspaceFolder}/node-service/client"
-            },
-            "dependsOn":["yarn"]
-        },
-        {
-            "label": "server build",
-            "type": "typescript",
-            "tsconfig": "node-service/server/tsconfig.json",
-            "problemMatcher": [
-                "$tsc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "dependsOn":["client build"]
-        },
-        {
-            "label": "server watch",
-            "type": "typescript",
-            "tsconfig": "node-service/server/tsconfig.json",
-            "option": "watch",
-            "isBackground": true,
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": "$tsc-watch"
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "pnpm install",
+      "command": "pnpm install",
+      "options": {
+        "cwd": "${workspaceFolder}/node-service"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "client build",
+      "command": "pnpm run build",
+      "options": {
+        "cwd": "${workspaceFolder}/node-service/client"
+      },
+      "dependsOn": ["pnpm install"]
+    },
+    {
+      "label": "server build",
+      "type": "typescript",
+      "tsconfig": "node-service/server/tsconfig.json",
+      "problemMatcher": ["$tsc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": ["client build"]
+    },
+    {
+      "label": "server watch",
+      "type": "typescript",
+      "tsconfig": "node-service/server/tsconfig.json",
+      "option": "watch",
+      "isBackground": true,
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$tsc-watch"
+    }
+  ]
 }
