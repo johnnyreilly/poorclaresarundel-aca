@@ -1,5 +1,4 @@
-import * as fs from 'fs';
-import * as koaBody from 'koa-body';
+import { koaBody } from 'koa-body';
 import * as Router from 'koa-router';
 import * as Mailgun from 'mailgun-js';
 
@@ -23,7 +22,7 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
 
         if (!prayerRequestFromEmail || !prayerRequestRecipientEmail) {
             throw new Error(
-                'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL and / or APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL not configured'
+                'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL and / or APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL not configured',
             );
         }
 
