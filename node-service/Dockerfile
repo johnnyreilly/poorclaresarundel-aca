@@ -10,7 +10,7 @@ RUN corepack enable
 WORKDIR /client
 
 COPY client/package.json client/pnpm-lock.yaml ./
-RUN pnpm fetch --prod
+RUN pnpm i --frozen-lockfile	
 
 COPY client ./
 RUN pnpm run build
