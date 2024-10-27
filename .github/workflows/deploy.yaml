@@ -32,7 +32,7 @@ jobs:
       image-node: ${{ steps.image-tag.outputs.image-node-service }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Dump GitHub context
         env:
@@ -111,7 +111,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # - name: Azure Login
       #   uses: azure/login@v1
