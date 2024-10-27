@@ -1,11 +1,15 @@
-##
-## IMAGE: build-client
-##
-FROM node:20 AS build-client
+FROM node:20-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
+
+FROM base AS prod
+
+##
+## IMAGE: build-client
+##
+FROM base AS build-client
 
 WORKDIR /client
 
@@ -18,26 +22,26 @@ RUN pnpm run build
 ##
 ## IMAGE: build-server
 ##
-FROM node:20 AS build-server
+FROM base AS build-server
 WORKDIR /server
 
-COPY server/package.json server/yarn.lock ./
-RUN yarn --network-timeout 100000
+COPY server/package.json server/pnpm-lock.yaml ./
+RUN pnpm i --frozen-lockfile	
 
 COPY server ./
-RUN yarn build
+RUN pnpm run build
 
 ##
 ## IMAGE: runtime
 ##
-FROM node:20 AS runtime
+FROM base AS runtime
 ENV NODE_ENV production
 
 WORKDIR /app
 COPY --from=build-client client/dist ./client/dist
 COPY --from=build-server server/dist ./dist
-COPY --from=build-server server/package.json server/yarn.lock ./
-RUN yarn --network-timeout 100000
+COPY --from=build-server server/package.json server/pnpm-lock.yaml ./
+RUN pnpm i --frozen-lockfile --prod
 
 EXPOSE 3000
 CMD [ "node", "dist/index.js" ]
