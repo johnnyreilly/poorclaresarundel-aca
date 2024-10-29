@@ -174,9 +174,9 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h5>Christmas Day</h5>
 
-            <p>7.15am Morning Prayer</p>
+            <p>7.30am Morning Prayer</p>
 
-            <p>8am Holy Mass</p>
+            <p>8.30am Holy Mass</p>
 
             <Card className="float-left">
                 <CardImg top src={taize} />
