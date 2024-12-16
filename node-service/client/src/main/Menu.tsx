@@ -14,7 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 import Container from 'reactstrap/lib/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
 // import lifeInAConvent from '../static/Stylist_Life_in_a_convent.pdf';
 import communityFoundationsHollington from '../static/communityFoundationsHollington.pdf';
 import tripAroundGuestHouse from '../static/tripAroundGuestHouse.pdf';
@@ -266,13 +266,26 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                 </UncontrolledDropdown>
 
                                 <NavItem>
-                                    <a className="nav-link" href="https://youtu.be/URlqwrgphRc">
+                                    <a className="nav-link" target="_blank" href="https://youtu.be/URlqwrgphRc">
                                         The Convent
                                     </a>
                                 </NavItem>
                                 <NavItem>
-                                    <a className="nav-link" href="https://www.facebook.com/poorclaresarundel">
+                                    <a
+                                        className="nav-link"
+                                        target="_blank"
+                                        href="https://www.facebook.com/poorclaresarundel"
+                                    >
                                         <FontAwesomeIcon icon={faFacebook} />
+                                    </a>
+                                </NavItem>
+                                <NavItem>
+                                    <a
+                                        className="nav-link"
+                                        target="_blank"
+                                        href="https://www.youtube.com/channel/UCenwZN21CYRbwwWtqqf7v0w"
+                                    >
+                                        <FontAwesomeIcon icon={faYoutube} />
                                     </a>
                                 </NavItem>
                             </Nav>
