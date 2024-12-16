@@ -31,6 +31,7 @@ import { PrayerRequests, prayerRequestsPath } from './PrayerRequests';
 import { LightForTheWorld, lightForTheWorldPath } from './LightForTheWorld';
 import { MyPeaceIGiveYou, myPeaceIGiveYouPath } from './MyPeaceIGiveYou';
 import { Donate, donatePath } from './Donate';
+import { Christmas, christmasPath } from './Christmas';
 
 function Main() {
     const location = useLocation();
@@ -68,6 +69,7 @@ function Main() {
                     <Route path={donatePath} element={<Donate />} />
                     <Route path={prayerRequestsPath} element={<PrayerRequests />} />
                     <Route path={lightForTheWorldPath} element={<LightForTheWorld />} />
+                    <Route path={christmasPath} element={<Christmas />} />
                     <Route path={myPeaceIGiveYouPath} element={<MyPeaceIGiveYou />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>

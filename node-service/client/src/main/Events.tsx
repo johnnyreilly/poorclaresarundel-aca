@@ -166,7 +166,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>5pm Evening Prayer</p>
 
-            <p>8pm Office of Readings and blessing of the Crib</p>
+            <p>8.30pm Office of Readings and blessing of the Crib</p>
 
             <Card className="float-right">
                 <CardImg top src={crib} />

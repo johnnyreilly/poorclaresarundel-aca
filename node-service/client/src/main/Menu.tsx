@@ -51,6 +51,7 @@ import { prayerRequestsPath } from './PrayerRequests';
 import { lightForTheWorldPath } from './LightForTheWorld';
 import { homePath } from '../the-convent/Home';
 import { myPeaceIGiveYouPath } from './MyPeaceIGiveYou';
+import { christmasPath } from './Christmas';
 
 // const theConventPath = 'the-convent';
 
@@ -252,6 +253,9 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         Our Music
                                     </DropdownToggle>
                                     <DropdownMenu right>
+                                        <DropdownItem>
+                                            <Link to={christmasPath}>Christmas 2024</Link>
+                                        </DropdownItem>
                                         <DropdownItem>
                                             <Link to={lightForTheWorldPath}>Light for the World</Link>
                                         </DropdownItem>
