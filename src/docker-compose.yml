@@ -6,7 +6,7 @@ services:
     build: .
     environment:
       NODE_ENV: production
-      APPSETTINGS_API_KEY: 'this is the guid from mailgun'
+      APPSETTINGS_API_KEY: 'api-key-from-mailgun'
       APPSETTINGS_DOMAIN: 'mg.poorclaresarundel.org'
       APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL: 'noreply@mg.poorclaresarundel.org'
       APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL: 'johnny_reilly@hotmail.com'

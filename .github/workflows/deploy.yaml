@@ -23,8 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        services:
-          [{ "imageName": "node-service", "directory": "./node-service" }]
+        services: [{ "imageName": "node-service", "directory": "./src" }]
     permissions:
       contents: read
       packages: write

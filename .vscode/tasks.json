@@ -8,7 +8,7 @@
       "label": "pnpm install",
       "command": "pnpm install",
       "options": {
-        "cwd": "${workspaceFolder}/node-service"
+        "cwd": "${workspaceFolder}/src"
       }
     },
     {
@@ -16,14 +16,14 @@
       "label": "client build",
       "command": "pnpm run build",
       "options": {
-        "cwd": "${workspaceFolder}/node-service/client"
+        "cwd": "${workspaceFolder}/src/client"
       },
       "dependsOn": ["pnpm install"]
     },
     {
       "label": "server build",
       "type": "typescript",
-      "tsconfig": "node-service/server/tsconfig.json",
+      "tsconfig": "src/server/tsconfig.json",
       "problemMatcher": ["$tsc"],
       "group": {
         "kind": "build",
@@ -34,7 +34,7 @@
     {
       "label": "server watch",
       "type": "typescript",
-      "tsconfig": "node-service/server/tsconfig.json",
+      "tsconfig": "src/server/tsconfig.json",
       "option": "watch",
       "isBackground": true,
       "group": {
