@@ -13,10 +13,10 @@ FROM base AS build-client
 
 WORKDIR /client
 
-COPY client/package.json client/pnpm-lock.yaml ./
+COPY src/client/package.json src/client/pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile	
 
-COPY client ./
+COPY src/client ./
 RUN pnpm run build
 
 ##
@@ -25,10 +25,10 @@ RUN pnpm run build
 FROM base AS build-server
 WORKDIR /server
 
-COPY server/package.json server/pnpm-lock.yaml ./
+COPY src/server/package.json src/server/pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile	
 
-COPY server ./
+COPY src/server ./
 RUN pnpm run build
 
 ##

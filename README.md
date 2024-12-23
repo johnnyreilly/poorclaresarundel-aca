@@ -7,7 +7,7 @@ Built with Azure Container Apps and deployed here: https://main-web.blackmeadow-
 Test locally with:
 
 ```shell
-cd node-service/client
+cd src/client
 pnpm install
 pnpm run dev
 ```
