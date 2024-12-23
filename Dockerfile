@@ -28,7 +28,7 @@ WORKDIR /server
 COPY src/server/package.json src/server/pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile	
 
-COPY server ./
+COPY src/server ./
 RUN pnpm run build
 
 ##
