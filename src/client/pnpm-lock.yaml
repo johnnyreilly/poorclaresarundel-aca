@@ -59,7 +59,7 @@ importers:
         version: 29.5.14
       '@types/node':
         specifier: ^16.11.62
-        version: 16.18.115
+        version: 16.18.122
       '@types/react':
         specifier: ^18.0.21
         version: 18.3.12
@@ -71,13 +71,13 @@ importers:
         version: 7.1.6
       '@vitejs/plugin-react':
         specifier: ^4.3.3
-        version: 4.3.3(vite@5.4.10(@types/node@16.18.115))
+        version: 4.3.3(vite@5.4.10(@types/node@16.18.122))
       typescript:
         specifier: ^5.6.2
         version: 5.6.3
       vite:
         specifier: ^5.0.0
-        version: 5.4.10(@types/node@16.18.115)
+        version: 5.4.10(@types/node@16.18.122)
 
 packages:
 
@@ -512,8 +512,8 @@ packages:
   '@types/jest@29.5.14':
     resolution: {integrity: sha512-ZN+4sdnLUbo8EVvVc2ao0GFW6oVrQRPn4K2lglySj7APvSrgzxHiNNK99us4WDMi57xxA2yggblIAMNhXOotLQ==}
 
-  '@types/node@16.18.115':
-    resolution: {integrity: sha512-NF5ajYn+dq0tRfswdyp8Df75h7D9z+L8TCIwrXoh46ZLK6KZVXkRhf/luXaZytvm/keUo9vU4m1Bg39St91a5w==}
+  '@types/node@16.18.122':
+    resolution: {integrity: sha512-rF6rUBS80n4oK16EW8nE75U+9fw0SSUgoPtWSvHhPXdT7itbvmS7UjB/jyM8i3AkvI6yeSM5qCwo+xN0npGDHg==}
 
   '@types/prop-types@15.7.13':
     resolution: {integrity: sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==}
@@ -1184,7 +1184,7 @@ snapshots:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 16.18.115
+      '@types/node': 16.18.122
       '@types/yargs': 15.0.19
       chalk: 4.1.2
 
@@ -1193,7 +1193,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 16.18.115
+      '@types/node': 16.18.122
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
@@ -1344,7 +1344,7 @@ snapshots:
       expect: 29.7.0
       pretty-format: 29.7.0
 
-  '@types/node@16.18.115': {}
+  '@types/node@16.18.122': {}
 
   '@types/prop-types@15.7.13': {}
 
@@ -1377,14 +1377,14 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@vitejs/plugin-react@4.3.3(vite@5.4.10(@types/node@16.18.115))':
+  '@vitejs/plugin-react@4.3.3(vite@5.4.10(@types/node@16.18.122))':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.10(@types/node@16.18.115)
+      vite: 5.4.10(@types/node@16.18.122)
     transitivePeerDependencies:
       - supports-color
 
@@ -1555,7 +1555,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 16.18.115
+      '@types/node': 16.18.122
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -1764,13 +1764,13 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  vite@5.4.10(@types/node@16.18.115):
+  vite@5.4.10(@types/node@16.18.122):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.47
       rollup: 4.24.1
     optionalDependencies:
-      '@types/node': 16.18.115
+      '@types/node': 16.18.122
       fsevents: 2.3.3
 
   web-vitals@1.1.2: {}
