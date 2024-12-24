@@ -27,7 +27,7 @@ var webServiceContainerAppName = '${branch}-web'
 var containerRegistryPasswordRef = 'container-registry-password'
 var mailgunApiKeyRef = 'mailgun-api-key'
 
-resource workspace 'Microsoft.OperationalInsights/workspaces@2021-12-01-preview' = {
+resource workspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: workspaceName
   location: location
   tags: tags
