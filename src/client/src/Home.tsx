@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import house from './images/house.jpg';
 // import lightForTheWorldSmall from './images/light-for-the-world-small.jpg';
 // import oComeEmmanuelSmall from './images/o-come-emmanuel-small.jpg';
 import myPeaceIGiveYou from './images/my-peace-i-give-you.avif';
 import { myPeaceIGiveYouPath } from './main/MyPeaceIGiveYou';
 import './Home.css';
+import { Footer } from './components/Footer';
 
 // https://schema.org/CatholicChurch
 const catholicChurchStructuredData = {
@@ -89,25 +87,9 @@ export class Home extends React.Component {
                                 <Link to="/us">Learn more about us...</Link>
                             </p>
                         </main>
-
-                        <footer className="mastfoot mt-auto">
-                            <div className="inner">
-                                <p>
-                                    © Community of Poor Clares, Arundel 2014-{new Date().getFullYear()}
-                                    <br /> Convent of Poor Clares, Crossbush, Arundel, BN18 9PJ
-                                </p>
-                                <p>
-                                    <a href="mailto:arundel.poorclares@gmail.com">
-                                        <FontAwesomeIcon icon={faEnvelope} /> arundel.poorclares@gmail.com
-                                    </a>{' '}
-                                    <a href="https://www.facebook.com/poorclaresarundel">
-                                        <FontAwesomeIcon icon={faFacebook} /> Facebook
-                                    </a>
-                                </p>
-                            </div>
-                        </footer>
                     </div>
                 </div>
+                <Footer />
             </>
         );
     }

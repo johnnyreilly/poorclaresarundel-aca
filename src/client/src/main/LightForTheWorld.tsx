@@ -10,7 +10,7 @@ export const lightForTheWorldPath = '/light-for-the-world';
 
 export const LightForTheWorld: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={new Date().getMonth() === 11 ? oComeEmmanuelSmall : lightForTheWorldSmall} />
         </Card>
 

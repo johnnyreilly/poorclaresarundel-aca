@@ -32,6 +32,7 @@ import { LightForTheWorld, lightForTheWorldPath } from './LightForTheWorld';
 import { MyPeaceIGiveYou, myPeaceIGiveYouPath } from './MyPeaceIGiveYou';
 import { Donate, donatePath } from './Donate';
 import { Christmas, christmasPath } from './Christmas';
+import { Footer } from '../components/Footer';
 
 function Main() {
     const location = useLocation();
@@ -74,6 +75,7 @@ function Main() {
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </Container>
+            <Footer />
         </>
     );
 }

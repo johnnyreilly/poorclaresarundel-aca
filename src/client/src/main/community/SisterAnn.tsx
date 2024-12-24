@@ -6,7 +6,7 @@ export const sisterAnnPath = '/community-sister-ann';
 
 export const SisterAnn: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={srAnn} />
             <CardBody>
                 <CardText>Sister Ann</CardText>

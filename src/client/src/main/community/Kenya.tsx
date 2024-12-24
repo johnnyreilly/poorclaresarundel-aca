@@ -30,7 +30,7 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
 
         <h4>Beginnings</h4>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={kenyaContractSigning} />
             <CardBody>
                 <CardText>
@@ -103,7 +103,7 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             closely in contact with us.
         </p>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={africanStClare} />
             <CardBody>
                 <CardText>African St Clare</CardText>

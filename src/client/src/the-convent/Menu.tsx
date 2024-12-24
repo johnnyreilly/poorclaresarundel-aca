@@ -8,10 +8,9 @@ import {
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import Container from 'reactstrap/lib/Container';
 import './Menu.css';
 import { whyPath } from './Why';
 import { angelaPath } from './seekers/Angela';
@@ -27,7 +26,7 @@ interface IProps {
 }
 
 const initialState = {
-    isOpen: false
+    isOpen: false,
 };
 
 export class Menu extends React.Component<IProps, typeof initialState> {
@@ -35,7 +34,7 @@ export class Menu extends React.Component<IProps, typeof initialState> {
 
     toggle = () =>
         this.setState(() => ({
-            isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen,
         }));
 
     render() {
@@ -45,8 +44,10 @@ export class Menu extends React.Component<IProps, typeof initialState> {
                 <div className="header-image header-image-the-convent" />
 
                 <Navbar dark className="bg-primary" expand="md">
-                    <Container>
-                        <Link to={conventRootPath} className="navbar-brand">The Convent</Link>
+                    <div className="rounded px-3 px-sm-4 py-3 py-sm-5">
+                        <Link to={conventRootPath} className="navbar-brand">
+                            The Convent
+                        </Link>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
@@ -80,7 +81,9 @@ export class Menu extends React.Component<IProps, typeof initialState> {
                                     </DropdownToggle>
                                     <DropdownMenu right>
                                         <DropdownItem>
-                                            <Link to={`${conventRootPath}${producersCommentsPath}`}>Producer's Comments</Link>
+                                            <Link to={`${conventRootPath}${producersCommentsPath}`}>
+                                                Producer's Comments
+                                            </Link>
                                         </DropdownItem>
                                         <DropdownItem>
                                             <Link to={`${conventRootPath}${photoGalleryPath}`}>Photo Gallery</Link>
@@ -101,7 +104,7 @@ export class Menu extends React.Component<IProps, typeof initialState> {
                                 </NavItem>
                             </Nav>
                         </Collapse>
-                    </Container>
+                    </div>
                 </Navbar>
             </>
         );

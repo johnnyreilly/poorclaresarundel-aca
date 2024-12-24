@@ -5,9 +5,9 @@ import smallSanDamianoCrucifix from './images/SmallSanDamianoCrucifix.jpg';
 
 export const guidedPrayerPath = '/guided-prayer';
 
-export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={smallRoom} style={{ maxWidth: '500px' }} />
         </Card>
 
@@ -44,7 +44,7 @@ export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = _props =
             Someone passing by
         </p>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={smallSanDamianoCrucifix} />
         </Card>
 
@@ -106,7 +106,7 @@ export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = _props =
 
         <h4>Imaginative Prayer</h4>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={smallSanDamianoCrucifix} />
         </Card>
         <p>
@@ -192,7 +192,7 @@ export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = _props =
 
         <h4>Examen of Consciousness</h4>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={smallSanDamianoCrucifix} />
         </Card>
 

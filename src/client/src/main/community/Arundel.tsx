@@ -31,7 +31,7 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
 
         <h4>Our History</h4>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={dukeNDuchess} />
             <CardBody>
                 <CardText>
@@ -130,7 +130,7 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
 
         <h4>1990</h4>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={spire} />
             <CardBody>
                 <CardText>The Spire</CardText>

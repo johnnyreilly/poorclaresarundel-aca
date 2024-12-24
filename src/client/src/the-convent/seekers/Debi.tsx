@@ -5,9 +5,9 @@ import theConventDebiRecipe from './images/TheConventDebiRecipe.jpg';
 
 export const debiPath = '/debi';
 
-export const Debi: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const Debi: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={seekerDebi} />
             <CardBody>
                 <CardText>Debi</CardText>
@@ -83,7 +83,7 @@ export const Debi: React.FC<React.PropsWithChildren<unknown>> = _props => (
             had learned to cook, despite my relatively little time with the Aga. This is what I made.
         </p>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={theConventDebiRecipe} alt="© Tiger Aspect Productions" />
             <CardBody>
                 <CardText>Debi mixing</CardText>
