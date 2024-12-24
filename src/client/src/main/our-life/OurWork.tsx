@@ -13,7 +13,7 @@ export const ourWorkPath = '/our-work';
 
 export const OurWork: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right" style={{ marginLeft: '1em', marginTop: '1em' }}>
+        <Card className="float-end" style={{ marginLeft: '1em', marginTop: '1em' }}>
             <CardImg top src={sisterCooking} />
             <CardBody>
                 <CardText>Sister cooking</CardText>

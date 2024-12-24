@@ -6,11 +6,13 @@ import theBible from './images/TheBible.jpg';
 
 export const francisLifePath = '/beginnings-francis-life';
 
-export const FrancisLife: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const FrancisLife: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={stFrancis} />
-            <CardBody><CardText>St Francis</CardText></CardBody>
+            <CardBody>
+                <CardText>St Francis</CardText>
+            </CardBody>
         </Card>
 
         <h3>St Francis of Assisi – His Life</h3>
@@ -39,9 +41,11 @@ export const FrancisLife: React.FC<React.PropsWithChildren<unknown>> = _props =>
             understood it was God who was calling him to serve Him, and not another man.
         </p>
 
-        <Card className="float-left">
+        <Card className="float-start">
             <CardImg top src={sanDamianoCrucifix} />
-            <CardBody><CardText>San Damiano Crucifix</CardText></CardBody>
+            <CardBody>
+                <CardText>San Damiano Crucifix</CardText>
+            </CardBody>
         </Card>
 
         <p>
@@ -65,9 +69,11 @@ export const FrancisLife: React.FC<React.PropsWithChildren<unknown>> = _props =>
             sin and evil.
         </p>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={theBible} />
-            <CardBody><CardText>The Bible</CardText></CardBody>
+            <CardBody>
+                <CardText>The Bible</CardText>
+            </CardBody>
         </Card>
 
         <p>

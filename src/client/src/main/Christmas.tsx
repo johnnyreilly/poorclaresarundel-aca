@@ -7,7 +7,7 @@ export const christmasPath = '/christmas';
 
 export const Christmas: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={silentNightSmall} />
         </Card>
 
@@ -29,7 +29,7 @@ export const Christmas: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
 
         <hr />
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={hodieChristusSmall} />
         </Card>
 

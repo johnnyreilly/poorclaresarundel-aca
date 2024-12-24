@@ -9,7 +9,7 @@ export const myPeaceIGiveYouPath = '/my-peace-i-give-you';
 
 export const MyPeaceIGiveYou: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right" style={{ marginLeft: '1em' }}>
+        <Card className="float-end" style={{ marginLeft: '1em' }}>
             <CardImg top src={myPeaceIGiveYou} alt="My Peace I Give You album cover" />
         </Card>
 

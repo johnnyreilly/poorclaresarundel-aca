@@ -1,6 +1,6 @@
 import * as React from 'react';
 import smalltau from './images/smalltau.jpg';
-import Alert from 'reactstrap/lib/Alert';
+import { Alert } from 'reactstrap';
 
 export const prayerRequestsPath = '/prayer-requests';
 
@@ -13,7 +13,7 @@ const initialState = {
     message: undefined as IPrayerRequestResult | undefined,
     requestPrayFor: '',
     requestEmail: '',
-    formSubmitAttempted: false
+    formSubmitAttempted: false,
 };
 
 export class PrayerRequests extends React.Component<{}, typeof initialState> {
@@ -35,8 +35,8 @@ export class PrayerRequests extends React.Component<{}, typeof initialState> {
             formSubmitAttempted: true,
             message: {
                 ok: true,
-                text: 'Sending...'
-            }
+                text: 'Sending...',
+            },
         }));
 
         try {
@@ -44,21 +44,21 @@ export class PrayerRequests extends React.Component<{}, typeof initialState> {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: this.state.requestEmail, prayFor: this.state.requestPrayFor })
+                body: JSON.stringify({ email: this.state.requestEmail, prayFor: this.state.requestPrayFor }),
             });
             const message: IPrayerRequestResult = await rawResponse.json();
 
             this.setState(() => ({
-                message
+                message,
             }));
         } catch (err) {
             this.setState(() => ({
                 message: {
                     ok: false,
-                    text: 'Sorry your prayer request was not sent'
-                }
+                    text: 'Sorry your prayer request was not sent',
+                },
             }));
         }
     };

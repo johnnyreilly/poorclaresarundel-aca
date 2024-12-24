@@ -6,11 +6,11 @@ import chapel from './images/Chapel.jpg';
 
 export const vocationPath = '/community-vocation';
 
-export const Vocation: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const Vocation: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
         <h3>Vocation</h3>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={chapel} />
             <CardBody>
                 <CardText>In Chapel</CardText>

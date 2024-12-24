@@ -4,7 +4,7 @@ import communityPhoto from './images/CommunityPhoto.jpg';
 
 export const whyPath = '/why';
 
-export const Why: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const Why: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
         <h3>Why?</h3>
 
@@ -37,7 +37,7 @@ export const Why: React.FC<React.PropsWithChildren<unknown>> = _props => (
             channels of that love in our world of today.
         </p>
 
-        <Card className="float-left">
+        <Card className="float-start">
             <CardImg top src={communityPhoto} />
             <CardBody>
                 <CardText>The Community</CardText>

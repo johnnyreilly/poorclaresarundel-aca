@@ -4,9 +4,9 @@ import srClareRuva from './images/SrClareRuva.jpg';
 
 export const sisterClareRuvaPath = '/community-sister-clare-ruva';
 
-export const SisterClareRuva: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const SisterClareRuva: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={srClareRuva} />
             <CardBody>
                 <CardText>Sister Clare Ruva</CardText>

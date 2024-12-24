@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, Jumbotron } from 'reactstrap';
+import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
 import communityAtPrayer from './images/Page2CommunityAtPrayer.jpg';
 import prayingInChapel from './images/praying_in_chapel.jpg';
 import coffeeTime from './images/coffee_time.jpg';
@@ -82,19 +82,10 @@ export class Us extends React.Component<unknown, typeof defaultState> {
     render() {
         const { activeIndex } = this.state;
 
-        const slides = items.map((item) => {
-            return (
-                <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
-                    <img src={item.src} alt={item.caption} />
-                    <CarouselCaption captionText={''} captionHeader={item.caption} />
-                </CarouselItem>
-            );
-        });
-
         return (
             <div className="row">
                 <div className="col-lg-6 col-md-5 col-sm-3 col-xs-12">
-                    <Jumbotron>
+                    <div className="rounded px-3 px-sm-4 py-3 py-sm-5">
                         <h1 className="display-4">About Us</h1>
                         <p className="lead">
                             Called to a life of prayer we seek to live the Gospel in and for our world of today. We
@@ -107,12 +98,17 @@ export class Us extends React.Component<unknown, typeof defaultState> {
                                 See a slideshow of us here...
                             </a>
                         </p>
-                    </Jumbotron>
+                    </div>
                 </div>
                 <div className="col-lg-6 col-md-7 col-sm-9 col-xs-12 carousel-container">
                     <Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
                         <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-                        {slides}
+                        {items.map((item) => (
+                            <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
+                                <img src={item.src} alt={item.caption} />
+                                <CarouselCaption captionText={''} captionHeader={item.caption} />
+                            </CarouselItem>
+                        ))}
                         <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                         <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
                     </Carousel>

@@ -7,7 +7,7 @@ import tiggers4 from './images/Tiggers4.jpg';
 
 export const photoGalleryPath = '/photo-gallery';
 
-export const PhotoGallery: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const PhotoGallery: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
         <h3>Photo Gallery of the Tigger Team</h3>
 
@@ -20,19 +20,19 @@ export const PhotoGallery: React.FC<React.PropsWithChildren<unknown>> = _props =
             at work:
         </p>
 
-        <Card className="float-left">
+        <Card className="float-start">
             <CardImg top src={tiggers1} style={{ maxWidth: '500px' }} />
         </Card>
 
-        <Card className="float-left">
+        <Card className="float-start">
             <CardImg top src={tiggers2} style={{ maxWidth: '500px' }} />
         </Card>
 
-        <Card className="float-left">
+        <Card className="float-start">
             <CardImg top src={tiggers3} style={{ maxWidth: '500px' }} />
         </Card>
 
-        <Card className="float-left">
+        <Card className="float-start">
             <CardImg top src={tiggers4} style={{ maxWidth: '500px' }} />
         </Card>
     </>

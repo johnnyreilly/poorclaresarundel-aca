@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createRoot } from 'react-dom/client';
 import { Home } from './Home';
 import React, { Suspense } from 'react';
-import { Loading } from './Loading';
+import { Loading } from './components/Loading';
 
 const Main = React.lazy(() => import('./main'));
 const TheConvent = React.lazy(() => import('./the-convent'));

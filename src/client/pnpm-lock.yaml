@@ -21,8 +21,8 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@18.3.1)
       bootstrap:
-        specifier: ^4.0.0
-        version: 4.6.2(jquery@3.7.1)(popper.js@1.16.1)
+        specifier: ^5.0.0
+        version: 5.3.3(@popperjs/core@2.11.8)
       history:
         specifier: ^5.3.0
         version: 5.3.0
@@ -39,8 +39,8 @@ importers:
         specifier: ^7.0.0
         version: 7.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       reactstrap:
-        specifier: ^7.1.0
-        version: 7.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^9.2.3
+        version: 9.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       web-vitals:
         specifier: ^1.1.2
         version: 1.1.2
@@ -66,9 +66,6 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.5
         version: 18.3.5(@types/react@18.3.18)
-      '@types/reactstrap':
-        specifier: ^7.1.6
-        version: 7.1.6
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@5.4.11(@types/node@20.17.10))
@@ -369,6 +366,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@popperjs/core@2.11.8':
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+
   '@rollup/rollup-android-arm-eabi@4.29.1':
     resolution: {integrity: sha512-ssKhA8RNltTZLpG6/QNkCSge+7mBQGUqJRisZ2MDQcEGaK93QESEgWK2iOpIDZ7k9zPVkG5AS3ksvD5ZWxmItw==}
     cpu: [arm]
@@ -535,9 +535,6 @@ packages:
   '@types/react@18.3.18':
     resolution: {integrity: sha512-t4yC+vtgnkYjNSKlFx1jkAhH8LgTo2N/7Qvi83kdEaUtMDiwpbLAktKDaAMlRcJ5eSxZkH74eEGt1ky31d7kfQ==}
 
-  '@types/reactstrap@7.1.6':
-    resolution: {integrity: sha512-FiBlScaiDNyy46a7AOYkTruGfF8n23liualCdbjDRYHnF2UyAgHf8Cp585FG63fhbO9VuxL2bA4jmW70XGmzlA==}
-
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
 
@@ -579,11 +576,10 @@ packages:
     resolution: {integrity: sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==}
     engines: {node: '>= 0.4'}
 
-  bootstrap@4.6.2:
-    resolution: {integrity: sha512-51Bbp/Uxr9aTuy6ca/8FbFloBUJZLHwnhTcnjIeRn2suQWsWzcuJhGjKDB5eppVte/8oCdOL3VuwxvZDUggwGQ==}
+  bootstrap@5.3.3:
+    resolution: {integrity: sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==}
     peerDependencies:
-      jquery: 1.9.1 - 3
-      popper.js: ^1.16.1
+      '@popperjs/core': ^2.11.8
 
   braces@3.0.3:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
@@ -651,8 +647,8 @@ packages:
   dom-accessibility-api@0.5.16:
     resolution: {integrity: sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==}
 
-  dom-helpers@3.4.0:
-    resolution: {integrity: sha512-LnuPJ+dwqKDIyotW1VzmOZ5TONUN7CwkCR5hrgawTUbkBGYdeoNLZo6nNfGkCrjtE1nXXaj7iMMpDa8/d9WoIA==}
+  dom-helpers@5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
 
   electron-to-chromium@1.5.75:
     resolution: {integrity: sha512-Lf3++DumRE/QmweGjU+ZcKqQ+3bKkU/qjaKYhIJKEOhgIO9Xs6IiAQFkfFoj+RhgDk4LUeNsLo6plExHqSyu6Q==}
@@ -729,9 +725,6 @@ packages:
     resolution: {integrity: sha512-z6EbKajIpqGKU56y5KBUgy1dt1ihhQJgWzUlZHArA/+X2ad7Cb5iF+AK1EWVL/Bo7Rz9uurpqw6SiBCefUbCGA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  jquery@3.7.1:
-    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
-
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -744,15 +737,6 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
-
-  lodash.isfunction@3.0.9:
-    resolution: {integrity: sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==}
-
-  lodash.isobject@3.0.2:
-    resolution: {integrity: sha512-3/Qptq2vr7WeJbB4KHUSKlq8Pl7ASXi3UG6CMbBm8WRtXi8+GHm7mKaU3urfpSEzWe2wCIChs6/sdocUsTKJiA==}
-
-  lodash.tonumber@4.0.3:
-    resolution: {integrity: sha512-SY0SwuPOHRwKcCNTdsntPYb+Zddz5mDUIVFABzRMqmAiL41pMeyoQFGxYAw5zdc9NnH4pbJqiqqp5ckfxa+zSA==}
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
@@ -798,10 +782,6 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
-  popper.js@1.16.1:
-    resolution: {integrity: sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==}
-    deprecated: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
-
   postcss@8.4.49:
     resolution: {integrity: sha512-OCVPnIObs4N29kxTjzLfUryOkvZEq+pf8jTF0lg8E7uETuWHA+v7j3c/xJmiqpX450191LlmZfUKkXxkTry7nA==}
     engines: {node: ^10 || ^12 || >=14}
@@ -822,6 +802,9 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
+  react-fast-compare@3.2.2:
+    resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
+
   react-ga@2.7.0:
     resolution: {integrity: sha512-AjC7UOZMvygrWTc2hKxTDvlMXEtbmA0IgJjmkhgmQQ3RkXrWR11xEagLGFGaNyaPnmg24oaIiaNPnEoftUhfXA==}
     peerDependencies:
@@ -837,14 +820,12 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-lifecycles-compat@3.0.4:
-    resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
-
-  react-popper@0.10.4:
-    resolution: {integrity: sha512-QddoNHru2o+nV/FFKxe+ZQfE0McrjY0rnrlUlVNtuE4/23YW57zFIYHr7gN4L5OVhyN+1eF7iQnk0y9Ugng42A==}
+  react-popper@2.3.0:
+    resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
     peerDependencies:
-      react: 0.14.x || ^15.0.0 || ^16.0.0
-      react-dom: 0.14.x || ^15.0.0 || ^16.0.0
+      '@popperjs/core': ^2.0.0
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: ^16.8.0 || ^17 || ^18
 
   react-refresh@0.14.2:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
@@ -867,21 +848,21 @@ packages:
       react-dom:
         optional: true
 
-  react-transition-group@2.9.0:
-    resolution: {integrity: sha512-+HzNTCHpeQyl4MJ/bdE0u6XRMe9+XG/+aL4mCxVN4DnPBQ0/5bfHWPDuOZUzYdMj94daZaZdCCc1Dzt9R/xSSg==}
+  react-transition-group@4.4.5:
+    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
     peerDependencies:
-      react: '>=15.0.0'
-      react-dom: '>=15.0.0'
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
 
-  reactstrap@7.1.0:
-    resolution: {integrity: sha512-wtc4RkgnGn1TsZ0AxOZ2OqT+b8YmCWZj/tErPujWLepxzlEEhveZGC+uDerdaHVSAzJUP2DTk605iper7hutQQ==}
+  reactstrap@9.2.3:
+    resolution: {integrity: sha512-1nXy7FIBIoOgXr3AIHOpgzcZXdj6rZE5YvNSPd1hYgwv8X64m6TAJsU0ExlieJdlRXhaRfTYRSZoTWa127b0gw==}
     peerDependencies:
-      react: ^16.0.0
-      react-dom: ^16.0.0
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   redent@3.0.0:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
@@ -976,6 +957,9 @@ packages:
         optional: true
       terser:
         optional: true
+
+  warning@4.0.3:
+    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
 
   web-vitals@1.1.2:
     resolution: {integrity: sha512-PFMKIY+bRSXlMxVAQ+m2aw9c/ioUYfDgrYot0YUa+/xa0sakubWhSDyxAKwzymvXVdF4CZI71g06W+mqhzu6ig==}
@@ -1242,6 +1226,8 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@popperjs/core@2.11.8': {}
+
   '@rollup/rollup-android-arm-eabi@4.29.1':
     optional: true
 
@@ -1393,10 +1379,6 @@ snapshots:
       '@types/prop-types': 15.7.14
       csstype: 3.1.3
 
-  '@types/reactstrap@7.1.6':
-    dependencies:
-      '@types/react': 18.3.18
-
   '@types/stack-utils@2.0.3': {}
 
   '@types/testing-library__jest-dom@5.14.9':
@@ -1439,10 +1421,9 @@ snapshots:
 
   aria-query@5.3.2: {}
 
-  bootstrap@4.6.2(jquery@3.7.1)(popper.js@1.16.1):
+  bootstrap@5.3.3(@popperjs/core@2.11.8):
     dependencies:
-      jquery: 3.7.1
-      popper.js: 1.16.1
+      '@popperjs/core': 2.11.8
 
   braces@3.0.3:
     dependencies:
@@ -1495,9 +1476,10 @@ snapshots:
 
   dom-accessibility-api@0.5.16: {}
 
-  dom-helpers@3.4.0:
+  dom-helpers@5.2.1:
     dependencies:
       '@babel/runtime': 7.26.0
+      csstype: 3.1.3
 
   electron-to-chromium@1.5.75: {}
 
@@ -1599,19 +1581,11 @@ snapshots:
       graceful-fs: 4.2.11
       picomatch: 2.3.1
 
-  jquery@3.7.1: {}
-
   js-tokens@4.0.0: {}
 
   jsesc@3.1.0: {}
 
   json5@2.2.3: {}
-
-  lodash.isfunction@3.0.9: {}
-
-  lodash.isobject@3.0.2: {}
-
-  lodash.tonumber@4.0.3: {}
 
   lodash@4.17.21: {}
 
@@ -1644,8 +1618,6 @@ snapshots:
 
   picomatch@2.3.1: {}
 
-  popper.js@1.16.1: {}
-
   postcss@8.4.49:
     dependencies:
       nanoid: 3.3.8
@@ -1677,6 +1649,8 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
+  react-fast-compare@3.2.2: {}
+
   react-ga@2.7.0(prop-types@15.8.1)(react@18.3.1):
     dependencies:
       prop-types: 15.8.1
@@ -1688,14 +1662,13 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-lifecycles-compat@3.0.4: {}
-
-  react-popper@0.10.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-popper@2.3.0(@popperjs/core@2.11.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      popper.js: 1.16.1
-      prop-types: 15.8.1
+      '@popperjs/core': 2.11.8
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+      react-fast-compare: 3.2.2
+      warning: 4.0.3
 
   react-refresh@0.14.2: {}
 
@@ -1715,32 +1688,29 @@ snapshots:
     optionalDependencies:
       react-dom: 18.3.1(react@18.3.1)
 
-  react-transition-group@2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-transition-group@4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      dom-helpers: 3.4.0
+      '@babel/runtime': 7.26.0
+      dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-lifecycles-compat: 3.0.4
 
   react@18.3.1:
     dependencies:
       loose-envify: 1.4.0
 
-  reactstrap@7.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  reactstrap@9.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.26.0
+      '@popperjs/core': 2.11.8
       classnames: 2.5.1
-      lodash.isfunction: 3.0.9
-      lodash.isobject: 3.0.2
-      lodash.tonumber: 4.0.3
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-lifecycles-compat: 3.0.4
-      react-popper: 0.10.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-transition-group: 2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-popper: 2.3.0(@popperjs/core@2.11.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-transition-group: 4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   redent@3.0.0:
     dependencies:
@@ -1822,6 +1792,10 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.17.10
       fsevents: 2.3.3
+
+  warning@4.0.3:
+    dependencies:
+      loose-envify: 1.4.0
 
   web-vitals@1.1.2: {}
 

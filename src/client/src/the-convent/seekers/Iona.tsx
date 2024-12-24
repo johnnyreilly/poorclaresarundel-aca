@@ -4,9 +4,9 @@ import seekerIona from './images/SeekerIona.jpg';
 
 export const ionaPath = '/iona';
 
-export const Iona: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const Iona: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={seekerIona} />
             <CardBody>
                 <CardText>Iona</CardText>

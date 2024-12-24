@@ -9,10 +9,11 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
+    Container,
+    NavbarBrand,
     // NavLink
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import Container from 'reactstrap/lib/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
 // import lifeInAConvent from '../static/Stylist_Life_in_a_convent.pdf';
@@ -79,14 +80,16 @@ export class Menu extends React.Component<Props, typeof initialState> {
 
     render() {
         return (
-            <>
+            <div className="bg-primary">
                 <div className="header-image header-image-main" />
+                <Container>
+                    <Navbar dark expand="md">
+                        <NavbarBrand>
+                            <Link className="navbar-brand" to={homePath}>
+                                Poor Clares
+                            </Link>
+                        </NavbarBrand>
 
-                <Navbar dark className="bg-primary" expand="md">
-                    <Container>
-                        <Link className="navbar-brand" to={homePath}>
-                            Poor Clares
-                        </Link>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
@@ -94,7 +97,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                     <DropdownToggle nav caret>
                                         Our Life
                                     </DropdownToggle>
-                                    <DropdownMenu right>
+                                    <DropdownMenu>
                                         <DropdownItem>
                                             <Link to={ourPrayerPath}>Our prayer</Link>
                                         </DropdownItem>
@@ -131,7 +134,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                     <DropdownToggle nav caret>
                                         Community
                                     </DropdownToggle>
-                                    <DropdownMenu right>
+                                    <DropdownMenu>
                                         <DropdownItem header>Sister's stories</DropdownItem>
                                         <DropdownItem>
                                             <Link to={sisterAnnPath}>Sister Ann</Link>
@@ -178,7 +181,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                     <DropdownToggle nav caret>
                                         Beginnings
                                     </DropdownToggle>
-                                    <DropdownMenu right>
+                                    <DropdownMenu>
                                         <DropdownItem>
                                             <Link to={claresStoryPath}>Clares Story</Link>
                                         </DropdownItem>
@@ -204,7 +207,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                     <DropdownToggle nav caret>
                                         Misc
                                     </DropdownToggle>
-                                    <DropdownMenu right>
+                                    <DropdownMenu>
                                         <DropdownItem>
                                             <Link to={faqsPath}>FAQs</Link>
                                         </DropdownItem>
@@ -252,7 +255,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                     <DropdownToggle nav caret>
                                         Our Music
                                     </DropdownToggle>
-                                    <DropdownMenu right>
+                                    <DropdownMenu>
                                         <DropdownItem>
                                             <Link to={christmasPath}>Christmas 2024</Link>
                                         </DropdownItem>
@@ -290,9 +293,9 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                 </NavItem>
                             </Nav>
                         </Collapse>
-                    </Container>
-                </Navbar>
-            </>
+                    </Navbar>
+                </Container>
+            </div>
         );
     }
 }

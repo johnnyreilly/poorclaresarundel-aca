@@ -11,7 +11,7 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
     <>
         <h3>Our Prayer</h3>
         <img
-            className="float-right img-thumbnail img-space-right-and-bottom"
+            className="float-end img-thumbnail img-space-right-and-bottom"
             src={prayerOur2}
             alt="Helen sitting in the cemetary"
         />
@@ -36,7 +36,7 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
 
         <h3>Our usual timetable</h3>
         <img
-            className="float-right img-thumbnail img-space-right-and-bottom"
+            className="float-end img-thumbnail img-space-right-and-bottom"
             src={prayerOur3}
             alt="ikon of Clare washing the sisters feet"
         />
@@ -94,7 +94,7 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
             Taize style prayer meeting: last Friday of each month (except December), c.7.15pm – 8.30pm. All are welcome.
         </p>
 
-        <img className="float-right img-thumbnail img-space-right-and-bottom" src={prayerOur1} alt="" />
+        <img className="float-end img-thumbnail img-space-right-and-bottom" src={prayerOur1} alt="" />
         <h3>Prayer Requests</h3>
 
         <p>

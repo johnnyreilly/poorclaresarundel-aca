@@ -8,9 +8,9 @@ import churchSanDamiano from './images/ChurchSanDamiano.jpg';
 
 export const claresStoryPath = '/beginnings-clares-story';
 
-export const ClaresStory: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const ClaresStory: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-left">
+        <Card className="float-start">
             <CardImg top src={sanDamianoCrucifix} />
         </Card>
 
@@ -24,7 +24,7 @@ export const ClaresStory: React.FC<React.PropsWithChildren<unknown>> = _props =>
 
         <p>Together they founded the Poor Clares.</p>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={francisAndClare} />
             <CardBody>St Clare, St Francis</CardBody>
         </Card>
@@ -54,7 +54,7 @@ export const ClaresStory: React.FC<React.PropsWithChildren<unknown>> = _props =>
 
         <h3>Enter Clare di Offeduccio di Faverone</h3>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg top src={francisCutsClaresHair} />
             <CardBody>Francis cuts Clares hair</CardBody>
         </Card>
@@ -81,7 +81,7 @@ export const ClaresStory: React.FC<React.PropsWithChildren<unknown>> = _props =>
             today. She died in 1253 and was proclaimed a saint in 1255.
         </p>
 
-        <Card className="float-left">
+        <Card className="float-start">
             <CardImg src={stClare} />
             <CardBody>
                 <CardText>St Clare</CardText>
@@ -103,7 +103,7 @@ export const ClaresStory: React.FC<React.PropsWithChildren<unknown>> = _props =>
 
         <p>This is the tiny church of San Damiano. Built before the year 1000, St Francis restored it in 1206.</p>
 
-        <Card className="float-right">
+        <Card className="float-end">
             <CardImg src={churchSanDamiano} />
             <CardBody>
                 <CardText>The Church of San Damiano</CardText>

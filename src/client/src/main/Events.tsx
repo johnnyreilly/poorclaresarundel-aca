@@ -115,7 +115,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h4>Franciscan Celebrations</h4>
 
-            <Card className="float-right">
+            <Card className="float-end">
                 <CardImg top src={stClareStatue} />
             </Card>
 
@@ -123,7 +123,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>10th August - 12 noon Mass of St Clare</p>
 
-            <Card className="float-right">
+            <Card className="float-end">
                 <CardImg top src={stFrancis} />
             </Card>
 
@@ -139,7 +139,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>Mass of the Lord’s Supper: 6.30pm</p>
 
-            <Card className="float-right">
+            <Card className="float-end">
                 <CardImg top src={strewnCross} />
             </Card>
 
@@ -148,7 +148,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
             <p>Liturgy of the Passion: 3pm</p>
             <p>Way of the Cross: 5.30pm</p>
 
-            <Card className="float-right">
+            <Card className="float-end">
                 <CardImg top src={easterVigil} />
             </Card>
 
@@ -168,7 +168,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>8.30pm Office of Readings and blessing of the Crib</p>
 
-            <Card className="float-right">
+            <Card className="float-end">
                 <CardImg top src={crib} />
             </Card>
 
@@ -178,7 +178,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>8.30am Holy Mass</p>
 
-            <Card className="float-left">
+            <Card className="float-start">
                 <CardImg top src={taize} />
             </Card>
 
