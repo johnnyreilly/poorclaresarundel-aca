@@ -1,5 +1,5 @@
 import * as Koa from 'koa';
-import * as helmet from 'koa-helmet';
+import helmet from 'koa-helmet';
 import * as send from 'koa-send';
 import * as serve from 'koa-static';
 import * as path from 'path';
@@ -13,15 +13,13 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const app = new Koa();
 
 app.use(
-    helmet.contentSecurityPolicy(
-        {
-            useDefaults: true,
-            directives: {
-                scriptSrc: ["'self'", "'unsafe-inline'", 'storage.googleapis.com', 'www.google-analytics.com'],
-                frameSrc: ["www.youtube.com", "www.youtube-nocookie.com"],
-            },
-        } as any // see https://github.com/venables/koa-helmet/pull/69
-    )
+    helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+            scriptSrc: ["'self'", "'unsafe-inline'", 'storage.googleapis.com', 'www.google-analytics.com'],
+            frameSrc: ['www.youtube.com', 'www.youtube-nocookie.com'],
+        },
+    }),
 );
 app.use(logger);
 app.use(routes);
@@ -39,5 +37,5 @@ app.use(async (ctx) => {
 app.listen(config.port);
 
 console.log(
-    `Server running on port ${config.port}; static files served from ${publicPath}, SPA template from ${indexHtmlPath}`
+    `Server running on port ${config.port}; static files served from ${publicPath}, SPA template from ${indexHtmlPath}`,
 );
