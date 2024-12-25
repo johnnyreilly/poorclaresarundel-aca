@@ -43,6 +43,7 @@ export const MyPeaceIGiveYou: React.FC<React.PropsWithChildren<unknown>> = (_pro
                 <a
                     target="_blank"
                     href="https://canartsaveus.podbean.com/e/number-one-albums-in-hearts-minds-everywhere/"
+                    rel="noreferrer"
                 >
                     Sister Gabriel on the <em>Can Art Save Us</em> podcast discussing the album.
                 </a>
