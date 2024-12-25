@@ -1,4 +1,4 @@
-name: Build and lint client
+name: Client
 
 on:
   push:

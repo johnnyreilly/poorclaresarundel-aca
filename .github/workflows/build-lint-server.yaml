@@ -1,4 +1,4 @@
-name: Build and lint server
+name: Server
 
 on:
   push:
