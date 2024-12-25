@@ -11,7 +11,7 @@ const prayerRequestRecipientEmail = process.env.APPSETTINGS_PRAYER_REQUEST_RECIP
 
 // Send a message to the specified email address when you navigate to /submit/someaddr@email.com
 // The index redirects here
-router.post('/api/PrayerRequest', koaBody(), async (ctx, next) => {
+router.post('/api/PrayerRequest', koaBody(), async (ctx, _next) => {
     // Invokes the method to send emails given the above data with the helper library
     try {
         const { email, prayFor } = ctx.request.body;

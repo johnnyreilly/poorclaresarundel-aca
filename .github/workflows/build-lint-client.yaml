@@ -1,0 +1,42 @@
+name: Build and lint client
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  client_build_and_test_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: client build and test ⚙️
+    steps:
+      - name: Checkout 📥
+        uses: actions/checkout@v4
+        with:
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: 0
+
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: client install
+        working-directory: src/client
+        run: pnpm i --frozen-lockfile
+
+      - name: client build
+        working-directory: src/client
+        run: pnpm run build
+
+      # - name: client lint
+      #   working-directory: src/client
+      #   run: pnpm run lint

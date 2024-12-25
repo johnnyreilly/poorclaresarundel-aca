@@ -2,9 +2,9 @@
     "name": "poor-clares-arundel-koa-server",
     "version": "1.0.0",
     "scripts": {
-        "build": "tsc && eslint -c .eslintrc.js --ext .ts ./server",
+        "build": "tsc",
         "copy:client": "cpx \"../client/dist/**/*\" client/dist",
-        "lint": "tsc --noEmit && eslint -c .eslintrc.js --ext .ts ./server",
+        "lint": "eslint ./server",
         "start": "node dist/index.js",
         "watch": "cross-env NODE_ENV=development nodemon --watch src/**/* -e ts,tsx --exec ts-node src/server/server.ts"
     },
@@ -18,6 +18,7 @@
         "mailgun-js": "^0.22.0"
     },
     "devDependencies": {
+        "@eslint/js": "^9.17.0",
         "@types/koa": "^2.13.5",
         "@types/koa-router": "^7.4.4",
         "@types/koa-send": "^4.1.3",
@@ -27,12 +28,10 @@
         "@typescript-eslint/parser": "^4.33.0",
         "cpx2": "^8.0.0",
         "cross-env": "^7.0.3",
-        "eslint": "^7.32.0",
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-prettier": "^3.4.1",
+        "eslint": "^9.17.0",
         "nodemon": "^2.0.22",
         "ts-node": "^10.9.1",
-        "typescript": "^5.6.2"
+        "typescript": "^5.7.2",
+        "typescript-eslint": "^8.18.2"
     }
 }

@@ -4,18 +4,18 @@ import { config } from './config';
 interface ILogData {
     method: string;
     url: string;
-    query: any;
+    query: unknown;
     remoteAddress: string;
     host: string;
     userAgent: string;
     statusCode: number;
     errorMessage: string;
     errorStack: string;
-    data: any;
+    data: unknown;
     responseTime: number;
 }
 
-function outputLog(data: Partial<ILogData>, thrownError: any) {
+function outputLog(data: Partial<ILogData>, thrownError: unknown) {
     if (config.prettyLog) {
         console.log(`${data.statusCode} ${data.method} ${data.url} - ${data.responseTime}ms`);
         if (thrownError) {
@@ -28,7 +28,7 @@ function outputLog(data: Partial<ILogData>, thrownError: any) {
     }
 }
 
-export async function logger(ctx: Koa.Context, next: () => Promise<any>) {
+export async function logger(ctx: Koa.Context, next: () => Promise<unknown>) {
     const start = new Date().getMilliseconds();
 
     const logData: Partial<ILogData> = {
@@ -40,7 +40,7 @@ export async function logger(ctx: Koa.Context, next: () => Promise<any>) {
         userAgent: ctx.headers['user-agent'],
     };
 
-    let errorThrown: any = null;
+    let errorThrown: unknown = null;
     try {
         await next();
         logData.statusCode = ctx.status;
