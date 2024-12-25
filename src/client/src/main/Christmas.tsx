@@ -36,7 +36,9 @@ export const Christmas: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
         <h3>Hodie Christus Natus Est</h3>
 
         <p>
-            <a href="https://poorclares.lnk.to/HodieChristus">Listen to our "Hodie Christus Natus Est" here.</a>
+            <a href="https://poorclares.lnk.to/HodieChristus">
+                Listen to our &quot;Hodie Christus Natus Est&quot; here.
+            </a>
         </p>
 
         <iframe
