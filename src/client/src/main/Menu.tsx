@@ -109,7 +109,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         </DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem>
-                                            <a target="_blank" href="https://youtu.be/y_d-T74WEO0">
+                                            <a target="_blank" href="https://youtu.be/y_d-T74WEO0" rel="noreferrer">
                                                 Sister Gabriel answers your questions on LADbible
                                             </a>
                                         </DropdownItem>
@@ -117,6 +117,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                             <a
                                                 target="_blank"
                                                 href="https://canartsaveus.podbean.com/e/number-one-albums-in-hearts-minds-everywhere/"
+                                                rel="noreferrer"
                                             >
                                                 Sister Gabriel on the <em>Can Art Save Us</em> podcast
                                             </a>
@@ -135,7 +136,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         Community
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        <DropdownItem header>Sister's stories</DropdownItem>
+                                        <DropdownItem header>Sister&apos;s stories</DropdownItem>
                                         <DropdownItem>
                                             <Link to={sisterAnnPath}>Sister Ann</Link>
                                         </DropdownItem>
@@ -269,7 +270,12 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                 </UncontrolledDropdown>
 
                                 <NavItem>
-                                    <a className="nav-link" target="_blank" href="https://youtu.be/URlqwrgphRc">
+                                    <a
+                                        className="nav-link"
+                                        target="_blank"
+                                        href="https://youtu.be/URlqwrgphRc"
+                                        rel="noreferrer"
+                                    >
                                         The Convent
                                     </a>
                                 </NavItem>
@@ -278,6 +284,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         className="nav-link"
                                         target="_blank"
                                         href="https://www.facebook.com/poorclaresarundel"
+                                        rel="noreferrer"
                                     >
                                         <FontAwesomeIcon icon={faFacebook} />
                                     </a>
@@ -287,6 +294,7 @@ export class Menu extends React.Component<Props, typeof initialState> {
                                         className="nav-link"
                                         target="_blank"
                                         href="https://www.youtube.com/channel/UCenwZN21CYRbwwWtqqf7v0w"
+                                        rel="noreferrer"
                                     >
                                         <FontAwesomeIcon icon={faYoutube} />
                                     </a>

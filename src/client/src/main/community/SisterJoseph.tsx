@@ -13,7 +13,7 @@ export const SisterJoseph: React.FC<React.PropsWithChildren<unknown>> = (_props)
             </CardBody>
         </Card>
 
-        <h3>Sister Joseph's Story</h3>
+        <h3>Sister Joseph&apos;s Story</h3>
 
         <p>
             I came from an Irish family of six children – two boys and four girls, who all became nuns in the end. We

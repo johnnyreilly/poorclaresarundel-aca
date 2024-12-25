@@ -1,0 +1,42 @@
+name: Client
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  client_build_and_test_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: client build and test ⚙️
+    steps:
+      - name: Checkout 📥
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: client install
+        working-directory: src/client
+        run: pnpm i --frozen-lockfile
+
+      - name: client build
+        working-directory: src/client
+        run: pnpm run build
+
+      # - name: client lint
+      #   working-directory: src/client
+      #   run: pnpm run lint

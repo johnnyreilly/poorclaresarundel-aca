@@ -16,7 +16,7 @@ const initialState = {
     formSubmitAttempted: false,
 };
 
-export class PrayerRequests extends React.Component<{}, typeof initialState> {
+export class PrayerRequests extends React.Component<unknown, typeof initialState> {
     state = initialState;
 
     handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,7 @@ export class PrayerRequests extends React.Component<{}, typeof initialState> {
             this.setState(() => ({
                 message,
             }));
-        } catch (err) {
+        } catch (_err) {
             this.setState(() => ({
                 message: {
                     ok: false,

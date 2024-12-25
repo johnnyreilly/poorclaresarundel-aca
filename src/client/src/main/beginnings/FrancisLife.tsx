@@ -57,11 +57,11 @@ export const FrancisLife: React.FC<React.PropsWithChildren<unknown>> = (_props) 
         </p>
 
         <p>
-            It called him tenderly by name:"Francis! Do you not see that my house is falling into ruin? Go and repair it
-            for me!"
+            It called him tenderly by name:&quot;Francis! Do you not see that my house is falling into ruin? Go and
+            repair it for me!&quot;
         </p>
 
-        <p>He was amazed, but he replied: "Gladly I will do so, O Lord."</p>
+        <p>He was amazed, but he replied: &quot;Gladly I will do so, O Lord.&quot;</p>
 
         <p>
             He thought he was being asked to rebuild that chapel, which was indeed in ruins, but God had a wider picture

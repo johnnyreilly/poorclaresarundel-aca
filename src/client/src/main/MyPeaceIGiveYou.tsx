@@ -16,8 +16,8 @@ export const MyPeaceIGiveYou: React.FC<React.PropsWithChildren<unknown>> = (_pro
         <h3>My Peace I Give You</h3>
 
         <p>
-            Here is our album, 'My Peace I Give You' . Enjoy listening to our music. We hope it will help you find a
-            place of peace and inner calm.
+            Here is our album, &apos;My Peace I Give You&apos; . Enjoy listening to our music. We hope it will help you
+            find a place of peace and inner calm.
         </p>
 
         <p>To learn more check out these links:</p>
@@ -43,6 +43,7 @@ export const MyPeaceIGiveYou: React.FC<React.PropsWithChildren<unknown>> = (_pro
                 <a
                     target="_blank"
                     href="https://canartsaveus.podbean.com/e/number-one-albums-in-hearts-minds-everywhere/"
+                    rel="noreferrer"
                 >
                     Sister Gabriel on the <em>Can Art Save Us</em> podcast discussing the album.
                 </a>

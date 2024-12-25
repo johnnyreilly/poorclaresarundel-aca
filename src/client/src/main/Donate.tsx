@@ -28,7 +28,7 @@ export const Donate: React.FC<React.PropsWithChildren<unknown>> = (_props) => {
             </ul>
 
             <h4>Cheque</h4>
-            <p>If you'd like to send a cheque, please post it to:</p>
+            <p>If you&apos;d like to send a cheque, please post it to:</p>
             <p>
                 Convent of Poor Clares
                 <br />

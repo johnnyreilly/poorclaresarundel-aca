@@ -21,7 +21,7 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             <CardImg top src={communityKenya} />
             <CardBody>
                 <CardText>
-                    <a target="_blank" href="https://poorclaresmonastery.co.ke">
+                    <a target="_blank" href="https://poorclaresmonastery.co.ke" rel="noreferrer">
                         poorclaresmonastery.co.ke
                     </a>
                 </CardText>
