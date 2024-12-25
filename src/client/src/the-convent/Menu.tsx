@@ -82,7 +82,7 @@ export class Menu extends React.Component<IProps, typeof initialState> {
                                     <DropdownMenu right>
                                         <DropdownItem>
                                             <Link to={`${conventRootPath}${producersCommentsPath}`}>
-                                                Producer's Comments
+                                                Producer&apos;s Comments
                                             </Link>
                                         </DropdownItem>
                                         <DropdownItem>

@@ -13,7 +13,7 @@ export const SisterGraca: React.FC<React.PropsWithChildren<unknown>> = (_props) 
             </CardBody>
         </Card>
 
-        <h3>Sister Graça's Story</h3>
+        <h3>Sister Graça&apos;s Story</h3>
 
         <p>
             Each step of my journey has been full of gifts – and ‘gifts are of their nature surprises’!!! But it all

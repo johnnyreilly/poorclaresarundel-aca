@@ -14,7 +14,7 @@ export const Christmas: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
         <h3>Silent Night</h3>
 
         <p>
-            <a href="https://poorclares.lnk.to/SilentNight">Listen to our "Silent Night" here.</a>
+            <a href="https://poorclares.lnk.to/SilentNight">Listen to our &quot;Silent Night&quot; here.</a>
         </p>
 
         <iframe

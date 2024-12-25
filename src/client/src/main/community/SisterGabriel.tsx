@@ -12,7 +12,7 @@ export const SisterGabriel: React.FC<React.PropsWithChildren<unknown>> = (_props
                 <CardText>Sister Gabriel</CardText>
             </CardBody>
         </Card>
-        <h3>Sister Gabriel's Story</h3>
+        <h3>Sister Gabriel&apos;s Story</h3>
         <p>
             My name is Sr Gabriel, I am 35 years old, I was born and brought up in Newcastle and I have been a Poor
             Clare for twelve years. I graduated in 1993 having read engineering at Salford University and I worked for a

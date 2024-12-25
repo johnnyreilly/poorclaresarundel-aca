@@ -12,7 +12,7 @@ export const SisterClareAgnes: React.FC<React.PropsWithChildren<unknown>> = (_pr
                 <CardText>Sister Clare Agnes</CardText>
             </CardBody>
         </Card>
-        <h3>Sister Clare Agnes' Story</h3>
+        <h3>Sister Clare Agnes&apos; Story</h3>
         <p>
             Well, I was 58 when I joined the Poor Clares in Arundel. Before that I had been in a teaching Order, called
             Notre Dame de Namur. I went there when I was 22, having been a Catholic for just 2 years, because I was so

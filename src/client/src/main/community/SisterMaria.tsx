@@ -13,7 +13,7 @@ export const SisterMaria: React.FC<React.PropsWithChildren<unknown>> = (_props) 
             </CardBody>
         </Card>
 
-        <h3>Sister Maria's Story</h3>
+        <h3>Sister Maria&apos;s Story</h3>
 
         <p>
             I was born in Malaysia, I came to this country when I was 19 to be a student. I received my calling to be a
@@ -24,9 +24,10 @@ export const SisterMaria: React.FC<React.PropsWithChildren<unknown>> = (_props) 
 
         <p>
             Although I did not want to believe this calling which I knew would cost me a tremendous pain of not having
-            my own family and being looked upon as 'strange' within my close knit family, I felt an overwhelming joy of
-            being alive like I never did in my life. I experienced God's deep love in my prayer each night and His Power
-            at work in all things. I started to improve my English and attended daily Mass secretly if possible.
+            my own family and being looked upon as &apos;strange&apos; within my close knit family, I felt an
+            overwhelming joy of being alive like I never did in my life. I experienced God&apos;s deep love in my prayer
+            each night and His Power at work in all things. I started to improve my English and attended daily Mass
+            secretly if possible.
         </p>
 
         <p>
@@ -40,10 +41,10 @@ export const SisterMaria: React.FC<React.PropsWithChildren<unknown>> = (_props) 
 
         <p>
             I stopped attending lectures after the Easter break in my second year, and decided to search for religious
-            life even in the stage of 'unbelief'. I just had to find out if this desire for God is still true, or could
-            I totally give up my faith. I went to an apostolic religious congregation only to be told to go back to
-            university. Then finally I was directed by two other religious to come to Arundel. I did that as my last
-            resort and after the first night in the guest house, I knew God existed.
+            life even in the stage of &apos;unbelief&apos;. I just had to find out if this desire for God is still true,
+            or could I totally give up my faith. I went to an apostolic religious congregation only to be told to go
+            back to university. Then finally I was directed by two other religious to come to Arundel. I did that as my
+            last resort and after the first night in the guest house, I knew God existed.
         </p>
 
         <p>

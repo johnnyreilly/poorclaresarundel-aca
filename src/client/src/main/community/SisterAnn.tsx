@@ -13,7 +13,7 @@ export const SisterAnn: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
             </CardBody>
         </Card>
 
-        <h3>Sister Ann's Story</h3>
+        <h3>Sister Ann&apos;s Story</h3>
 
         <p>
             It all began when I was nine years old, when my teacher hung up a poster of St Francis surrounded by birds
