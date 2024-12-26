@@ -16,7 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     name: container build ⚙️
     steps:
-      # Build and push Docker image with Buildx (don't push on PR)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+        # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
