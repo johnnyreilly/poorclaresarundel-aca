@@ -13,7 +13,7 @@ FROM base AS build-client
 
 WORKDIR /client
 
-COPY src/client/package.json src/client/pnpm-lock.yaml ./
+# COPY src/client/package.json src/client/pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile	
 
 COPY src/client ./
