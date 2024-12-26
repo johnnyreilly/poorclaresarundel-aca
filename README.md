@@ -1,6 +1,6 @@
 # Poor Clares Arundel
 
-[![Build and Deploy](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml/badge.svg)](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml)
+[![Deploy](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml/badge.svg)](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml)
 
 Built with Azure Container Apps and deployed here: https://main-web.blackmeadow-04548954.uksouth.azurecontainerapps.io
 
