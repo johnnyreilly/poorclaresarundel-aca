@@ -16,6 +16,7 @@ env:
   RESOURCE_GROUP: rg-poorclaresarundel
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   build:
@@ -108,6 +109,9 @@ jobs:
       contents: read
       packages: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: "AZ CLI login"
         uses: azure/login@v2
         with:
@@ -118,7 +122,7 @@ jobs:
       - name: Deploy bicep
         uses: azure/CLI@v2
         with:
-          azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
+          # azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
           inlineScript: |
             REF_SHA='${{ github.ref }}.${{ github.sha }}'
             DEPLOYMENT_NAME="${REF_SHA////-}"
@@ -130,29 +134,37 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  branchName='${{ github.event.number == 0 && 'main' ||  format('pr-{0}', github.event.number) }}' \
+                  branchName='${{ env.BRANCH_NAME }}' \
                   webServiceImage='${{ needs.build.outputs.image-node }}' \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
+                  workspaceName='${{ env.BRANCH_NAME }}-log-analytics' \
+                  appInsightsName='${{ env.BRANCH_NAME }}-app-insights' \
+                  webServiceContainerAppName='${{ env.BRANCH_NAME }}-web' \
                   tags="$TAGS" \
                   APPSETTINGS_API_KEY="${{ secrets.APPSETTINGS_API_KEY }}" \
                   APPSETTINGS_DOMAIN="${{ vars.APPSETTINGS_DOMAIN }}" \
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
 
-            echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
-            DEPLOYMENT_OUTPUTS=$(az deployment group show \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name $DEPLOYMENT_NAME \
-              --query properties.outputs)
+            az containerapp show \
+              --resource-group '${{ env.RESOURCE_GROUP }}' \
+              --name '${{ env.BRANCH_NAME }}-web' \
+              --query properties.configuration.ingress.fqdn
 
-            echo 'convert outputs to variables'
-            echo $DEPLOYMENT_OUTPUTS | jq -c '. | to_entries[] | [.key, .value.value]' |
-              while IFS=$"\n" read -r c; do
-                OUTPUT_NAME=$(echo "$c" | jq -r '.[0]')
-                OUTPUT_VALUE=$(echo "$c" | jq -r '.[1]')
-                echo "setting variable $OUTPUT_NAME=$OUTPUT_VALUE"
-                echo "{$OUTPUT_NAME}={$OUTPUT_VALUE}" >> $GITHUB_OUTPUT
-                # echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
-              done # --query properties.outputs.nodeUrl
+            # echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
+            # DEPLOYMENT_OUTPUTS=$(az deployment group show \
+            #   --resource-group ${{ env.RESOURCE_GROUP }} \
+            #   --name $DEPLOYMENT_NAME \
+            #   --query properties.outputs)
+
+            # echo 'convert outputs to variables'
+            # echo $DEPLOYMENT_OUTPUTS | jq -c '. | to_entries[] | [.key, .value.value]' |
+            #   while IFS=$"\n" read -r c; do
+            #     OUTPUT_NAME=$(echo "$c" | jq -r '.[0]')
+            #     OUTPUT_VALUE=$(echo "$c" | jq -r '.[1]')
+            #     echo "setting variable $OUTPUT_NAME=$OUTPUT_VALUE"
+            #     echo "{$OUTPUT_NAME}={$OUTPUT_VALUE}" >> $GITHUB_OUTPUT
+            #     # echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
+            #   done # --query properties.outputs.nodeUrl

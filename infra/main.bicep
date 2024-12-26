@@ -7,6 +7,10 @@ param containerRegistryUsername string
 @secure()
 param containerRegistryPassword string
 
+param workspaceName string
+param appInsightsName string
+param webServiceContainerAppName string
+
 param tags object
 
 @secure()
@@ -17,12 +21,7 @@ param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
 param location string = resourceGroup().location
 
-var branch = toLower(last(split(branchName, '/')))
-
 var environmentName = 'shared-env'
-var workspaceName = '${branch}-log-analytics'
-var appInsightsName = '${branch}-app-insights'
-var webServiceContainerAppName = '${branch}-web'
 
 var containerRegistryPasswordRef = 'container-registry-password'
 var mailgunApiKeyRef = 'mailgun-api-key'
