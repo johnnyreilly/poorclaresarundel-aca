@@ -37,6 +37,6 @@ jobs:
         working-directory: src/client
         run: pnpm run build
 
-      # - name: client lint
-      #   working-directory: src/client
-      #   run: pnpm run lint
+      - name: client lint
+        working-directory: src/client
+        run: pnpm run lint

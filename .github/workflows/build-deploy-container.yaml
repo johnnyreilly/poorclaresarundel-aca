@@ -98,7 +98,6 @@ jobs:
           value=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]')
           echo "setting output: $name=$value"
           echo "$name=$value" >> $GITHUB_OUTPUT
-          # echo "::set-output name=$name::$value"
 
   deploy:
     runs-on: ubuntu-latest
@@ -111,12 +110,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # - name: Azure Login
-      #   uses: azure/login@v1
-      #   with:
-      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: "Az CLI login"
+      - name: "AZ CLI login"
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -165,30 +159,3 @@ jobs:
                 echo "{$OUTPUT_NAME}={$OUTPUT_VALUE}" >> $GITHUB_OUTPUT
                 # echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
               done # --query properties.outputs.nodeUrl
-
-      - name: What-if bicep
-        uses: azure/CLI@v2
-        if: github.event_name == 'pull_request'
-        with:
-          azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
-          inlineScript: |
-            REF_SHA='${{ github.ref }}.${{ github.sha }}'
-            DEPLOYMENT_NAME="${REF_SHA////-}"
-            echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
-
-            TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
-            az deployment group what-if \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name "$DEPLOYMENT_NAME" \
-              --template-file ./infra/main.bicep \
-              --parameters \
-                  branchName='${{ github.event.number == 0 && 'main' ||  format('pr-{0}', github.event.number) }}' \
-                  webServiceImage='${{ needs.build.outputs.image-node }}' \
-                  containerRegistry=${{ env.REGISTRY }} \
-                  containerRegistryUsername=${{ github.actor }} \
-                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
-                  tags="$TAGS" \
-                  APPSETTINGS_API_KEY="${{ secrets.APPSETTINGS_API_KEY }}" \
-                  APPSETTINGS_DOMAIN="${{ vars.APPSETTINGS_DOMAIN }}" \
-                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
-                  APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
