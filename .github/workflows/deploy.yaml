@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        services: [{ "imageName": "node-service", "directory": "." }]
+        services: [{ "imageName": "node-service" }]
     permissions:
       contents: read
       packages: write
@@ -86,7 +86,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ${{ matrix.services.directory }}
+          context: ./
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -101,15 +101,13 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     needs: [build]
     permissions:
       id-token: write
       contents: read
       packages: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: "AZ CLI login"
         uses: azure/login@v2
         with:
@@ -119,7 +117,6 @@ jobs:
 
       - name: Deploy bicep
         uses: azure/CLI@v2
-        if: github.event_name != 'pull_request'
         with:
           azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
           inlineScript: |
