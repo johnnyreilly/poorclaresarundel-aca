@@ -1,5 +1,3 @@
-param branchName string
-
 param webServiceImage string
 
 param containerRegistry string

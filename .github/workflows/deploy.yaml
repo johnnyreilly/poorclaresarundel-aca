@@ -134,7 +134,6 @@ jobs:
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  branchName='${{ env.BRANCH_NAME }}' \
                   webServiceImage='${{ needs.build.outputs.image-node }}' \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
@@ -148,10 +147,13 @@ jobs:
                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
 
-            az containerapp show \
+            CONTAINER_APP_URL=$(az containerapp show \
               --resource-group '${{ env.RESOURCE_GROUP }}' \
               --name '${{ env.BRANCH_NAME }}-web' \
-              --query properties.configuration.ingress.fqdn
+              --query properties.configuration.ingress.fqdn \
+              --output tsv)
+
+            echo "CONTAINER_APP_URL=$CONTAINER_APP_URL"
 
             # echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
             # DEPLOYMENT_OUTPUTS=$(az deployment group show \
@@ -168,3 +170,8 @@ jobs:
             #     echo "{$OUTPUT_NAME}={$OUTPUT_VALUE}" >> $GITHUB_OUTPUT
             #     # echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
             #   done # --query properties.outputs.nodeUrl
+
+# az containerapp show \
+# --resource-group 'rg-poorclaresarundel' \
+# --name 'main-web' \
+# --query properties.configuration.ingress.fqdn
