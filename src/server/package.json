@@ -9,13 +9,14 @@
         "watch": "cross-env NODE_ENV=development nodemon --watch src/**/* -e ts,tsx --exec ts-node src/server/server.ts"
     },
     "dependencies": {
+        "form-data": "^4.0.1",
         "koa": "^2.13.4",
         "koa-body": "^6.0.0",
         "koa-helmet": "^7.0.0",
         "koa-router": "^13.0.0",
         "koa-send": "^5.0.1",
         "koa-static": "^5.0.0",
-        "mailgun-js": "^0.22.0"
+        "mailgun.js": "^10.3.0"
     },
     "devDependencies": {
         "@eslint/js": "^9.17.0",
