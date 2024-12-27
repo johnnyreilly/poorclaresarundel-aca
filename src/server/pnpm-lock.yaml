@@ -18,8 +18,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.1
       koa-helmet:
-        specifier: ^7.0.0
-        version: 7.1.0(helmet@6.2.0)
+        specifier: ^8.0.0
+        version: 8.0.1(helmet@6.2.0)
       koa-router:
         specifier: ^13.0.0
         version: 13.0.1
@@ -857,8 +857,8 @@ packages:
     resolution: {integrity: sha512-asOvN6bFlSnxewce2e/DK3p4tltyfC4VM7ZwuTuepI7dEQVcvpyFuBcEARu1+Hxg8DIwytce2n7jrZtRlPrARA==}
     engines: {node: '>= 10'}
 
-  koa-helmet@7.1.0:
-    resolution: {integrity: sha512-sm/6asmJtEpVL3oJmQTP4lCQgniI3Pp60xSbw+b2eejaKX/25opQKOoalr5BIoHJOUONSuSrbfeW9hEhJdNo+w==}
+  koa-helmet@8.0.1:
+    resolution: {integrity: sha512-lXDqTqNLgqyOKEuCSF3MFReJmEQQ0GD0NzkdSe9dKH87NSMc5GxAA7H5mYaAT+UJypYkIS1lPNRqTuEUgl+l3Q==}
     engines: {node: '>= 18.0.0'}
     peerDependencies:
       helmet: '>= 6'
@@ -2137,7 +2137,7 @@ snapshots:
       co: 4.6.0
       koa-compose: 4.1.0
 
-  koa-helmet@7.1.0(helmet@6.2.0):
+  koa-helmet@8.0.1(helmet@6.2.0):
     dependencies:
       helmet: 6.2.0
 
