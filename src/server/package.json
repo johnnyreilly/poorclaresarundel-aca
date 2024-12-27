@@ -12,7 +12,7 @@
         "form-data": "^4.0.1",
         "koa": "^2.13.4",
         "koa-body": "^6.0.0",
-        "koa-helmet": "^7.0.0",
+        "koa-helmet": "^8.0.0",
         "koa-router": "^13.0.0",
         "koa-send": "^5.0.1",
         "koa-static": "^5.0.0",
