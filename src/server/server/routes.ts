@@ -1,6 +1,9 @@
 import { koaBody } from 'koa-body';
-import * as Router from 'koa-router';
-import * as Mailgun from 'mailgun-js';
+import Router from 'koa-router';
+// import * as Mailgun from 'mailgun-js';
+
+import FormData from 'form-data';
+import Mailgun from 'mailgun.js';
 
 const router = new Router();
 
@@ -27,7 +30,9 @@ router.post('/api/PrayerRequest', koaBody(), async (ctx, _next) => {
         }
 
         // We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails
-        const mailgun = new Mailgun({ apiKey, domain });
+        // const mailgun = new Mailgun({ apiKey, domain });
+        const mailgun = new Mailgun(FormData);
+        const mg = mailgun.client({ username: 'api', key: apiKey });
 
         const prayerRequest = {
             from: email, // prayerRequestFromEmail,
@@ -39,7 +44,9 @@ I'd love it if you could pray for me about this:
 
 ${prayFor}`,
         };
-        await mailgun.messages().send(prayerRequest);
+        // await mailgun.messages().send(prayerRequest);
+
+        await mg.messages.create(domain, prayerRequest);
 
         const text = `Thank you for your prayer request.
 
@@ -72,7 +79,8 @@ Your Poor Clare sisters, Arundel.`;
             text,
             html,
         };
-        await mailgun.messages().send(reassuringResponse);
+        // await mailgun.messages().send(reassuringResponse);
+        await mg.messages.create(domain, reassuringResponse);
 
         ctx.body = { ok: true, text: 'Thanks for sending your prayer request - we will pray.' };
     } catch (exc) {
