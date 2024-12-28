@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import smalltau from './images/smalltau.jpg';
+import { Alert } from 'reactstrap';
 export const prayerRequestsPath = '/prayer-requests';
 
 interface IPrayerRequestResult {
@@ -17,7 +18,7 @@ export function PrayerRequests() {
         setRequestEmail(event.target.value);
     };
 
-    const handlePrayForChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handlePrayForChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setRequestPrayFor(event.target.value);
     };
 
@@ -44,38 +45,51 @@ export function PrayerRequests() {
     };
 
     return (
-        <Container>
-            <Row>
-                <Col>
-                    <h1>Prayer Requests</h1>
-                    <Form onSubmit={handleSubmit}>
-                        <FormGroup>
-                            <Label for="requestEmail">Email</Label>
-                            <Input
-                                type="email"
-                                name="email"
-                                id="requestEmail"
-                                value={requestEmail}
-                                onChange={handleEmailChange}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="requestPrayFor">Your Prayer Request</Label>
-                            <Input
-                                type="textarea"
-                                name="prayFor"
-                                id="requestPrayFor"
-                                value={requestPrayFor}
-                                onChange={handlePrayForChange}
-                            />
-                        </FormGroup>
-                        <Button type="submit" color="primary">
-                            Submit
-                        </Button>
-                    </Form>
-                    {formSubmitAttempted && message && <p>{message.text}</p>}
-                </Col>
-            </Row>
-        </Container>
+        <>
+            <h3>Prayer Requests</h3>
+
+            <p>If you would like to ask the community to pray for a special intention mail us a prayer request:</p>
+
+            {message && (
+                <Alert color={message.ok ? 'success' : 'danger'}>
+                    <img className="img-thumbnail" src={smalltau} alt={message.ok ? 'success' : 'failure'} />
+                    {message.text}
+                </Alert>
+            )}
+
+            <form name="form" noValidate onSubmit={handleSubmit}>
+                <div className={`form-group has-feedback ${formSubmitAttempted && !requestEmail ? 'has-error' : ''}`}>
+                    <label className="control-label">Email address</label>
+                    <input
+                        name="emailAddr"
+                        type="email"
+                        className="form-control"
+                        placeholder="Enter email"
+                        value={requestEmail}
+                        onChange={handleEmailChange}
+                        required
+                    />
+                    {formSubmitAttempted && !requestEmail && <span>Tell us your email.</span>}
+                </div>
+                <div>
+                    <label className="control-label">Your prayer request</label>
+                    <textarea
+                        name="prayForText"
+                        className="form-control"
+                        rows={3}
+                        placeholder="Enter prayer request"
+                        value={requestPrayFor}
+                        onChange={handlePrayForChange}
+                        required
+                    />
+                    {formSubmitAttempted && !requestPrayFor && <span>You must tell us something to pray for!</span>}
+                </div>
+                <button disabled={!requestEmail || !requestPrayFor} type="submit" className="btn btn-primary">
+                    Send us your prayer request
+                </button>
+            </form>
+
+            <p>Although you may only receive a standardised reply, you can be confident that we will indeed pray.</p>
+        </>
     );
 }
