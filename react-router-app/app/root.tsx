@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import {
   isRouteErrorResponse,
   Links,
@@ -11,6 +13,7 @@ import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
 
 export const links: Route.LinksFunction = () => [
+  /*
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
@@ -21,6 +24,8 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
+  */
+  { rel: "shortcut icon", href: "/favicon.ico" },
   { rel: "stylesheet", href: stylesheet },
 ];
 
@@ -29,7 +34,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta name="theme-color" content="#000000" />
         <Meta />
         <Links />
       </head>
