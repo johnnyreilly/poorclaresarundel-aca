@@ -12,7 +12,7 @@ import {
     Container,
     NavbarBrand,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import communityFoundationsHollington from '../static/communityFoundationsHollington.pdf';
