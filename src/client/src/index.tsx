@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as ReactGA from 'react-ga';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { createRoot } from 'react-dom/client';
+import { RouterProvider } from 'react-router/dom';
 import { Home } from './Home';
 import React, { Suspense } from 'react';
 import { Loading } from './components/Loading';

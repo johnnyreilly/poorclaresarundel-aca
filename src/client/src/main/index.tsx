@@ -1,5 +1,5 @@
 import { Container } from 'reactstrap';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
 import { Menu } from './Menu';
 import { Us, usPath } from './Us';
 import { OurPrayer, ourPrayerPath } from './our-life/OurPrayer';

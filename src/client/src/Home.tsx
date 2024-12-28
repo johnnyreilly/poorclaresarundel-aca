@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import house from './images/house.jpg';
 // import lightForTheWorldSmall from './images/light-for-the-world-small.jpg';
 // import oComeEmmanuelSmall from './images/o-come-emmanuel-small.jpg';

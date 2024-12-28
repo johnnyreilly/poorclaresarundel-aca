@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import prayerOur1 from './images/prayerOur1.jpg';
 import prayerOur2 from './images/prayerOur2.webp';
 import prayerOur3 from './images/prayerOur3.webp';

@@ -1,5 +1,5 @@
 import { Container } from 'reactstrap';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
 import { Menu } from './Menu';
 import { Home, homePath } from './Home';
 import { Why, whyPath } from './Why';
