@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
 import communityAtPrayer from './images/Page2CommunityAtPrayer.jpg';
 import prayingInChapel from './images/praying_in_chapel.jpg';
@@ -7,6 +6,35 @@ import librarian from './images/librarian.jpg';
 import vegTeam from './images/veg_team.jpg';
 import providenceGroup from './images/graca_and_yohanna.jpg';
 import './Us.css';
+import { useState } from 'react';
+
+export const usPath = '/us';
+
+export function Us() {
+    return (
+        <div className="row">
+            <div className="col-lg-6 col-md-5 col-sm-3 col-xs-12">
+                <div className="rounded px-3 px-sm-4 py-3 py-sm-5">
+                    <h1 className="display-4">About Us</h1>
+                    <p className="lead">
+                        Called to a life of prayer we seek to live the Gospel in and for our world of today. We share
+                        our lives and all that we do.
+                    </p>
+                    <hr className="my-2" />
+                    <p>We are the Poor Clares of Arundel.</p>
+                    <p className="lead">
+                        <a className="btn btn-primary" href="http://youtu.be/u_RlaYfJGbc">
+                            See a slideshow of us here...
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div className="col-lg-6 col-md-7 col-sm-9 col-xs-12">
+                <UsCarousel />
+            </div>
+        </div>
+    );
+}
 
 const items = [
     {
@@ -35,85 +63,42 @@ const items = [
     },
 ];
 
-export const usPath = '/us';
+function UsCarousel() {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [animating, setAnimating] = useState(false);
 
-const defaultState = { activeIndex: 0 };
-
-export class Us extends React.Component<unknown, typeof defaultState> {
-    animating = false;
-
-    state = defaultState;
-
-    onExiting = () => {
-        this.animating = true;
+    const next = () => {
+        if (animating) return;
+        const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+        setActiveIndex(nextIndex);
     };
 
-    onExited = () => {
-        this.animating = false;
+    const previous = () => {
+        if (animating) return;
+        const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+        setActiveIndex(nextIndex);
     };
 
-    next = () => {
-        if (this.animating) {
-            return;
-        }
-        this.setState((prevState) => {
-            const nextIndex = prevState.activeIndex === items.length - 1 ? 0 : prevState.activeIndex + 1;
-            return { activeIndex: nextIndex };
-        });
+    const goToIndex = (newIndex: number) => {
+        if (animating) return;
+        setActiveIndex(newIndex);
     };
 
-    previous = () => {
-        if (this.animating) {
-            return;
-        }
-        this.setState((prevState) => {
-            const nextIndex = prevState.activeIndex === 0 ? items.length - 1 : prevState.activeIndex - 1;
-            return { activeIndex: nextIndex };
-        });
-    };
-
-    goToIndex = (newIndex: number) => {
-        if (this.animating) {
-            return;
-        }
-        this.setState(() => ({ activeIndex: newIndex }));
-    };
-
-    render() {
-        const { activeIndex } = this.state;
-
+    const slides = items.map((item) => {
         return (
-            <div className="row">
-                <div className="col-lg-6 col-md-5 col-sm-3 col-xs-12">
-                    <div className="rounded px-3 px-sm-4 py-3 py-sm-5">
-                        <h1 className="display-4">About Us</h1>
-                        <p className="lead">
-                            Called to a life of prayer we seek to live the Gospel in and for our world of today. We
-                            share our lives and all that we do.
-                        </p>
-                        <hr className="my-2" />
-                        <p>We are the Poor Clares of Arundel.</p>
-                        <p className="lead">
-                            <a className="btn btn-primary" href="http://youtu.be/u_RlaYfJGbc">
-                                See a slideshow of us here...
-                            </a>
-                        </p>
-                    </div>
-                </div>
-                <div className="col-lg-6 col-md-7 col-sm-9 col-xs-12 carousel-container">
-                    <Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
-                        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-                        {items.map((item) => (
-                            <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
-                                <img src={item.src} alt={item.caption} />
-                                <CarouselCaption captionText={''} captionHeader={item.caption} />
-                            </CarouselItem>
-                        ))}
-                        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-                        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-                    </Carousel>
-                </div>
-            </div>
+            <CarouselItem onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)} key={item.src}>
+                <img src={item.src} alt={item.caption} />
+                <CarouselCaption captionText="" captionHeader={item.caption} />
+            </CarouselItem>
         );
-    }
+    });
+
+    return (
+        <Carousel activeIndex={activeIndex} next={next} previous={previous}>
+            <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+            {slides}
+            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+        </Carousel>
+    );
 }
