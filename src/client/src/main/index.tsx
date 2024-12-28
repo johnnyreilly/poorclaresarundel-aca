@@ -1,5 +1,5 @@
 import { Container } from 'reactstrap';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Menu } from './Menu';
 import { Us, usPath } from './Us';
 import { OurPrayer, ourPrayerPath } from './our-life/OurPrayer';
@@ -35,10 +35,9 @@ import { Christmas, christmasPath } from './Christmas';
 import { Footer } from '../components/Footer';
 
 function Main() {
-    const location = useLocation();
     return (
         <>
-            <Menu location={location.pathname} />
+            <Menu />
             <Container>
                 <Routes>
                     <Route path={usPath} element={<Us />} />
