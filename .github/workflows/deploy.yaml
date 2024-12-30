@@ -124,7 +124,8 @@ jobs:
         with:
           # azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
           inlineScript: |
-            REF_SHA='${{ github.ref }}.${{ github.sha }}'
+            SHA_SHORT=$(git rev-parse --short HEAD)
+            REF_SHA="${{ env.BRANCH_NAME }}.$SHA_SHORT"
             DEPLOYMENT_NAME="${REF_SHA////-}"
             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
