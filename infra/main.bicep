@@ -7,6 +7,7 @@ param containerRegistryPassword string
 
 param workspaceName string
 param appInsightsName string
+param managedEnvironmentName string
 param webServiceContainerAppName string
 
 param tags object
@@ -18,8 +19,6 @@ param APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL string
 param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
 param location string = resourceGroup().location
-
-var environmentName = 'shared-env'
 
 var containerRegistryPasswordRef = 'container-registry-password'
 var mailgunApiKeyRef = 'mailgun-api-key'
@@ -48,8 +47,8 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource environment 'Microsoft.App/managedEnvironments@2024-03-01' = {
-  name: environmentName
+resource managedEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
+  name: managedEnvironmentName
   location: location
   tags: tags
   properties: {
@@ -75,7 +74,7 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
   tags: tags
   location: location
   properties: {
-    managedEnvironmentId: environment.id
+    managedEnvironmentId: managedEnvironment.id
     configuration: {
       secrets: [
         {
@@ -106,7 +105,7 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
           {
             name: 'www.poorclaresarundel.org'
-            certificateId: '${environment.id}/certificates/poorclaresarundel.org'
+            certificateId: '${managedEnvironment.id}/certificates/poorclaresarundel.org'
             bindingType: 'SniEnabled'
           }
         ]
