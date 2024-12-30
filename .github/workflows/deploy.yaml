@@ -29,9 +29,17 @@ jobs:
       packages: write
     outputs:
       image-node: ${{ steps.image-tag.outputs.image-node-service }}
+      sha-short: ${{ steps.sha_short.outputs.sha_short }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set SHA_SHORT environment variable
+        id: sha_short
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Check SHA_SHORT environment variable
+        run: echo ${{ steps.sha_short.outputs.sha_short }}
 
       # - name: Dump GitHub context
       #   env:
@@ -96,7 +104,7 @@ jobs:
         id: image-tag
         run: |
           name=$(echo "image-${{ matrix.services.imageName }}" | tr '[:upper:]' '[:lower:]')
-          value=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]')
+          value=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-${{ steps.sha_short.outputs.sha_short }}" | tr '[:upper:]' '[:lower:]')
           echo "setting output: $name=$value"
           echo "$name=$value" >> $GITHUB_OUTPUT
 
@@ -124,8 +132,7 @@ jobs:
         with:
           # azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
           inlineScript: |
-            SHA_SHORT=$(git rev-parse --short HEAD)
-            REF_SHA="${{ env.BRANCH_NAME }}.$SHA_SHORT"
+            REF_SHA="${{ env.BRANCH_NAME }}.${{ needs.build.outputs.sha-short }}"
             DEPLOYMENT_NAME="${REF_SHA////-}"
             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
