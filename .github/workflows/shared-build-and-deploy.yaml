@@ -24,18 +24,19 @@ jobs:
       contents: read
       packages: write
     outputs:
-      image-node: ${{ steps.image-tag.outputs.image-node-service }}
-      sha-short: ${{ steps.sha_short.outputs.sha_short }}
+      image-name: ${{ steps.vars.outputs.image_name }}
+      sha-short: ${{ steps.vars.outputs.sha_short }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set SHA_SHORT environment variable
-        id: sha_short
-        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
-      - name: Check SHA_SHORT environment variable
-        run: echo ${{ steps.sha_short.outputs.sha_short }}
+      - name: Set sha-short and image-name environment variables
+        id: vars
+        run: |
+          image_name=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}" | tr '[:upper:]' '[:lower:]')
+          echo "image_name=$image_name" >> $GITHUB_OUTPUT
+          sha_short=$(echo "$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]')
+          echo "sha_short=$sha_short" >> $GITHUB_OUTPUT
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -53,7 +54,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}
+          images: ${{ steps.vars.outputs.image_name }}
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
@@ -71,14 +72,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Output image tag
-        id: image-tag
-        run: |
-          name=$(echo "image-${{ matrix.services.imageName }}" | tr '[:upper:]' '[:lower:]')
-          value=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-${{ steps.sha_short.outputs.sha_short }}" | tr '[:upper:]' '[:lower:]')
-          echo "setting output: $name=$value"
-          echo "$name=$value" >> $GITHUB_OUTPUT
 
   deploy:
     runs-on: ubuntu-latest
@@ -108,13 +101,16 @@ jobs:
             DEPLOYMENT_NAME="${REF_SHA////-}"
             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
+            webServiceImage="${{ needs.build.outputs.image-name }}:sha-${{ needs.build.outputs.sha-short }}"
+            echo "webServiceImage=$webServiceImage"
+
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
-                  webServiceImage='${{ needs.build.outputs.image-node }}' \
+                  webServiceImage="$webServiceImage" \
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
