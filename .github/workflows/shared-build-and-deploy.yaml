@@ -75,7 +75,6 @@ jobs:
         id: image-tag
         run: |
           name=$(echo "image-${{ matrix.services.imageName }}" | tr '[:upper:]' '[:lower:]')
-          # value=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:${{ env.BRANCH_NAME }}-${{ steps.sha_short.outputs.sha_short }}" | tr '[:upper:]' '[:lower:]')
           value=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-${{ steps.sha_short.outputs.sha_short }}" | tr '[:upper:]' '[:lower:]')
           echo "setting output: $name=$value"
           echo "$name=$value" >> $GITHUB_OUTPUT

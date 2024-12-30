@@ -19,7 +19,7 @@ on:
 #   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
-  run-build-and-deploy:
+  build-and-deploy:
     uses: ./.github/workflows/shared-build-and-deploy.yaml
     secrets: inherit
 #   build:
