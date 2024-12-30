@@ -140,7 +140,7 @@ jobs:
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
                   workspaceName='shared-log-analytics' \
                   appInsightsName='shared-app-insights' \
-                  managedEnvironmentName='shared-managed-env' \
+                  managedEnvironmentName='shared-env' \
                   webServiceContainerAppName='${{ env.BRANCH_NAME }}-web' \
                   tags="$TAGS" \
                   APPSETTINGS_API_KEY="${{ secrets.APPSETTINGS_API_KEY }}" \
