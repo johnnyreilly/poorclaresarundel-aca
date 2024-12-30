@@ -147,5 +147,3 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
     }
   }
 }
-
-output webServiceUrl string = webServiceContainerApp.properties.latestRevisionFqdn
