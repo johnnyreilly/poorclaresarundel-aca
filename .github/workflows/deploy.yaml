@@ -12,175 +12,177 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  RESOURCE_GROUP: rg-poorclaresarundel
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+# env:
+#   RESOURCE_GROUP: rg-poorclaresarundel
+#   REGISTRY: ghcr.io
+#   IMAGE_NAME: ${{ github.repository }}
+#   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        services: [{ "imageName": "node-service" }]
-    permissions:
-      contents: read
-      packages: write
-    outputs:
-      image-node: ${{ steps.image-tag.outputs.image-node-service }}
-      sha-short: ${{ steps.sha_short.outputs.sha_short }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  run-build-and-deploy:
+    uses: ./.github/workflows/shared-build-and-deploy.yaml
+#   build:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         services: [{ "imageName": "node-service" }]
+#     permissions:
+#       contents: read
+#       packages: write
+#     outputs:
+#       image-node: ${{ steps.image-tag.outputs.image-node-service }}
+#       sha-short: ${{ steps.sha_short.outputs.sha_short }}
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Set SHA_SHORT environment variable
-        id: sha_short
-        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+#       - name: Set SHA_SHORT environment variable
+#         id: sha_short
+#         run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Check SHA_SHORT environment variable
-        run: echo ${{ steps.sha_short.outputs.sha_short }}
+#       - name: Check SHA_SHORT environment variable
+#         run: echo ${{ steps.sha_short.outputs.sha_short }}
 
-      # - name: Dump GitHub context
-      #   env:
-      #     GITHUB_CONTEXT: ${{ toJSON(github) }}
-      #   run: echo "$GITHUB_CONTEXT"
-      # - name: Dump job context
-      #   env:
-      #     JOB_CONTEXT: ${{ toJSON(job) }}
-      #   run: echo "$JOB_CONTEXT"
-      # - name: Dump steps context
-      #   env:
-      #     STEPS_CONTEXT: ${{ toJSON(steps) }}
-      #   run: echo "$STEPS_CONTEXT"
-      # - name: Dump runner context
-      #   env:
-      #     RUNNER_CONTEXT: ${{ toJSON(runner) }}
-      #   run: echo "$RUNNER_CONTEXT"
-      # - name: Dump strategy context
-      #   env:
-      #     STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
-      #   run: echo "$STRATEGY_CONTEXT"
-      # - name: Dump matrix context
-      #   env:
-      #     MATRIX_CONTEXT: ${{ toJSON(matrix) }}
-      #   run: echo "$MATRIX_CONTEXT"
+#       # - name: Dump GitHub context
+#       #   env:
+#       #     GITHUB_CONTEXT: ${{ toJSON(github) }}
+#       #   run: echo "$GITHUB_CONTEXT"
+#       # - name: Dump job context
+#       #   env:
+#       #     JOB_CONTEXT: ${{ toJSON(job) }}
+#       #   run: echo "$JOB_CONTEXT"
+#       # - name: Dump steps context
+#       #   env:
+#       #     STEPS_CONTEXT: ${{ toJSON(steps) }}
+#       #   run: echo "$STEPS_CONTEXT"
+#       # - name: Dump runner context
+#       #   env:
+#       #     RUNNER_CONTEXT: ${{ toJSON(runner) }}
+#       #   run: echo "$RUNNER_CONTEXT"
+#       # - name: Dump strategy context
+#       #   env:
+#       #     STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+#       #   run: echo "$STRATEGY_CONTEXT"
+#       # - name: Dump matrix context
+#       #   env:
+#       #     MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+#       #   run: echo "$MATRIX_CONTEXT"
 
-      # Login against a Docker registry except on PR
-      # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+#       # Login against a Docker registry except on PR
+#       # https://github.com/docker/login-action
+#       - name: Log into registry ${{ env.REGISTRY }}
+#         if: github.event_name != 'pull_request'
+#         uses: docker/login-action@v3
+#         with:
+#           registry: ${{ env.REGISTRY }}
+#           username: ${{ github.actor }}
+#           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Extract metadata (tags, labels) for Docker
-      # https://github.com/docker/metadata-action
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=ref,event=branch
-            type=sha
+#       # Extract metadata (tags, labels) for Docker
+#       # https://github.com/docker/metadata-action
+#       - name: Extract Docker metadata
+#         id: meta
+#         uses: docker/metadata-action@v5
+#         with:
+#           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}
+#           tags: |
+#             type=semver,pattern={{version}}
+#             type=semver,pattern={{major}}.{{minor}}
+#             type=semver,pattern={{major}}
+#             type=ref,event=branch
+#             type=sha
 
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: ./
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+#       # Build and push Docker image with Buildx (don't push on PR)
+#       # https://github.com/docker/build-push-action
+#       - name: Build and push Docker image
+#         uses: docker/build-push-action@v6
+#         with:
+#           context: ./
+#           push: ${{ github.event_name != 'pull_request' }}
+#           tags: ${{ steps.meta.outputs.tags }}
+#           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Output image tag
-        id: image-tag
-        run: |
-          name=$(echo "image-${{ matrix.services.imageName }}" | tr '[:upper:]' '[:lower:]')
-          value=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-${{ steps.sha_short.outputs.sha_short }}" | tr '[:upper:]' '[:lower:]')
-          echo "setting output: $name=$value"
-          echo "$name=$value" >> $GITHUB_OUTPUT
+#       - name: Output image tag
+#         id: image-tag
+#         run: |
+#           name=$(echo "image-${{ matrix.services.imageName }}" | tr '[:upper:]' '[:lower:]')
+#           value=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}:sha-${{ steps.sha_short.outputs.sha_short }}" | tr '[:upper:]' '[:lower:]')
+#           echo "setting output: $name=$value"
+#           echo "$name=$value" >> $GITHUB_OUTPUT
 
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
-    needs: [build]
-    permissions:
-      id-token: write
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#   deploy:
+#     runs-on: ubuntu-latest
+#     if: github.event_name != 'pull_request'
+#     needs: [build]
+#     permissions:
+#       id-token: write
+#       contents: read
+#       packages: write
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: "AZ CLI login"
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+#       - name: "AZ CLI login"
+#         uses: azure/login@v2
+#         with:
+#           client-id: ${{ secrets.AZURE_CLIENT_ID }}
+#           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+#           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Deploy bicep
-        uses: azure/CLI@v2
-        with:
-          # azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
-          inlineScript: |
-            REF_SHA="${{ env.BRANCH_NAME }}.${{ needs.build.outputs.sha-short }}"
-            DEPLOYMENT_NAME="${REF_SHA////-}"
-            echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
+#       - name: Deploy bicep
+#         uses: azure/CLI@v2
+#         with:
+#           # azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
+#           inlineScript: |
+#             REF_SHA="${{ env.BRANCH_NAME }}.${{ needs.build.outputs.sha-short }}"
+#             DEPLOYMENT_NAME="${REF_SHA////-}"
+#             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
-            TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
-            az deployment group create \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --name "$DEPLOYMENT_NAME" \
-              --template-file ./infra/main.bicep \
-              --parameters \
-                  webServiceImage='${{ needs.build.outputs.image-node }}' \
-                  containerRegistry=${{ env.REGISTRY }} \
-                  containerRegistryUsername=${{ github.actor }} \
-                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
-                  workspaceName='shared-log-analytics' \
-                  appInsightsName='shared-app-insights' \
-                  managedEnvironmentName='shared-env' \
-                  webServiceContainerAppName='${{ env.BRANCH_NAME }}-web' \
-                  tags="$TAGS" \
-                  APPSETTINGS_API_KEY="${{ secrets.APPSETTINGS_API_KEY }}" \
-                  APPSETTINGS_DOMAIN="${{ vars.APPSETTINGS_DOMAIN }}" \
-                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
-                  APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
+#             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
+#             az deployment group create \
+#               --resource-group ${{ env.RESOURCE_GROUP }} \
+#               --name "$DEPLOYMENT_NAME" \
+#               --template-file ./infra/main.bicep \
+#               --parameters \
+#                   webServiceImage='${{ needs.build.outputs.image-node }}' \
+#                   containerRegistry=${{ env.REGISTRY }} \
+#                   containerRegistryUsername=${{ github.actor }} \
+#                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
+#                   workspaceName='shared-log-analytics' \
+#                   appInsightsName='shared-app-insights' \
+#                   managedEnvironmentName='shared-env' \
+#                   webServiceContainerAppName='${{ env.BRANCH_NAME }}-web' \
+#                   tags="$TAGS" \
+#                   APPSETTINGS_API_KEY="${{ secrets.APPSETTINGS_API_KEY }}" \
+#                   APPSETTINGS_DOMAIN="${{ vars.APPSETTINGS_DOMAIN }}" \
+#                   APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
+#                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
 
-            CONTAINER_APP_URL=$(az containerapp show \
-              --resource-group '${{ env.RESOURCE_GROUP }}' \
-              --name '${{ env.BRANCH_NAME }}-web' \
-              --query properties.configuration.ingress.fqdn \
-              --output tsv)
+#             CONTAINER_APP_URL=$(az containerapp show \
+#               --resource-group '${{ env.RESOURCE_GROUP }}' \
+#               --name '${{ env.BRANCH_NAME }}-web' \
+#               --query properties.configuration.ingress.fqdn \
+#               --output tsv)
 
-            echo "CONTAINER_APP_URL=$CONTAINER_APP_URL"
+#             echo "CONTAINER_APP_URL=$CONTAINER_APP_URL"
 
-            # echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
-            # DEPLOYMENT_OUTPUTS=$(az deployment group show \
-            #   --resource-group ${{ env.RESOURCE_GROUP }} \
-            #   --name $DEPLOYMENT_NAME \
-            #   --query properties.outputs)
+#             # echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
+#             # DEPLOYMENT_OUTPUTS=$(az deployment group show \
+#             #   --resource-group ${{ env.RESOURCE_GROUP }} \
+#             #   --name $DEPLOYMENT_NAME \
+#             #   --query properties.outputs)
 
-            # echo 'convert outputs to variables'
-            # echo $DEPLOYMENT_OUTPUTS | jq -c '. | to_entries[] | [.key, .value.value]' |
-            #   while IFS=$"\n" read -r c; do
-            #     OUTPUT_NAME=$(echo "$c" | jq -r '.[0]')
-            #     OUTPUT_VALUE=$(echo "$c" | jq -r '.[1]')
-            #     echo "setting variable $OUTPUT_NAME=$OUTPUT_VALUE"
-            #     echo "{$OUTPUT_NAME}={$OUTPUT_VALUE}" >> $GITHUB_OUTPUT
-            #     # echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
-            #   done # --query properties.outputs.nodeUrl
+#             # echo 'convert outputs to variables'
+#             # echo $DEPLOYMENT_OUTPUTS | jq -c '. | to_entries[] | [.key, .value.value]' |
+#             #   while IFS=$"\n" read -r c; do
+#             #     OUTPUT_NAME=$(echo "$c" | jq -r '.[0]')
+#             #     OUTPUT_VALUE=$(echo "$c" | jq -r '.[1]')
+#             #     echo "setting variable $OUTPUT_NAME=$OUTPUT_VALUE"
+#             #     echo "{$OUTPUT_NAME}={$OUTPUT_VALUE}" >> $GITHUB_OUTPUT
+#             #     # echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
+#             #   done # --query properties.outputs.nodeUrl
 
-# az containerapp show \
-# --resource-group 'rg-poorclaresarundel' \
-# --name 'main-web' \
-# --query properties.configuration.ingress.fqdn
+# # az containerapp show \
+# # --resource-group 'rg-poorclaresarundel' \
+# # --name 'main-web' \
+# # --query properties.configuration.ingress.fqdn
