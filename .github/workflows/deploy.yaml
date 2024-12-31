@@ -16,8 +16,8 @@ jobs:
       branchName: ${{ github.head_ref || github.ref_name }}
     secrets: inherit
 
-  get-container-app-url:
-    runs-on: ubuntu-latest
-    needs: build-and-deploy
-    steps:
-      - run: echo "container-app-url=${{ needs.build-and-deploy.outputs.container-app-url }}"
+  # get-container-app-url:
+  #   runs-on: ubuntu-latest
+  #   needs: build-and-deploy
+  #   steps:
+  #     - run: echo "container-app-url=${{ needs.build-and-deploy.outputs.container-app-url }}"
