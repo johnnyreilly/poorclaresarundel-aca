@@ -6,7 +6,7 @@ import path from 'path';
 
 import { config } from './config';
 import { logger } from './logging';
-import { routes } from './routes';
+import { routes } from './routes/index';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -19,7 +19,7 @@ app.use(
             scriptSrc: ["'self'", "'unsafe-inline'", 'storage.googleapis.com', 'www.google-analytics.com'],
             frameSrc: ['www.youtube.com', 'www.youtube-nocookie.com'],
         },
-    }),
+    })
 );
 app.use(logger);
 app.use(routes);
@@ -37,5 +37,5 @@ app.use(async (ctx) => {
 app.listen(config.port);
 
 console.log(
-    `Server running on port ${config.port}; static files served from ${publicPath}, SPA template from ${indexHtmlPath}`,
+    `Server running on port ${config.port}; static files served from ${publicPath}, SPA template from ${indexHtmlPath}`
 );

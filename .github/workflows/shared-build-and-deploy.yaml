@@ -136,6 +136,7 @@ jobs:
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
                   branchName="$BRANCH_NAME" \
+                  gitSha="${{ needs.build.outputs.sha-short }}" \
                   workspaceName='shared-log-analytics' \
                   appInsightsName='shared-app-insights' \
                   managedEnvironmentName='shared-env' \
