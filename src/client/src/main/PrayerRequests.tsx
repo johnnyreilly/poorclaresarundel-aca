@@ -28,7 +28,7 @@ export function PrayerRequests() {
         setMessage({ ok: true, text: 'Sending...' });
 
         try {
-            const rawResponse = await fetch('/api/PrayerRequest', {
+            const rawResponse = await fetch('/api/prayer-request', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
