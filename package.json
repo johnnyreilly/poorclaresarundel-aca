@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "concurrently": "9.1.1",
+    "concurrently": "9.1.2",
     "npm-run-all2": "7.0.2",
     "rimraf": "6.0.1"
   }
