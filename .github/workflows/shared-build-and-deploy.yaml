@@ -1,9 +1,9 @@
 on:
   workflow_call:
-    # inputs:
-    #   config-path:
-    #     required: true
-    #     type: string
+    inputs:
+      deploy:
+        required: true
+        type: boolean
     # secrets:
     #   personal_access_token:
     #     required: true
@@ -69,13 +69,14 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./
-          push: ${{ github.event_name != 'pull_request' }}
+          #   push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ inputs.deploy }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
+    if: inputs.deploy == true
     needs: [build]
     permissions:
       id-token: write

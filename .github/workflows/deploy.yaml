@@ -21,6 +21,8 @@ on:
 jobs:
   build-and-deploy:
     uses: ./.github/workflows/shared-build-and-deploy.yaml
+    with:
+      deploy: true
     secrets: inherit
 #   build:
 #     runs-on: ubuntu-latest
