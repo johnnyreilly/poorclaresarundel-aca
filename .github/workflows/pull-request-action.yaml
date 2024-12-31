@@ -1,25 +1,22 @@
 name: Pull request comment
+
 on:
   issue_comment:
     types: [created, edited, deleted]
+
 jobs:
-  job01:
-    if: contains(github.event.comment.html_url, '/pull/') # check if the comments come from pull request, exclude those from issue.
-    runs-on: [ubuntu-latest]
+  output-context:
+    runs-on: ubuntu-latest
     steps:
-      - name: say hello
-        if: contains(github.event.comment.body, '/support') # check the comment if it contains the keywords
-        run: |
-          echo say hello
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
-      - name: test
-        if: contains(github.event.comment.body, '/test') # check the comment if it contains the keywords
-        run: |
-          echo test
-
-      - name: deploy
-        if: contains(github.event.comment.body, '/deploy') # check the comment if it contains the keywords
-        uses: ./.github/workflows/shared-build-and-deploy.yaml
-        # secrets: inherit
-        with:
-          deploy: true
+  build-and-deploy:
+    # check if the comment comes from a pull request and contains the required keyword
+    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/deploy')
+    uses: ./.github/workflows/shared-build-and-deploy.yaml
+    with:
+      deploy: true
+    secrets: inherit
