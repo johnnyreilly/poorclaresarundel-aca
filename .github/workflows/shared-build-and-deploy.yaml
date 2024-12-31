@@ -63,6 +63,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ steps.vars.outputs.image_name }}
+          context: git # so it uses the git branch that is checked out
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
