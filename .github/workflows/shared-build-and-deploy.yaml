@@ -111,11 +111,12 @@ jobs:
         with:
           inlineScript: |
             BRANCH_NAME="${{ inputs.branchName }}"
+            SHA_SHORT="${{ needs.build.outputs.sha-short }}"
             REF_SHA="${{ inputs.branchName }}.${{ needs.build.outputs.sha-short }}"
             DEPLOYMENT_NAME="${REF_SHA////-}"
             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
-            webServiceImage="${{ needs.build.outputs.image-name }}:sha-${{ needs.build.outputs.sha-short }}"
+            webServiceImage="${{ needs.build.outputs.image-name }}:sha-$SHA_SHORT"
             echo "webServiceImage=$webServiceImage"
 
             if [ "$BRANCH_NAME" == "main" ]; then
@@ -136,6 +137,7 @@ jobs:
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
                   branchName="$BRANCH_NAME" \
+                  gitSha="$SHA_SHORT" \
                   workspaceName='shared-log-analytics' \
                   appInsightsName='shared-app-insights' \
                   managedEnvironmentName='shared-env' \
