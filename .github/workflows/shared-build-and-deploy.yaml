@@ -6,10 +6,15 @@ on:
       deploy:
         required: true
         type: boolean
+      branchName:
+        required: true
+        type: string
+
     # secrets:
     #   personal_access_token:
     #     required: true
     # Map the workflow outputs to job outputs
+
     outputs:
       container-app-url:
         description: "The URL of the deployed container app"
@@ -18,7 +23,6 @@ on:
 env:
   RESOURCE_GROUP: rg-poorclaresarundel
   REGISTRY: ghcr.io
-  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   build:
@@ -101,14 +105,19 @@ jobs:
         uses: azure/CLI@v2
         with:
           inlineScript: |
-            REF_SHA="${{ env.BRANCH_NAME }}.${{ needs.build.outputs.sha-short }}"
+            BRANCH_NAME="${{ inputs.branchName }}"
+            REF_SHA="${{ inputs.branchName }}.${{ needs.build.outputs.sha-short }}"
             DEPLOYMENT_NAME="${REF_SHA////-}"
             echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
             webServiceImage="${{ needs.build.outputs.image-name }}:sha-${{ needs.build.outputs.sha-short }}"
             echo "webServiceImage=$webServiceImage"
 
-            webServiceContainerAppName='${{ env.BRANCH_NAME }}-web'
+            if [ "$BRANCH_NAME" == "main" ]; then
+              webServiceContainerAppName="main-web"
+            else
+              webServiceContainerAppName="preview-web"
+            fi
             echo "webServiceContainerAppName=$webServiceContainerAppName"
 
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
@@ -121,7 +130,7 @@ jobs:
                   containerRegistry=${{ env.REGISTRY }} \
                   containerRegistryUsername=${{ github.actor }} \
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
-                  branchName='${{ env.BRANCH_NAME }}' \
+                  branchName="$BRANCH_NAME" \
                   workspaceName='shared-log-analytics' \
                   appInsightsName='shared-app-insights' \
                   managedEnvironmentName='shared-env' \

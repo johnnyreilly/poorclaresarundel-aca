@@ -13,6 +13,7 @@ jobs:
     uses: ./.github/workflows/shared-build-and-deploy.yaml
     with:
       deploy: true
+      branchName: ${{ github.head_ref || github.ref_name }}
     secrets: inherit
 
   get-container-app-url:
