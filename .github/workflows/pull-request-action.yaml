@@ -22,6 +22,8 @@ jobs:
         run: |
           branchName=$(gh pr view ${{ github.event.issue.number }} --json "headRefName" --jq ".headRefName" --repo ${{ github.repository }})
           echo "branchName=$branchName" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
 
   build-and-deploy:
     # check if the comment comes from a pull request and contains the required keyword
