@@ -5,6 +5,8 @@ param containerRegistryUsername string
 @secure()
 param containerRegistryPassword string
 
+param branchName string
+
 param workspaceName string
 param appInsightsName string
 param managedEnvironmentName string
@@ -96,19 +98,21 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
       ingress: {
         external: true
         targetPort: 3000
-        customDomains: [
-          // {
-          //     name: 'poorclaresarundel.org'
-          //     certificateId: '/subscriptions/subscription-id/resourceGroups/rg-poor-clares-arundel-aca/providers/Microsoft.App/managedEnvironments/shared-env/certificates/poorclaresarundel.org'
-          //     bindingType: 'SniEnabled'
-          // }
+        customDomains: branchName == 'main'
+          ? [
+              // {
+              //     name: 'poorclaresarundel.org'
+              //     certificateId: '/subscriptions/subscription-id/resourceGroups/rg-poor-clares-arundel-aca/providers/Microsoft.App/managedEnvironments/shared-env/certificates/poorclaresarundel.org'
+              //     bindingType: 'SniEnabled'
+              // }
 
-          {
-            name: 'www.poorclaresarundel.org'
-            certificateId: '${managedEnvironment.id}/certificates/poorclaresarundel.org'
-            bindingType: 'SniEnabled'
-          }
-        ]
+              {
+                name: 'www.poorclaresarundel.org'
+                certificateId: '${managedEnvironment.id}/certificates/poorclaresarundel.org'
+                bindingType: 'SniEnabled'
+              }
+            ]
+          : []
       }
     }
     template: {
