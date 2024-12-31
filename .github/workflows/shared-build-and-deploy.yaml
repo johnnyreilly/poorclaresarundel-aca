@@ -1,3 +1,5 @@
+name: Build and deploy
+
 on:
   workflow_call:
     inputs:
@@ -16,15 +18,11 @@ on:
 env:
   RESOURCE_GROUP: rg-poorclaresarundel
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        services: [{ "imageName": "node-service" }]
     permissions:
       contents: read
       packages: write
@@ -38,7 +36,7 @@ jobs:
       - name: Set sha-short and image-name environment variables
         id: vars
         run: |
-          image_name=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.services.imageName }}" | tr '[:upper:]' '[:lower:]')
+          image_name=$(echo "${{ env.REGISTRY }}/${{ github.repository }}/node-service" | tr '[:upper:]' '[:lower:]')
           echo "image_name=$image_name" >> $GITHUB_OUTPUT
           sha_short=$(echo "$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]')
           echo "sha_short=$sha_short" >> $GITHUB_OUTPUT
