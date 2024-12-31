@@ -7,6 +7,11 @@ on:
     # secrets:
     #   personal_access_token:
     #     required: true
+    # Map the workflow outputs to job outputs
+    outputs:
+      container-app-url:
+        description: "The URL of the deployed container app"
+        value: ${{ jobs.deploy.outputs.container-app-url }}
 
 env:
   RESOURCE_GROUP: rg-poorclaresarundel
@@ -41,7 +46,6 @@ jobs:
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
-        # if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
@@ -69,7 +73,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./
-          #   push: ${{ github.event_name != 'pull_request' }}
           push: ${{ inputs.deploy }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -78,6 +81,8 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.deploy == true
     needs: [build]
+    outputs:
+      container-app-url: ${{ steps.deploy.outputs.CONTAINER_APP_URL }}
     permissions:
       id-token: write
       contents: read
@@ -86,17 +91,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: "AZ CLI login"
+      - name: Azure login
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Deploy bicep
+      - name: Deploy to Azure
+        id: deploy
         uses: azure/CLI@v2
         with:
-          # azcliversion: 2.63.0 # pinning because https://github.com/Azure/cli/issues/165
           inlineScript: |
             REF_SHA="${{ env.BRANCH_NAME }}.${{ needs.build.outputs.sha-short }}"
             DEPLOYMENT_NAME="${REF_SHA////-}"
@@ -132,19 +137,4 @@ jobs:
               --output tsv)
 
             echo "CONTAINER_APP_URL=$CONTAINER_APP_URL"
-
-            # echo "az deployment group show --resource-group '${{ env.RESOURCE_GROUP }}' --name $DEPLOYMENT_NAME"
-            # DEPLOYMENT_OUTPUTS=$(az deployment group show \
-            #   --resource-group ${{ env.RESOURCE_GROUP }} \
-            #   --name $DEPLOYMENT_NAME \
-            #   --query properties.outputs)
-
-            # echo 'convert outputs to variables'
-            # echo $DEPLOYMENT_OUTPUTS | jq -c '. | to_entries[] | [.key, .value.value]' |
-            #   while IFS=$"\n" read -r c; do
-            #     OUTPUT_NAME=$(echo "$c" | jq -r '.[0]')
-            #     OUTPUT_VALUE=$(echo "$c" | jq -r '.[1]')
-            #     echo "setting variable $OUTPUT_NAME=$OUTPUT_VALUE"
-            #     echo "{$OUTPUT_NAME}={$OUTPUT_VALUE}" >> $GITHUB_OUTPUT
-            #     # echo "::set-output name=$OUTPUT_NAME::$OUTPUT_VALUE"
-            #   done # --query properties.outputs.nodeUrl
+            echo "CONTAINER_APP_URL=$CONTAINER_APP_URL" >> $GITHUB_OUTPUT
