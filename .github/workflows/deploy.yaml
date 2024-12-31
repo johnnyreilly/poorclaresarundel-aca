@@ -7,9 +7,9 @@ on:
       - main
     # Publish semver tags as releases.
     tags: ["v*.*.*"]
-  pull_request:
-    branches:
-      - main
+  # pull_request:
+  #   branches:
+  #     - main
   workflow_dispatch:
 
 # env:
@@ -21,6 +21,8 @@ on:
 jobs:
   build-and-deploy:
     uses: ./.github/workflows/shared-build-and-deploy.yaml
+    with:
+      deploy: true
     secrets: inherit
 #   build:
 #     runs-on: ubuntu-latest
