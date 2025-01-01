@@ -7,6 +7,7 @@ export interface IConfig {
     prayerRequestRecipientEmail: string;
     branchName: string;
     gitSha: string;
+    builtAt: string;
 }
 
 const config: IConfig = {
@@ -18,6 +19,7 @@ const config: IConfig = {
     prayerRequestRecipientEmail: process.env.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL ?? 'unknown',
     branchName: process.env.APPSETTINGS_BRANCH_NAME ?? 'unknown',
     gitSha: process.env.APPSETTINGS_GIT_SHA ?? 'unknown',
+    builtAt: process.env.APPSETTINGS_BUILT_AT ?? 'unknown',
 };
 
 export { config };

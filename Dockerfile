@@ -13,6 +13,7 @@ FROM base AS build-client
 
 ARG VITE_BRANCH_NAME="UNKNOWN"
 ARG VITE_GIT_SHA="UNKNOWN"
+ARG VITE_BUILT_AT="UNKNOWN"
 
 WORKDIR /client
 
@@ -20,7 +21,7 @@ COPY src/client/package.json src/client/pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile	
 
 COPY src/client ./
-RUN VITE_BRANCH_NAME=${VITE_BRANCH_NAME} VITE_GIT_SHA=${VITE_GIT_SHA} pnpm run build
+RUN VITE_BRANCH_NAME=${VITE_BRANCH_NAME} VITE_GIT_SHA=${VITE_GIT_SHA} VITE_BUILT_AT=${VITE_BUILT_AT} pnpm run build
 
 ##
 ## IMAGE: build-server
