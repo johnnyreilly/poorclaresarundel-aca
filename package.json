@@ -1,12 +1,11 @@
 {
-  "name": "poor-clares-arundel-koa",
+  "name": "poorclaresarundel",
   "version": "1.0.0",
-  "description": "https://www.poorclaresarundel.org ported to koa",
+  "description": "https://www.poorclaresarundel.org",
   "scripts": {
     "prebuild": "pnpm run clean && pnpm install",
     "build": "run-s build:client build:server",
     "build:client": "cd src/client && pnpm run build",
-    "copy:client": "cd src/server && pnpm run copy:client",
     "build:server": "cd src/server && pnpm run build",
     "clean": "run-s clean:client clean:server",
     "clean:client": "rimraf src/client/dist",
@@ -14,10 +13,9 @@
     "install:client": "cd src/client && pnpm install",
     "install:server": "cd src/server && pnpm install",
     "postinstall": "run-s install:client install:server",
-    "start": "cd src/server && pnpm start",
-    "start:client": "cd src/client && pnpm run dev"
+    "start": "cd src/client && pnpm run dev",
+    "preview": "cd src/server && pnpm run dev"
   },
-  "main": "dist/index.js",
   "repository": "https://github.com/johnnyreilly/poorclaresarundel-aca.git",
   "author": "John Reilly <johnny_reilly@hotmail.com>",
   "license": "MIT",
