@@ -8,7 +8,15 @@
       "label": "pnpm install",
       "command": "pnpm install",
       "options": {
-        "cwd": "${workspaceFolder}/src"
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "server build",
+      "command": "pnpm run dev:build",
+      "options": {
+        "cwd": "${workspaceFolder}/src/server"
       }
     },
     {
@@ -21,7 +29,7 @@
       "dependsOn": ["pnpm install"]
     },
     {
-      "label": "server build",
+      "label": "server build (tsc)",
       "type": "typescript",
       "tsconfig": "src/server/tsconfig.json",
       "problemMatcher": ["$tsc"],

@@ -6,6 +6,7 @@ param containerRegistryUsername string
 param containerRegistryPassword string
 
 param branchName string
+param gitSha string
 
 param workspaceName string
 param appInsightsName string
@@ -141,6 +142,8 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
               name: 'APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL'
               value: APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL
             }
+            { name: 'APPSETTINGS_BRANCH_NAME', value: branchName }
+            { name: 'APPSETTINGS_GIT_SHA', value: gitSha }
           ]
         }
       ]

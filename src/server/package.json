@@ -3,7 +3,11 @@
     "version": "1.0.0",
     "scripts": {
         "build": "tsc",
-        "copy:client": "cpx \"../client/dist/**/*\" client/dist",
+        "dev:build": "pnpm run build && pnpm run client",
+        "dev": "pnpm run dev:build && pnpm start",
+        "client": "pnpm run client:build && pnpm run client:copy",
+        "client:build": "cd ../client && pnpm run build",
+        "client:copy": "cpx \"../client/dist/**/*\" client/dist",
         "lint": "eslint ./src",
         "start": "node dist/index.js",
         "watch": "cross-env NODE_ENV=development nodemon --watch src/**/* -e ts,tsx --exec ts-node src/server/server.ts"

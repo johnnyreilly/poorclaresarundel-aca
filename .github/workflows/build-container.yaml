@@ -15,4 +15,5 @@ jobs:
     uses: ./.github/workflows/shared-build-and-deploy.yaml
     with:
       deploy: false
+      branchName: ${{ github.head_ref || github.ref_name }}
     secrets: inherit
