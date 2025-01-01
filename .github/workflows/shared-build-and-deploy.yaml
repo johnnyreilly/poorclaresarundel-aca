@@ -28,6 +28,7 @@ jobs:
     outputs:
       image-name: ${{ steps.vars.outputs.image_name }}
       sha-short: ${{ steps.vars.outputs.sha_short }}
+      built-at: ${{ steps.vars.outputs.built_at }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -41,6 +42,7 @@ jobs:
           echo "image_name=$image_name" >> $GITHUB_OUTPUT
           sha_short=$(echo "$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]')
           echo "sha_short=$sha_short" >> $GITHUB_OUTPUT
+          echo "built_at=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_OUTPUT
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -79,6 +81,7 @@ jobs:
           build-args: |
             VITE_BRANCH_NAME=${{ inputs.branchName }}
             VITE_GIT_SHA=${{ steps.vars.outputs.sha_short }}
+            VITE_BUILT_AT=${{ steps.vars.outputs.built_at }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -109,6 +112,7 @@ jobs:
         with:
           inlineScript: |
             RESOURCE_GROUP="${{ env.RESOURCE_GROUP }}"
+            BUILT_AT="${{ needs.build.outputs.built-at }}"
             BRANCH_NAME="${{ inputs.branchName }}"
             SHA_SHORT="${{ needs.build.outputs.sha-short }}"
             REF_SHA="${{ inputs.branchName }}.${{ needs.build.outputs.sha-short }}"
@@ -137,6 +141,7 @@ jobs:
                   containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
                   branchName="$BRANCH_NAME" \
                   gitSha="$SHA_SHORT" \
+                  builtAt="$BUILT_AT" \
                   workspaceName='shared-log-analytics' \
                   appInsightsName='shared-app-insights' \
                   managedEnvironmentName='shared-env' \

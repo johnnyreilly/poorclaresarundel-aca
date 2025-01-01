@@ -5,8 +5,8 @@ import { config } from '../config';
 export function statusGET(): Router.IMiddleware<unknown, unknown> {
     return async (ctx, _next) => {
         try {
-            const { branchName, gitSha } = config;
-            ctx.body = { 'branch-name': branchName, 'git-sha': gitSha };
+            const { branchName, gitSha, builtAt } = config;
+            ctx.body = { 'branch-name': branchName, 'git-sha': gitSha, 'built-at': builtAt };
         } catch (exc) {
             console.error(exc instanceof Error ? exc.message : exc);
 
