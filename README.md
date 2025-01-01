@@ -2,14 +2,47 @@
 
 [![Deploy](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml/badge.svg)](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/workflows/deploy.yaml)
 
-Built with Azure Container Apps and deployed here: https://main-web.blackmeadow-04548954.uksouth.azurecontainerapps.io
+Built with Azure Container Apps and deployed here:
 
-Test locally with:
+- https://www.poorclaresarundel.org
+- https://main-web.blackmeadow-04548954.uksouth.azurecontainerapps.io
+
+## Development
+
+### Client app
+
+Run the client app locally with:
 
 ```shell
-cd src/client
 pnpm install
-pnpm run dev
+pnpm start
+```
+
+### Running the server app
+
+Build and run the client app and server app locally with:
+
+```shell
+pnpm install
+pnpm run preview
+```
+
+### Debugging the server app
+
+Debug the server app locally with:
+
+```shell
+pnpm install
+```
+
+Then in VS Code, run the `Debug Server` configuration.
+
+### Running the server app in Docker
+
+Build and run the Docker container locally with:
+
+```shell
+docker compose up --build
 ```
 
 ## What this needs to run in GitHub / Azure

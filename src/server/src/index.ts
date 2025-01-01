@@ -8,8 +8,6 @@ import { config } from './config';
 import { logger } from './logging';
 import { routes } from './routes/index';
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-
 const app = new Koa();
 
 app.use(
@@ -24,11 +22,8 @@ app.use(
 app.use(logger);
 app.use(routes);
 
-const publicPath = isDevelopment
-    ? path.join(__dirname, '..', '..', 'client', 'dist')
-    : path.join(__dirname, '..', 'client', 'dist');
+const publicPath = path.join(__dirname, '..', 'client', 'dist');
 
-const indexHtmlPath = path.join(publicPath, 'index.html');
 app.use(serve(publicPath));
 app.use(async (ctx) => {
     await send(ctx, 'index.html', { root: publicPath });
@@ -37,5 +32,12 @@ app.use(async (ctx) => {
 app.listen(config.port);
 
 console.log(
-    `Server running on port ${config.port}; static files served from ${publicPath}, SPA template from ${indexHtmlPath}`
+    `
+################
+# App started! #
+################
+
+- server running at: http://localhost:${config.port}
+- static files served from: ${publicPath}
+`
 );
