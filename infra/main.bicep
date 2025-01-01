@@ -57,7 +57,8 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource managedEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
+// https://learn.microsoft.com/en-us/azure/templates/microsoft.app/2024-10-02-preview/managedenvironments?pivots=deployment-language-bicep
+resource managedEnvironment 'Microsoft.App/managedEnvironments@2024-10-02-preview' = {
   name: managedEnvironmentName
   location: location
   tags: tags
@@ -67,6 +68,17 @@ resource managedEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
       logAnalyticsConfiguration: {
         customerId: workspace.properties.customerId
         sharedKey: workspace.listKeys().primarySharedKey
+      }
+    }
+    appInsightsConfiguration: {
+      connectionString: appInsights.properties.ConnectionString
+    }
+    openTelemetryConfiguration: {
+      tracesConfiguration: {
+        destinations: ['appInsights']
+      }
+      logsConfiguration: {
+        destinations: ['appInsights']
       }
     }
   }
