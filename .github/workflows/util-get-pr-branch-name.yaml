@@ -1,0 +1,26 @@
+name: Get PR branch name
+
+on:
+  workflow_call:
+    inputs:
+      pullRequestNumber:
+        required: true
+        type: number
+
+    outputs:
+      branchName:
+        description: "The source branch name for the pull request"
+        value: ${{ jobs.get-pr-branch-name.outputs.branchName }}
+
+jobs:
+  get-pr-branch-name:
+    runs-on: ubuntu-latest
+    outputs:
+      branchName: ${{ steps.get-pr-branch-name.outputs.branchName }}
+    steps:
+      - id: get-pr-branch-name
+        run: |
+          branchName=$(gh pr view ${{ inputs.pullRequestNumber }} --json "headRefName" --jq ".headRefName" --repo ${{ github.repository }})
+          echo "branchName=$branchName" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}

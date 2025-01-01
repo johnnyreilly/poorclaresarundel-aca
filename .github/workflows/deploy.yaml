@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-deploy:
-    uses: ./.github/workflows/shared-build-and-deploy.yaml
+    uses: ./.github/workflows/util-build-and-deploy.yaml
     with:
       deploy: true
       branchName: ${{ github.head_ref || github.ref_name }}
@@ -20,4 +20,4 @@ jobs:
   #   runs-on: ubuntu-latest
   #   needs: build-and-deploy
   #   steps:
-  #     - run: echo "container-app-url=${{ needs.build-and-deploy.outputs.container-app-url }}"
+  #     - run: echo "container-app-url=${{ needs.build-and-deploy.outputs.containerAppUrl }}"

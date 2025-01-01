@@ -1,4 +1,4 @@
-name: Shared build and deploy
+name: Build and deploy
 
 on:
   workflow_call:
@@ -11,9 +11,9 @@ on:
         type: string
 
     outputs:
-      container-app-url:
+      containerAppUrl:
         description: "The URL of the deployed container app"
-        value: ${{ jobs.deploy.outputs.container-app-url }}
+        value: ${{ jobs.deploy.outputs.containerAppUrl }}
 
 env:
   RESOURCE_GROUP: rg-poorclaresarundel
@@ -88,7 +88,7 @@ jobs:
     if: inputs.deploy == true
     needs: build
     outputs:
-      container-app-url: ${{ steps.deploy.outputs.CONTAINER_APP_URL }}
+      containerAppUrl: ${{ steps.deploy.outputs.CONTAINER_APP_URL }}
     permissions:
       id-token: write
       contents: read
