@@ -13,7 +13,9 @@ if (config.appInsightsConnectionString) {
     appInsights
         .setup(config.appInsightsConnectionString)
         .setAutoCollectConsole(true, true)
-        .enableWebInstrumentation(true)
+        .setAutoCollectExceptions(true)
+        .setAutoCollectRequests(true)
+        // .enableWebInstrumentation(true) // not being used on the client yet
         .start();
 }
 
