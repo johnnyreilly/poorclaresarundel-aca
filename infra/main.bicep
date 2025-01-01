@@ -152,6 +152,7 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
             { name: 'APPSETTINGS_BRANCH_NAME', value: branchName }
             { name: 'APPSETTINGS_GIT_SHA', value: gitSha }
             { name: 'APPSETTINGS_BUILT_AT', value: builtAt }
+            { name: 'APPLICATIONINSIGHTS_CONNECTION_STRING', value: appInsights.properties.ConnectionString }
           ]
         }
       ]

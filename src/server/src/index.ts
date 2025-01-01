@@ -3,10 +3,15 @@ import helmet from 'koa-helmet';
 import send from 'koa-send';
 import serve from 'koa-static';
 import path from 'path';
+import { setup } from 'applicationinsights';
 
 import { config } from './config';
 import { logger } from './logging';
 import { routes } from './routes/index';
+
+if (config.appInsightsConnectionString) {
+    setup(config.appInsightsConnectionString).start();
+}
 
 const app = new Koa();
 

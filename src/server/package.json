@@ -13,6 +13,7 @@
         "watch": "cross-env NODE_ENV=development nodemon --watch src/**/* -e ts,tsx --exec ts-node src/server/server.ts"
     },
     "dependencies": {
+        "applicationinsights": "^3.4.0",
         "form-data": "^4.0.1",
         "koa": "^2.13.4",
         "koa-body": "^6.0.0",

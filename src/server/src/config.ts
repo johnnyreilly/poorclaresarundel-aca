@@ -8,6 +8,7 @@ export interface IConfig {
     branchName: string;
     gitSha: string;
     builtAt: string;
+    appInsightsConnectionString: string;
 }
 
 const config: IConfig = {
@@ -20,6 +21,7 @@ const config: IConfig = {
     branchName: process.env.APPSETTINGS_BRANCH_NAME ?? 'unknown',
     gitSha: process.env.APPSETTINGS_GIT_SHA ?? 'unknown',
     builtAt: process.env.APPSETTINGS_BUILT_AT ?? 'unknown',
+    appInsightsConnectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING ?? '',
 };
 
 export { config };
