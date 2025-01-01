@@ -81,6 +81,9 @@ jobs:
           push: ${{ inputs.deploy }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            VITE_BRANCH_NAME=${{ inputs.branchName }}
+            VITE_GIT_SHA=${{ steps.vars.outputs.sha_short }}
 
   deploy:
     runs-on: ubuntu-latest
