@@ -10,11 +10,6 @@ on:
         required: true
         type: string
 
-    # secrets:
-    #   personal_access_token:
-    #     required: true
-    # Map the workflow outputs to job outputs
-
     outputs:
       container-app-url:
         description: "The URL of the deployed container app"
@@ -88,7 +83,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: inputs.deploy == true
-    needs: [build]
+    needs: build
     outputs:
       container-app-url: ${{ steps.deploy.outputs.CONTAINER_APP_URL }}
     permissions:
@@ -113,6 +108,7 @@ jobs:
         uses: azure/CLI@v2
         with:
           inlineScript: |
+            RESOURCE_GROUP="${{ env.RESOURCE_GROUP }}"
             BRANCH_NAME="${{ inputs.branchName }}"
             SHA_SHORT="${{ needs.build.outputs.sha-short }}"
             REF_SHA="${{ inputs.branchName }}.${{ needs.build.outputs.sha-short }}"
@@ -131,7 +127,7 @@ jobs:
 
             TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
             az deployment group create \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --resource-group $RESOURCE_GROUP \
               --name "$DEPLOYMENT_NAME" \
               --template-file ./infra/main.bicep \
               --parameters \
@@ -152,7 +148,7 @@ jobs:
                   APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
 
             CONTAINER_APP_URL=$(az containerapp show \
-              --resource-group '${{ env.RESOURCE_GROUP }}' \
+              --resource-group "$RESOURCE_GROUP" \
               --name "$webServiceContainerAppName" \
               --query properties.configuration.ingress.fqdn \
               --output tsv)
