@@ -24,7 +24,7 @@ jobs:
 
   pre-deploy:
     # check if the comment comes from a pull request and contains the command `/deploy`
-    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/deploy')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     runs-on: ubuntu-latest
     steps:
       - run: |
@@ -34,7 +34,7 @@ jobs:
 
   deploy:
     # check if the comment comes from a pull request and contains the command `/deploy`
-    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/deploy')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     needs: [get-pr-branch-name, pre-deploy]
     uses: ./.github/workflows/util-build-and-deploy.yaml
     with:
