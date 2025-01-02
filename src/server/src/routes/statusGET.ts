@@ -5,6 +5,7 @@ import { config } from '../config';
 export function statusGET(): Router.IMiddleware<unknown, unknown> {
     return async (ctx, _next) => {
         try {
+            console.log('statusGET');
             const { branchName, gitSha, builtAt } = config;
             ctx.body = { 'branch-name': branchName, 'git-sha': gitSha, 'built-at': builtAt };
         } catch (exc) {

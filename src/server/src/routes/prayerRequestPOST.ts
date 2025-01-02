@@ -6,6 +6,7 @@ import { config } from '../config';
 
 export function prayerRequestPOST(): Router.IMiddleware<unknown, unknown> {
     return async (ctx, _next) => {
+        console.log('prayerRequestPOST');
         // Invokes the method to send emails given the above data with the helper library
         try {
             const { email, prayFor } = ctx.request.body;
