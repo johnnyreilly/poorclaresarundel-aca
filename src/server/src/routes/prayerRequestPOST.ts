@@ -1,29 +1,46 @@
+import { FastifyInstance } from 'fastify';
 import FormData from 'form-data';
-import Router from 'koa-router';
-import Mailgun from 'mailgun.js';
+import mgjs from 'mailgun.js';
 
-import { config } from '../config';
+import { config } from '../config.js';
 
-export function prayerRequestPOST(): Router.IMiddleware<unknown, unknown> {
-    return async (ctx, _next) => {
-        console.log('prayerRequestPOST');
+export interface IPrayerRequest {
+    email: string;
+    prayFor: string;
+}
+
+export function prayerRequestPOST(fastify: FastifyInstance) {
+    fastify.post<{ Body: IPrayerRequest }>('/api/prayer-request', async (request, reply) => {
         // Invokes the method to send emails given the above data with the helper library
         try {
-            const { email, prayFor } = ctx.request.body;
+            const { email, prayFor } = request.body;
+
+            // console.log('email:', email);
+            // console.log('prayFor:', prayFor);
 
             if (!config.apiKey || !config.domain) {
-                throw new Error('APPSETTINGS_API_KEY and / or APPSETTINGS_DOMAIN not configured');
+                console.error('APPSETTINGS_API_KEY and / or APPSETTINGS_DOMAIN not configured');
+                reply.status(500);
+                return {
+                    success: false,
+                    text: 'Your prayer request has not been sent - please try again later.',
+                };
             }
 
             if (!config.prayerRequestFromEmail || !config.prayerRequestRecipientEmail) {
-                throw new Error(
+                console.error(
                     'APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL and / or APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL not configured'
                 );
+                reply.status(500);
+                return {
+                    success: false,
+                    text: 'Your prayer request has not been sent - please try again later.',
+                };
             }
 
             // We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails
             // const mailgun = new Mailgun({ apiKey, domain });
-            const mailgun = new Mailgun(FormData);
+            const mailgun = new mgjs.default.default(FormData);
             const mg = mailgun.client({ username: 'api', key: config.apiKey });
 
             const prayerRequest = {
@@ -73,14 +90,14 @@ Your Poor Clare sisters, Arundel.`;
             // await mailgun.messages().send(reassuringResponse);
             await mg.messages.create(config.domain, reassuringResponse);
 
-            ctx.body = { ok: true, text: 'Thanks for sending your prayer request - we will pray.' };
+            return { ok: true, text: 'Thanks for sending your prayer request - we will pray.' };
         } catch (exc) {
             console.error(exc instanceof Error ? exc.message : exc);
 
-            ctx.body = {
+            return {
                 success: false,
                 text: `Your prayer request has not been sent - please try mailing: ${config.prayerRequestFromEmail}`,
             };
         }
-    };
+    });
 }
