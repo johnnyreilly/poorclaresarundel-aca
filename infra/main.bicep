@@ -36,7 +36,7 @@ resource workspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
     sku: {
       name: 'PerGB2018'
     }
-    retentionInDays: 30
+    retentionInDays: 14
     workspaceCapping: {}
   }
 }
@@ -50,7 +50,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
     Application_Type: 'web'
     Flow_Type: 'Bluefield'
     WorkspaceResourceId: workspace.id
-    RetentionInDays: 30
+    RetentionInDays: 14
     IngestionMode: 'LogAnalytics'
     publicNetworkAccessForIngestion: 'Enabled'
     publicNetworkAccessForQuery: 'Enabled'

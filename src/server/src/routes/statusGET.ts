@@ -1,20 +1,20 @@
-import Router from 'koa-router';
+import { FastifyInstance } from 'fastify';
 
-import { config } from '../config';
+import { config } from '../config.js';
 
-export function statusGET(): Router.IMiddleware<unknown, unknown> {
-    return async (ctx, _next) => {
+export function statusGET(fastify: FastifyInstance) {
+    fastify.get('/api/status', async (_request, reply) => {
         try {
             console.log('statusGET');
             const { branchName, gitSha, builtAt } = config;
-            ctx.body = { 'branch-name': branchName, 'git-sha': gitSha, 'built-at': builtAt };
+            return { 'branch-name': branchName, 'git-sha': gitSha, 'built-at': builtAt };
         } catch (exc) {
             console.error(exc instanceof Error ? exc.message : exc);
 
-            ctx.status = 500;
-            ctx.body = {
+            reply.status(500);
+            return {
                 text: `There is a problem with the server. Please try again later.`,
             };
         }
-    };
+    });
 }

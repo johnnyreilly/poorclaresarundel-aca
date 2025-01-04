@@ -1,13 +1,16 @@
-import Koa from 'koa';
-import helmet from 'koa-helmet';
-import send from 'koa-send';
-import serve from 'koa-static';
-import path from 'path';
-import * as appInsights from 'applicationinsights';
+import Fastify, { FastifyInstance } from 'fastify';
+import fastifyStatic from '@fastify/static';
+import helmet from '@fastify/helmet';
 
-import { config } from './config';
-import { logger } from './logging';
-import { routes } from './routes/index';
+import path from 'path';
+import appInsights from 'applicationinsights';
+import { fileURLToPath } from 'url';
+
+import { config } from './config.js';
+import { routes } from './routes/index.js';
+import { fastifyRegisterAppInsights } from './fastifyRegisterAppInsights.js';
+
+let client: appInsights.TelemetryClient | undefined;
 
 if (config.appInsightsConnectionString) {
     appInsights
@@ -17,38 +20,63 @@ if (config.appInsightsConnectionString) {
         .setAutoCollectRequests(true)
         // .enableWebInstrumentation(true) // not being used on the client yet
         .start();
+
+    client = appInsights.defaultClient;
 }
 
-const app = new Koa();
+export const fastify: FastifyInstance = Fastify({
+    logger: true,
+});
 
-app.use(
-    helmet.contentSecurityPolicy({
+fastifyRegisterAppInsights(fastify, client);
+
+fastify.register(helmet, {
+    contentSecurityPolicy: {
         useDefaults: true,
         directives: {
             scriptSrc: ["'self'", "'unsafe-inline'", 'storage.googleapis.com', 'www.google-analytics.com'],
             frameSrc: ['www.youtube.com', 'www.youtube-nocookie.com'],
         },
-    })
-);
-app.use(logger);
-app.use(routes);
+    },
+});
+
+routes(fastify);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const publicPath = path.join(__dirname, '..', 'client', 'dist');
 
-app.use(serve(publicPath));
-app.use(async (ctx) => {
-    await send(ctx, 'index.html', { root: publicPath });
+fastify.register(fastifyStatic, {
+    root: publicPath,
+    // prefix: '/public/',
 });
 
-app.listen(config.port);
+fastify.setNotFoundHandler((_req, res) => {
+    res.sendFile('index.html');
+});
 
-console.log(
-    `
-################
-# App started! #
-################
+async function start() {
+    try {
+        await fastify.listen({
+            port: config.port,
+            host: '0.0.0.0', // necessary to run in Docker https://fastify.dev/docs/latest/Guides/Getting-Started/#note
+        });
 
-- server running at: http://localhost:${config.port}
+        const address = fastify.server.address();
+        const port = typeof address === 'string' ? address : address?.port;
+
+        console.log(
+            `# App started! #
+- server running at: http://localhost:${port}
 - static files served from: ${publicPath}
 `
-);
+        );
+    } catch (err) {
+        console.error(err);
+        fastify.log.error(err);
+        process.exit(1);
+    }
+}
+
+start();
