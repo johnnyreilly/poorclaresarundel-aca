@@ -36,7 +36,7 @@ resource workspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
     sku: {
       name: 'PerGB2018'
     }
-    retentionInDays: 14
+    retentionInDays: 30
     workspaceCapping: {}
   }
 }
