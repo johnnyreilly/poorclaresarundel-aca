@@ -1,5 +1,6 @@
+import { FastifyInstance, FastifyPluginOptions } from 'fastify';
+import fp from 'fastify-plugin';
 import appInsights from 'applicationinsights';
-import { FastifyInstance } from 'fastify';
 
 // based on https://github.com/microsoft/ApplicationInsights-node.js/issues/627#issuecomment-2194527018
 declare module 'fastify' {
@@ -8,11 +9,13 @@ declare module 'fastify' {
     }
 }
 
-export function fastifyRegisterAppInsights(fastify: FastifyInstance, client?: appInsights.TelemetryClient) {
-    if (!client) {
+export const appInsightsPlugin = fp(async (fastify: FastifyInstance, options: FastifyPluginOptions) => {
+    if (!options.client) {
         console.log('App Insights not configured');
         return;
     }
+
+    const client: appInsights.TelemetryClient = options.client;
 
     fastify.addHook('onRequest', async (request, _reply) => {
         const start = Date.now();
@@ -38,4 +41,4 @@ export function fastifyRegisterAppInsights(fastify: FastifyInstance, client?: ap
             },
         });
     });
-}
+});

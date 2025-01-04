@@ -23,6 +23,9 @@ importers:
       fastify:
         specifier: ^5.2.0
         version: 5.2.0
+      fastify-plugin:
+        specifier: ^5.0.1
+        version: 5.0.1
       form-data:
         specifier: ^4.0.1
         version: 4.0.1

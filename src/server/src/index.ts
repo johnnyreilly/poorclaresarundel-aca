@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 
 import { config } from './config.js';
 import { routes } from './routes/index.js';
-import { fastifyRegisterAppInsights } from './fastifyRegisterAppInsights.js';
+import { appInsightsPlugin } from './appInsightsPlugin.js';
 
 let client: appInsights.TelemetryClient | undefined;
 
@@ -28,7 +28,7 @@ export const fastify: FastifyInstance = Fastify({
     logger: true,
 });
 
-fastifyRegisterAppInsights(fastify, client);
+fastify.register(appInsightsPlugin, { client });
 
 fastify.register(helmet, {
     contentSecurityPolicy: {
