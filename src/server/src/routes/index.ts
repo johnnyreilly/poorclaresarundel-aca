@@ -1,8 +1,8 @@
 import { koaBody } from 'koa-body';
 import Router from 'koa-router';
 
-import { prayerRequestPOST } from './prayerRequestPOST';
-import { statusGET } from './statusGET';
+import { prayerRequestPOST } from './prayerRequestPOST.js';
+import { statusGET } from './statusGET.js';
 
 const router = new Router();
 

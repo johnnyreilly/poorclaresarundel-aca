@@ -1,13 +1,16 @@
 import Koa from 'koa';
 import helmet from 'koa-helmet';
+// import koaLogger from 'koa-logger';
 import send from 'koa-send';
 import serve from 'koa-static';
-import path from 'path';
+import * as path from 'path';
 import * as appInsights from 'applicationinsights';
 
-import { config } from './config';
-import { logger } from './logging';
-import { routes } from './routes/index';
+import { config } from './config.js';
+import { logger } from './logging.js';
+import { routes } from './routes/index.js';
+
+// const stripAnsi = await import('strip-ansi');
 
 if (config.appInsightsConnectionString) {
     appInsights
@@ -21,8 +24,9 @@ if (config.appInsightsConnectionString) {
 
 const app = new Koa();
 
+// app.use(koaLogger((text) => stripAnsi(text)));
 app.use(
-    helmet.contentSecurityPolicy({
+    helmet.default.contentSecurityPolicy({
         useDefaults: true,
         directives: {
             scriptSrc: ["'self'", "'unsafe-inline'", 'storage.googleapis.com', 'www.google-analytics.com'],
@@ -33,7 +37,7 @@ app.use(
 app.use(logger);
 app.use(routes);
 
-const publicPath = path.join(__dirname, '..', 'client', 'dist');
+const publicPath = path.join(path.dirname(import.meta.url), '..', 'client', 'dist');
 
 app.use(serve(publicPath));
 app.use(async (ctx) => {

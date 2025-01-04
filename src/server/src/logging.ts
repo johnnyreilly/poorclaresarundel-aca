@@ -1,5 +1,5 @@
 import * as Koa from 'koa';
-import { config } from './config';
+import { config } from './config.js';
 
 interface ILogData {
     method: string;

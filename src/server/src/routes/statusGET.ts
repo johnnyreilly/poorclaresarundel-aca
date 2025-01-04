@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 
-import { config } from '../config';
+import { config } from '../config.js';
 
 export function statusGET(): Router.IMiddleware<unknown, unknown> {
     return async (ctx, _next) => {

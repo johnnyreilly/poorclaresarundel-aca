@@ -1,8 +1,8 @@
 import FormData from 'form-data';
 import Router from 'koa-router';
-import Mailgun from 'mailgun.js';
+import mgjs from 'mailgun.js';
 
-import { config } from '../config';
+import { config } from '../config.js';
 
 export function prayerRequestPOST(): Router.IMiddleware<unknown, unknown> {
     return async (ctx, _next) => {
@@ -23,7 +23,7 @@ export function prayerRequestPOST(): Router.IMiddleware<unknown, unknown> {
 
             // We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails
             // const mailgun = new Mailgun({ apiKey, domain });
-            const mailgun = new Mailgun(FormData);
+            const mailgun = new mgjs.default(FormData);
             const mg = mailgun.client({ username: 'api', key: config.apiKey });
 
             const prayerRequest = {
