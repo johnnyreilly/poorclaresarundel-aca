@@ -50,7 +50,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
     Application_Type: 'web'
     Flow_Type: 'Bluefield'
     WorkspaceResourceId: workspace.id
-    RetentionInDays: 14
+    RetentionInDays: 30
     IngestionMode: 'LogAnalytics'
     publicNetworkAccessForIngestion: 'Enabled'
     publicNetworkAccessForQuery: 'Enabled'
