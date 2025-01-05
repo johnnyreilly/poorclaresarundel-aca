@@ -16,6 +16,7 @@ export const appInsightsPlugin = fp(async (fastify: FastifyInstance, options: Fa
     }
 
     const client: appInsights.TelemetryClient = options.client;
+    const urlsToIgnore = options.urlsToIgnore || [];
 
     fastify.addHook('onRequest', async (request, _reply) => {
         const start = Date.now();
@@ -23,7 +24,7 @@ export const appInsightsPlugin = fp(async (fastify: FastifyInstance, options: Fa
     });
 
     fastify.addHook('onResponse', async (request, reply) => {
-        if (request.raw.url === '/') return; // Ignore health check
+        if (urlsToIgnore.includes(request.raw.url)) return;
 
         const duration = Date.now() - request.app.start;
         client.trackRequest({

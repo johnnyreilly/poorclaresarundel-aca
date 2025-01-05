@@ -28,7 +28,7 @@ export const fastify: FastifyInstance = Fastify({
     logger: true,
 });
 
-fastify.register(appInsightsPlugin, { client });
+fastify.register(appInsightsPlugin, { client, urlsToIgnore: ['/'] });
 
 fastify.register(helmet, {
     contentSecurityPolicy: {
@@ -38,6 +38,12 @@ fastify.register(helmet, {
             frameSrc: ['www.youtube.com', 'www.youtube-nocookie.com'],
         },
     },
+});
+
+fastify.addHook('onRequest', async (request, reply) => {
+    if (request.url.includes('wp-includes') || request.url.includes('wp-admin')) {
+        reply.code(404).send('Not Found');
+    }
 });
 
 routes(fastify);
