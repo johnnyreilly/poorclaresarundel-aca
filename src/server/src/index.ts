@@ -13,12 +13,18 @@ import { appInsightsPlugin } from './appInsightsPlugin.js';
 let client: appInsights.TelemetryClient | undefined;
 
 if (config.appInsightsConnectionString) {
+    // https://github.com/microsoft/applicationinsights-node.js?tab=readme-ov-file#configuration
     appInsights
         .setup(config.appInsightsConnectionString)
-        .setAutoCollectConsole(true, true)
-        .setAutoCollectExceptions(true)
         .setAutoCollectRequests(true)
-        // .enableWebInstrumentation(true) // not being used on the client yet
+        .setAutoCollectPerformance(true, true)
+        .setAutoCollectExceptions(true)
+        .setAutoCollectDependencies(true)
+        .setAutoCollectConsole(true, true) // this will enable console logging
+        .setAutoCollectPreAggregatedMetrics(true)
+        .setSendLiveMetrics(false)
+        .setInternalLogging(false, true)
+        .enableWebInstrumentation(false)
         .start();
 
     client = appInsights.defaultClient;
