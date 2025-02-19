@@ -18,8 +18,17 @@ export function Footer() {
                     <a href="mailto:arundel.poorclares@gmail.com">
                         <FontAwesomeIcon icon={faEnvelope} /> arundel.poorclares@gmail.com
                     </a>{' '}
+                    |{' '}
                     <a href="https://www.facebook.com/poorclaresarundel">
                         <FontAwesomeIcon icon={faFacebook} /> Facebook
+                    </a>{' '}
+                    |{' '}
+                    <a target="_blank" href="/safeguarding-statement.docx">
+                        safeguarding statement
+                    </a>{' '}
+                    |{' '}
+                    <a target="_blank" href="/safeguarding-policy-and-procedures-2025.docx">
+                        safeguarding policy
                     </a>
                 </p>
             </div>
