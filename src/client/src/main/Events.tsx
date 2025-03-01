@@ -81,11 +81,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
                 </li>
 
                 <li>
-                    <b>7.30 pm</b> Compline
-                </li>
-
-                <li>
-                    <b>8 pm</b> Night Prayer
+                    <b>7.30 pm</b> Compline or Night Prayer
                 </li>
             </ul>
 
