@@ -62,12 +62,12 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
                 2.15 back to work with a tea break at 3.30 and a short prayer together in the refectory at 4.00 to
                 sanctify our work
             </li>
+ 
+            <li>5.30 Evening Prayer</li>
 
-            <li>5.50 Evening Prayer</li>
+            <li>6pm Supper, followed by an hour of personal prayer time.</li>
 
-            <li>6.30 Supper followed by an hour of personal prayer time until 8 pm.</li>
-
-            <li>8.00 Compline or Night Prayer, which closes the day.</li>
+            <li>7.30 Compline, or Night Prayer, which closes the day.</li>
         </ul>
 
         <p>

@@ -73,11 +73,15 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
                 </li>
 
                 <li>
-                    <b>5.50 pm</b> Weekdays Evening Prayer (except Wednesday)
+                    <b>5.30 pm</b> Weekdays Evening Prayer (except Wednesday)
                 </li>
 
                 <li>
-                    <b>8 pm</b> Night Prayer
+                    <b>6 pm</b> Supper
+                </li>
+
+                <li>
+                    <b>7.30 pm</b> Compline or Night Prayer
                 </li>
             </ul>
 
