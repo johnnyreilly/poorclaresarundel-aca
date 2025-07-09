@@ -30,6 +30,10 @@ export function Footer() {
                     <a target="_blank" href="/safeguarding-policy-and-procedures-2025.docx">
                         safeguarding policy
                     </a>
+                    |{' '}
+                    <a target="_blank" href="/poor-clares-arundel-audit.pdf">
+                        safeguarding report
+                    </a>
                 </p>
             </div>
         </footer>
