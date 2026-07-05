@@ -17,7 +17,7 @@ ARG VITE_BUILT_AT="UNKNOWN"
 
 WORKDIR /client
 
-COPY src/client/package.json src/client/pnpm-lock.yaml ./
+COPY src/client/package.json src/client/pnpm-lock.yaml src/client/pnpm-workspace.yaml ./
 RUN pnpm i --frozen-lockfile	
 
 COPY src/client ./
@@ -29,7 +29,7 @@ RUN VITE_BRANCH_NAME=${VITE_BRANCH_NAME} VITE_GIT_SHA=${VITE_GIT_SHA} VITE_BUILT
 FROM base AS build-server
 WORKDIR /server
 
-COPY src/server/package.json src/server/pnpm-lock.yaml ./
+COPY src/server/package.json src/server/pnpm-lock.yaml src/server/pnpm-workspace.yaml ./
 RUN pnpm i --frozen-lockfile	
 
 COPY src/server ./
