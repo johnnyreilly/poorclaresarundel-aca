@@ -1,0 +1,3 @@
+allowBuilds:
+  applicationinsights-native-metrics: true
+  protobufjs: true

@@ -73,6 +73,12 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             </CardBody>
         </Card>
 
+        <h4>Learn more about us</h4>
+
+        <p>Here is a video about our community:</p>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/tC0CK9XY4gU?si=mP_XJb5CuxHHIjlw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+
         <h4>Where We Live</h4>
 
         <p>
