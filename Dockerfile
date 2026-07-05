@@ -44,7 +44,7 @@ ENV NODE_ENV production
 WORKDIR /app
 COPY --from=build-client client/dist ./client/dist
 COPY --from=build-server server/dist ./dist
-COPY --from=build-server server/package.json server/pnpm-lock.yaml ./
+COPY --from=build-server server/package.json server/pnpm-lock.yaml server/pnpm-workspace.yaml ./
 RUN pnpm i --frozen-lockfile --prod
 
 EXPOSE 3000
