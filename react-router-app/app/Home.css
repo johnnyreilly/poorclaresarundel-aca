@@ -1,0 +1,10 @@
+main img
+{
+    max-height: 400px;
+    transition: 0.20s ease-out;
+}
+
+    main img:hover
+    {
+        transform: scale(0.9);
+    }
