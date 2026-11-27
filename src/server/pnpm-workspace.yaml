@@ -1,3 +1,5 @@
 allowBuilds:
   applicationinsights-native-metrics: true
   protobufjs: true
+overrides:
+  '@opentelemetry/api': ~1.9.0
