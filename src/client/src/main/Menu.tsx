@@ -15,7 +15,6 @@ import {
 import { Link } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import communityFoundationsHollington from '../static/communityFoundationsHollington.pdf';
 import tripAroundGuestHouse from '../static/tripAroundGuestHouse.pdf';
 import communityTripAroundHouse from '../static/communityTripAroundHouse.pdf';
 import { ourPrayerPath } from './our-life/OurPrayer';
@@ -145,12 +144,9 @@ export function Menu() {
                                         <Link to={vocationPath}>Vocation</Link>
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem header>Foundations</DropdownItem>
+                                    <DropdownItem header>Foundation</DropdownItem>
                                     <DropdownItem>
                                         <Link to={kenyaPath}>Kenya</Link>
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <a href={communityFoundationsHollington}>Hollington</a>
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

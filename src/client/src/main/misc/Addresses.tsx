@@ -44,14 +44,6 @@ export const Addresses: React.FC<React.PropsWithChildren<unknown>> = _props => (
             HR2 8PS
         </address>
 
-        <h4>Hollington</h4>
-        <address>
-            <strong>Poor Clare Community</strong><br />
-            22 Upper Church Road<br />
-            St Leonards-on-Sea<br />
-            East Sussex TN37 7AS
-        </address>
-
         <h4>Humbie</h4>
         <address>
             <strong>Mount Alvernia</strong><br />
