@@ -12,7 +12,6 @@ import bulwell from './images/Bulwell.jpg';
 import community2018 from './images/Community2018.webp';
 import community2024 from './images/Community2024.webp';
 import communityTripAroundHouse from '../../static/communityTripAroundHouse.pdf';
-import communityFoundationsHollington from '../../static/communityFoundationsHollington.pdf';
 
 export const arundelPath = '/community-arundel';
 
@@ -168,10 +167,10 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
         </p>
 
         <p>
-            You can find more about Hollington{' '}
-            <a href={communityFoundationsHollington} target="_self">
-                here
-            </a>
+            As the years passed there were a number of changes in the community, the need for the Friars to return to
+            their own communities being the first of these. In 2026, with sadness but recognising the realities of the
+            aging process, it was decided that the time had come to close the community. In late November 2026 the last
+            sister left our house in Hollington.
         </p>
 
         <h4>2010 - 2011</h4>
