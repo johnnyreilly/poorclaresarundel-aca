@@ -31,7 +31,7 @@ jobs:
       built-at: ${{ steps.vars.outputs.built_at }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.branchName }}
 
@@ -95,7 +95,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.branchName }}
 
