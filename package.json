@@ -19,6 +19,7 @@
   "repository": "https://github.com/johnnyreilly/poorclaresarundel-aca.git",
   "author": "John Reilly <johnny_reilly@hotmail.com>",
   "license": "MIT",
+  "packageManager": "pnpm@11.29.0",
   "dependencies": {},
   "devDependencies": {
     "concurrently": "10.0.7",

@@ -1,4 +1,4 @@
-name: Client
+name: Build and lint
 
 on:
   push:
@@ -18,32 +18,37 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  client_build_and_test_job:
+  build_and_lint:
+    # keeps the check names "client build and test ⚙️" and "server build and test ⚙️"
+    name: ${{ matrix.project }} build and test ⚙️
     runs-on: ubuntu-latest
-    name: client build and test ⚙️
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [client, server]
+    defaults:
+      run:
+        working-directory: src/${{ matrix.project }}
     steps:
       - name: Checkout 📥
         uses: actions/checkout@v7
 
+      # the pnpm version comes from "packageManager" in the root package.json
       - uses: pnpm/action-setup@v6
-        with:
-          version: 11
 
+      # the Node.js version comes from .nvmrc
       - name: Setup Node.js 🔧
         uses: actions/setup-node@v7
         with:
-          node-version: "26"
+          node-version-file: .nvmrc
           cache: "pnpm"
-          cache-dependency-path: src/client/pnpm-lock.yaml
+          cache-dependency-path: src/${{ matrix.project }}/pnpm-lock.yaml
 
-      - name: client install
-        working-directory: src/client
+      - name: install
         run: pnpm i --frozen-lockfile
 
-      - name: client build
-        working-directory: src/client
+      - name: build
         run: pnpm run build
 
-      - name: client lint
-        working-directory: src/client
+      - name: lint
         run: pnpm run lint
