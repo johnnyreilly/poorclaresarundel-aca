@@ -22,7 +22,7 @@ The root, `src/client` and `src/server` are three separate pnpm projects, each w
 
 ## Commands
 
-Use pnpm (Node 22). A root `pnpm install` also installs the client and server.
+Use pnpm 11 (Node 26). A root `pnpm install` also installs the client and server.
 
 ```shell
 pnpm install          # root, then client and server via postinstall
