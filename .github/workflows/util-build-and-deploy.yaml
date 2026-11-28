@@ -31,7 +31,7 @@ jobs:
       built-at: ${{ steps.vars.outputs.built_at }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.branchName }}
 
@@ -95,12 +95,12 @@ jobs:
       packages: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.branchName }}
 
       - name: Azure login
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -108,7 +108,7 @@ jobs:
 
       - name: Deploy to Azure
         id: deploy
-        uses: azure/CLI@v2
+        uses: azure/CLI@v3
         with:
           inlineScript: |
             RESOURCE_GROUP="${{ env.RESOURCE_GROUP }}"
