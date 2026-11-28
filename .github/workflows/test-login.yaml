@@ -1,10 +1,7 @@
 name: Test logins
 on:
+  # diagnostic only: run by hand to check the Azure and registry logins
   workflow_dispatch:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
 
 permissions:
   id-token: write

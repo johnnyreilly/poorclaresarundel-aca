@@ -108,55 +108,60 @@ jobs:
 
       - name: Deploy to Azure
         id: deploy
-        uses: azure/CLI@v3
-        with:
-          inlineScript: |
-            RESOURCE_GROUP="${{ env.RESOURCE_GROUP }}"
-            BUILT_AT="${{ needs.build.outputs.built-at }}"
-            BRANCH_NAME="${{ inputs.branchName }}"
-            SHA_SHORT="${{ needs.build.outputs.sha-short }}"
-            REF_SHA="${{ inputs.branchName }}.${{ needs.build.outputs.sha-short }}"
-            DEPLOYMENT_NAME="${REF_SHA////-}"
-            echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
+        env:
+          BRANCH_NAME: ${{ inputs.branchName }}
+          BUILT_AT: ${{ needs.build.outputs.built-at }}
+          SHA_SHORT: ${{ needs.build.outputs.sha-short }}
+          IMAGE_NAME: ${{ needs.build.outputs.image-name }}
+          REGISTRY_USERNAME: ${{ github.actor }}
+          REGISTRY_PASSWORD: ${{ secrets.PACKAGES_TOKEN }}
+          APPSETTINGS_API_KEY: ${{ secrets.APPSETTINGS_API_KEY }}
+          APPSETTINGS_DOMAIN: ${{ vars.APPSETTINGS_DOMAIN }}
+          APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL: ${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}
+          APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL: ${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}
+        run: |
+          REF_SHA="$BRANCH_NAME.$SHA_SHORT"
+          DEPLOYMENT_NAME="${REF_SHA////-}"
+          echo "DEPLOYMENT_NAME=$DEPLOYMENT_NAME"
 
-            webServiceImage="${{ needs.build.outputs.image-name }}:sha-$SHA_SHORT"
-            echo "webServiceImage=$webServiceImage"
+          webServiceImage="$IMAGE_NAME:sha-$SHA_SHORT"
+          echo "webServiceImage=$webServiceImage"
 
-            if [ "$BRANCH_NAME" == "main" ]; then
-              webServiceContainerAppName="main-web"
-            else
-              webServiceContainerAppName="preview-web"
-            fi
-            echo "webServiceContainerAppName=$webServiceContainerAppName"
+          if [ "$BRANCH_NAME" == "main" ]; then
+            webServiceContainerAppName="main-web"
+          else
+            webServiceContainerAppName="preview-web"
+          fi
+          echo "webServiceContainerAppName=$webServiceContainerAppName"
 
-            TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
-            az deployment group create \
-              --resource-group $RESOURCE_GROUP \
-              --name "$DEPLOYMENT_NAME" \
-              --template-file ./infra/main.bicep \
-              --parameters \
-                  webServiceImage="$webServiceImage" \
-                  containerRegistry=${{ env.REGISTRY }} \
-                  containerRegistryUsername=${{ github.actor }} \
-                  containerRegistryPassword=${{ secrets.PACKAGES_TOKEN }} \
-                  branchName="$BRANCH_NAME" \
-                  gitSha="$SHA_SHORT" \
-                  builtAt="$BUILT_AT" \
-                  workspaceName='shared-log-analytics' \
-                  appInsightsName='shared-app-insights' \
-                  managedEnvironmentName='shared-env' \
-                  webServiceContainerAppName="$webServiceContainerAppName" \
-                  tags="$TAGS" \
-                  APPSETTINGS_API_KEY="${{ secrets.APPSETTINGS_API_KEY }}" \
-                  APPSETTINGS_DOMAIN="${{ vars.APPSETTINGS_DOMAIN }}" \
-                  APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}" \
-                  APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="${{ vars.APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL }}"
+          TAGS='{"owner":"johnnyreilly", "email":"johnny_reilly@hotmail.com"}'
+          az deployment group create \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$DEPLOYMENT_NAME" \
+            --template-file ./infra/main.bicep \
+            --parameters \
+                webServiceImage="$webServiceImage" \
+                containerRegistry="$REGISTRY" \
+                containerRegistryUsername="$REGISTRY_USERNAME" \
+                containerRegistryPassword="$REGISTRY_PASSWORD" \
+                branchName="$BRANCH_NAME" \
+                gitSha="$SHA_SHORT" \
+                builtAt="$BUILT_AT" \
+                workspaceName='shared-log-analytics' \
+                appInsightsName='shared-app-insights' \
+                managedEnvironmentName='shared-env' \
+                webServiceContainerAppName="$webServiceContainerAppName" \
+                tags="$TAGS" \
+                APPSETTINGS_API_KEY="$APPSETTINGS_API_KEY" \
+                APPSETTINGS_DOMAIN="$APPSETTINGS_DOMAIN" \
+                APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL="$APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL" \
+                APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL="$APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL"
 
-            CONTAINER_APP_URL=$(az containerapp show \
-              --resource-group "$RESOURCE_GROUP" \
-              --name "$webServiceContainerAppName" \
-              --query properties.configuration.ingress.fqdn \
-              --output tsv)
+          CONTAINER_APP_URL=$(az containerapp show \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$webServiceContainerAppName" \
+            --query properties.configuration.ingress.fqdn \
+            --output tsv)
 
-            echo "CONTAINER_APP_URL=$CONTAINER_APP_URL"
-            echo "CONTAINER_APP_URL=$CONTAINER_APP_URL" >> $GITHUB_OUTPUT
+          echo "CONTAINER_APP_URL=$CONTAINER_APP_URL"
+          echo "CONTAINER_APP_URL=$CONTAINER_APP_URL" >> "$GITHUB_OUTPUT"
