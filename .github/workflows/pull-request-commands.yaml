@@ -56,7 +56,13 @@ jobs:
     with:
       deploy: true
       branchName: ${{ needs.get-pr-branch-name.outputs.branchName }}
-    secrets: inherit
+    # only the secrets that the deploy job uses
+    secrets:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+      APPSETTINGS_API_KEY: ${{ secrets.APPSETTINGS_API_KEY }}
 
   post-deploy:
     runs-on: ubuntu-latest

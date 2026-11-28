@@ -10,6 +10,19 @@ on:
         required: true
         type: string
 
+    # used by the deploy job only; a caller that does not deploy passes none
+    secrets:
+      AZURE_CLIENT_ID:
+        required: false
+      AZURE_TENANT_ID:
+        required: false
+      AZURE_SUBSCRIPTION_ID:
+        required: false
+      PACKAGES_TOKEN:
+        required: false
+      APPSETTINGS_API_KEY:
+        required: false
+
     outputs:
       containerAppUrl:
         description: "The URL of the deployed container app"
