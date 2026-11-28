@@ -16,6 +16,7 @@ jobs:
       startsWith(github.event.comment.body, '/deploy') &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - run: echo "/deploy requested by $COMMENT_AUTHOR"
         env:
@@ -33,6 +34,7 @@ jobs:
   pre-deploy:
     needs: check-command
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       issues: write
       pull-requests: write
@@ -58,6 +60,7 @@ jobs:
 
   post-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     needs: deploy
     permissions:
       issues: write
@@ -69,3 +72,21 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.issue.number }}
           CONTAINER_APP_URL: ${{ needs.deploy.outputs.containerAppUrl }}
+
+  # say so on the pull request when the preview deploy did not succeed
+  deploy-failed:
+    if: ${{ always() && needs.check-command.result == 'success' && needs.deploy.result != 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [check-command, deploy]
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - run: |
+          gh issue comment "$PR_NUMBER" --body "Preview environment was not deployed: the [run]($RUN_URL) ended as $DEPLOY_RESULT." --repo "$GITHUB_REPOSITORY"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}

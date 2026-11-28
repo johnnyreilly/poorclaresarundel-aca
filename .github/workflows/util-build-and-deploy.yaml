@@ -22,11 +22,13 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
       packages: write
     outputs:
       image-name: ${{ steps.vars.outputs.image_name }}
+      sha: ${{ steps.vars.outputs.sha }}
       sha-short: ${{ steps.vars.outputs.sha_short }}
       built-at: ${{ steps.vars.outputs.built_at }}
     steps:
@@ -38,12 +40,14 @@ jobs:
       - name: Set sha-short and image-name environment variables
         id: vars
         run: |
-          image_name=$(echo "${{ env.REGISTRY }}/${{ github.repository }}/node-service" | tr '[:upper:]' '[:lower:]')
-          echo "image_name=$image_name" >> $GITHUB_OUTPUT
+          image_name=$(echo "$REGISTRY/$GITHUB_REPOSITORY/node-service" | tr '[:upper:]' '[:lower:]')
+          echo "image_name=$image_name" >> "$GITHUB_OUTPUT"
+          # the commit that is built, so that the deploy job deploys the same one
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           # 7 characters, to match the `type=sha` tag that docker/metadata-action generates
           sha_short=$(git rev-parse --short=7 HEAD)
-          echo "sha_short=$sha_short" >> $GITHUB_OUTPUT
-          echo "built_at=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_OUTPUT
+          echo "sha_short=$sha_short" >> "$GITHUB_OUTPUT"
+          echo "built_at=$(date +'%Y-%m-%dT%H:%M:%S')" >> "$GITHUB_OUTPUT"
 
       # Login against a Docker registry
       # https://github.com/docker/login-action
@@ -63,11 +67,7 @@ jobs:
           images: ${{ steps.vars.outputs.image_name }}
           context: git # so it uses the git branch that is checked out
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
             type=ref,event=branch
-            type=ref,event=pr
             type=sha
 
       # Build and push Docker image with Buildx (don't push if deploy is false)
@@ -79,10 +79,6 @@ jobs:
           push: ${{ inputs.deploy }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # reuse image layers between runs through the GitHub Actions cache;
-          # mode=max also caches the intermediate build stages
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
           build-args: |
             VITE_BRANCH_NAME=${{ inputs.branchName }}
             VITE_GIT_SHA=${{ steps.vars.outputs.sha_short }}
@@ -108,6 +104,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     if: inputs.deploy == true
     needs: build
     # one deployment at a time to each container app; a second one waits.
@@ -120,12 +117,12 @@ jobs:
     permissions:
       id-token: write
       contents: read
-      packages: write
     steps:
+      # the commit the image was built from, not whatever the branch points at now
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          ref: ${{ inputs.branchName }}
+          ref: ${{ needs.build.outputs.sha }}
 
       - name: Azure login
         uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3

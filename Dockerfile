@@ -2,7 +2,10 @@ FROM node:26-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install --global pnpm@11
+# the pnpm version comes from "packageManager" in the root package.json
+COPY package.json /tmp/package.json
+RUN npm install --global "$(node -p "require('/tmp/package.json').packageManager.split('+')[0]")" \
+    && rm /tmp/package.json
 
 FROM base AS prod
 

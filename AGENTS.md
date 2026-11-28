@@ -22,7 +22,7 @@ The root, `src/client` and `src/server` are three separate pnpm projects, each w
 
 ## Commands
 
-Use pnpm (Node 26). The pnpm version is pinned by `packageManager` in the root `package.json` and the Node version by `.nvmrc`; CI reads both. A root `pnpm install` also installs the client and server.
+Use pnpm (Node 26). The pnpm version is pinned by `packageManager` in the root `package.json` and the Node version by `.nvmrc`; CI reads both, and the `Dockerfile` reads the pnpm version. A root `pnpm install` also installs the client and server.
 
 ```shell
 pnpm install          # root, then client and server via postinstall
