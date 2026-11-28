@@ -10,6 +10,8 @@ import { producersCommentsPath } from './production-team/ProducersComments';
 import { photoGalleryPath } from './production-team/PhotoGallery';
 import { guidedPrayerPath } from './GuidedPrayer';
 
+import './Menu.css';
+
 interface IProps {
     conventRootPath: string;
 }
