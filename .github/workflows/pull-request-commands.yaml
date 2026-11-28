@@ -8,18 +8,6 @@ permissions:
   contents: read
 
 jobs:
-  #   get-pr-branch-name:
-  #     runs-on: ubuntu-latest
-  #     outputs:
-  #       branchName: ${{ steps.get-pr-branch-name.outputs.branchName }}
-  #     steps:
-  #       - id: get-pr-branch-name
-  #         run: |
-  #           branchName=$(gh pr view ${{ github.event.issue.number }} --json "headRefName" --jq ".headRefName" --repo ${{ github.repository }})
-  #           echo "branchName=$branchName" >> $GITHUB_OUTPUT
-  #         env:
-  #           GH_TOKEN: ${{ github.token }}
-
   check-command:
     # only a comment on a pull request, that starts with `/deploy`,
     # written by someone with write access to the repository, deploys
@@ -54,7 +42,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.issue.number }}
-          RUN_URL: https://github.com/johnnyreilly/poorclaresarundel-aca/actions/runs/${{ github.run_id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
   deploy:
     needs: [get-pr-branch-name, pre-deploy]
@@ -81,31 +69,3 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.issue.number }}
           CONTAINER_APP_URL: ${{ needs.deploy.outputs.containerAppUrl }}
-
-  #   output-context:
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: Dump GitHub context
-  #         env:
-  #           GITHUB_CONTEXT: ${{ toJSON(github) }}
-  #         run: echo "$GITHUB_CONTEXT"
-  #       - name: Dump job context
-  #         env:
-  #           JOB_CONTEXT: ${{ toJSON(job) }}
-  #         run: echo "$JOB_CONTEXT"
-  #       - name: Dump steps context
-  #         env:
-  #           STEPS_CONTEXT: ${{ toJSON(steps) }}
-  #         run: echo "$STEPS_CONTEXT"
-  #       - name: Dump runner context
-  #         env:
-  #           RUNNER_CONTEXT: ${{ toJSON(runner) }}
-  #         run: echo "$RUNNER_CONTEXT"
-  #       - name: Dump strategy context
-  #         env:
-  #           STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
-  #         run: echo "$STRATEGY_CONTEXT"
-  #       - name: Dump matrix context
-  #         env:
-  #           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
-  #         run: echo "$MATRIX_CONTEXT"
