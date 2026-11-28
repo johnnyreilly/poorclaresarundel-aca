@@ -18,8 +18,6 @@ on:
         required: false
       AZURE_SUBSCRIPTION_ID:
         required: false
-      PACKAGES_TOKEN:
-        required: false
       APPSETTINGS_API_KEY:
         required: false
 
@@ -151,8 +149,6 @@ jobs:
           BUILT_AT: ${{ needs.build.outputs.built-at }}
           SHA_SHORT: ${{ needs.build.outputs.sha-short }}
           IMAGE_NAME: ${{ needs.build.outputs.image-name }}
-          REGISTRY_USERNAME: ${{ github.actor }}
-          REGISTRY_PASSWORD: ${{ secrets.PACKAGES_TOKEN }}
           APPSETTINGS_API_KEY: ${{ secrets.APPSETTINGS_API_KEY }}
           APPSETTINGS_DOMAIN: ${{ vars.APPSETTINGS_DOMAIN }}
           APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL: ${{ vars.APPSETTINGS_PRAYER_REQUEST_FROM_EMAIL }}
@@ -179,9 +175,6 @@ jobs:
             --template-file ./infra/main.bicep \
             --parameters \
                 webServiceImage="$webServiceImage" \
-                containerRegistry="$REGISTRY" \
-                containerRegistryUsername="$REGISTRY_USERNAME" \
-                containerRegistryPassword="$REGISTRY_PASSWORD" \
                 branchName="$BRANCH_NAME" \
                 gitSha="$SHA_SHORT" \
                 builtAt="$BUILT_AT" \

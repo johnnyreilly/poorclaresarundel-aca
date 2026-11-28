@@ -1,9 +1,5 @@
+// the image is public on the GitHub container registry, so no registry credentials are needed to pull it
 param webServiceImage string
-
-param containerRegistry string
-param containerRegistryUsername string
-@secure()
-param containerRegistryPassword string
 
 param branchName string
 param gitSha string
@@ -24,7 +20,6 @@ param APPSETTINGS_PRAYER_REQUEST_RECIPIENT_EMAIL string
 
 param location string = resourceGroup().location
 
-var containerRegistryPasswordRef = 'container-registry-password'
 var mailgunApiKeyRef = 'mailgun-api-key'
 
 // https://learn.microsoft.com/en-us/azure/templates/microsoft.operationalinsights/workspaces?pivots=deployment-language-bicep
@@ -100,19 +95,8 @@ resource webServiceContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
     configuration: {
       secrets: [
         {
-          name: containerRegistryPasswordRef
-          value: containerRegistryPassword
-        }
-        {
           name: mailgunApiKeyRef
           value: APPSETTINGS_API_KEY
-        }
-      ]
-      registries: [
-        {
-          server: containerRegistry
-          username: containerRegistryUsername
-          passwordSecretRef: containerRegistryPasswordRef
         }
       ]
       ingress: {
