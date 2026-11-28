@@ -1,9 +1,7 @@
 name: Container
 
 on:
-  push:
-    branches:
-      - main
+  # pushes to main are built (and deployed) by the Deploy workflow
   pull_request:
     branches:
       - main
@@ -11,6 +9,11 @@ on:
 
 permissions:
   contents: read
+
+# a newer push to a pull request cancels the run for the older one
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   container-build:
