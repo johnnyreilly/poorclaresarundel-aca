@@ -42,7 +42,7 @@ There are no automated tests. Before finishing a change, run `pnpm run build` an
 
 ## Client
 
-- Entry point: `src/client/src/index.tsx`. It defines three top-level routes: `/` (`Home.tsx`), `/the-convent` (`the-convent/`) and everything else (`main/`, lazily loaded).
+- Entry point: `src/client/src/index.tsx`. It defines three top-level routes: `/` (`Home.tsx`), `/the-convent/*` (`the-convent/`, a mini-site whose own routes are relative to `/the-convent`) and everything else (`main/`). The last two are lazily loaded.
 - Each page is one file exporting a path constant and a component, for example `kenyaPath` and `Kenya` in `src/client/src/main/community/Kenya.tsx`.
 - To add a page under `main/`:
   1. Create the component file, exporting `somethingPath` and `Something`.

@@ -18,15 +18,15 @@ export default function TheConvent() {
             <Menu conventRootPath={conventRootPath} />
             <PageContent>
                 <Routes>
-                    <Route path={`${conventRootPath}${homePath}`} element={<Home />} />
-                    <Route path={`${conventRootPath}${whyPath}`} element={<Why />} />
-                    <Route path={`${conventRootPath}${angelaPath}`} element={<Angela />} />
-                    <Route path={`${conventRootPath}${debiPath}`} element={<Debi />} />
-                    <Route path={`${conventRootPath}${ionaPath}`} element={<Iona />} />
-                    <Route path={`${conventRootPath}${vikPath}`} element={<Vik />} />
-                    <Route path={`${conventRootPath}${producersCommentsPath}`} element={<ProducerComments />} />
-                    <Route path={`${conventRootPath}${photoGalleryPath}`} element={<PhotoGallery />} />
-                    <Route path={`${conventRootPath}${guidedPrayerPath}`} element={<GuidedPrayer />} />
+                    <Route path={homePath} element={<Home />} />
+                    <Route path={whyPath} element={<Why />} />
+                    <Route path={angelaPath} element={<Angela />} />
+                    <Route path={debiPath} element={<Debi />} />
+                    <Route path={ionaPath} element={<Iona />} />
+                    <Route path={vikPath} element={<Vik />} />
+                    <Route path={producersCommentsPath} element={<ProducerComments />} />
+                    <Route path={photoGalleryPath} element={<PhotoGallery />} />
+                    <Route path={guidedPrayerPath} element={<GuidedPrayer />} />
                     <Route path="*" element={<Navigate to={`${conventRootPath}${homePath}`} replace />} />
                 </Routes>
             </PageContent>

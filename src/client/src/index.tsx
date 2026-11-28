@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         ),
     },
     {
-        path: 'the-convent',
+        path: 'the-convent/*',
         element: (
             <Suspense fallback={<Loading />}>
                 <TheConvent />
