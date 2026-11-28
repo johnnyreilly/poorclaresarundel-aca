@@ -4,7 +4,15 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN npm install --global pnpm@11
 
-FROM base AS prod
+##
+## IMAGE: build-base
+## python3, make and g++ let node-gyp compile native modules that have no
+## prebuilt binary for this Node version (applicationinsights-native-metrics)
+##
+FROM base AS build-base
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 make g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 ##
 ## IMAGE: build-client
@@ -26,7 +34,7 @@ RUN VITE_BRANCH_NAME=${VITE_BRANCH_NAME} VITE_GIT_SHA=${VITE_GIT_SHA} VITE_BUILT
 ##
 ## IMAGE: build-server
 ##
-FROM base AS build-server
+FROM build-base AS build-server
 WORKDIR /server
 
 COPY src/server/package.json src/server/pnpm-lock.yaml src/server/pnpm-workspace.yaml ./
@@ -34,6 +42,16 @@ RUN pnpm i --frozen-lockfile
 
 COPY src/server ./
 RUN pnpm run build
+
+##
+## IMAGE: prod-deps
+## production node_modules, built where the compiler toolchain is available
+##
+FROM build-base AS prod-deps
+WORKDIR /app
+
+COPY src/server/package.json src/server/pnpm-lock.yaml src/server/pnpm-workspace.yaml ./
+RUN pnpm i --frozen-lockfile --prod
 
 ##
 ## IMAGE: runtime
@@ -45,7 +63,7 @@ WORKDIR /app
 COPY --from=build-client client/dist ./client/dist
 COPY --from=build-server server/dist ./dist
 COPY --from=build-server server/package.json server/pnpm-lock.yaml server/pnpm-workspace.yaml ./
-RUN pnpm i --frozen-lockfile --prod
+COPY --from=prod-deps app/node_modules ./node_modules
 
 EXPOSE 3000
 CMD [ "node", "dist/index.js" ]
