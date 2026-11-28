@@ -22,6 +22,7 @@ jobs:
     # keeps the check names "client build and test ⚙️" and "server build and test ⚙️"
     name: ${{ matrix.project }} build and test ⚙️
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
