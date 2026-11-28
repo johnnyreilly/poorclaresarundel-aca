@@ -4,6 +4,9 @@ on:
   issue_comment:
     types: [created]
 
+permissions:
+  contents: read
+
 jobs:
   #   get-pr-branch-name:
   #     runs-on: ubuntu-latest
@@ -17,26 +20,49 @@ jobs:
   #         env:
   #           GH_TOKEN: ${{ github.token }}
 
+  check-command:
+    # only a comment on a pull request, that starts with `/deploy`,
+    # written by someone with write access to the repository, deploys
+    if: >-
+      github.event.issue.pull_request &&
+      startsWith(github.event.comment.body, '/deploy') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "/deploy requested by $COMMENT_AUTHOR"
+        env:
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+
   get-pr-branch-name:
+    needs: check-command
     uses: ./.github/workflows/util-get-pr-branch-name.yaml
+    permissions:
+      contents: read
+      pull-requests: read
     with:
       pullRequestNumber: ${{ github.event.issue.number }}
 
   pre-deploy:
-    # check if the comment comes from a pull request and contains the command `/deploy`
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
+    needs: check-command
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - run: |
-          gh issue comment ${{ github.event.issue.number }} --body "Preview environment [deploying](https://github.com/johnnyreilly/poorclaresarundel-aca/actions/runs/${{ github.run_id }})..." --repo ${{ github.repository }}
+          gh issue comment "$PR_NUMBER" --body "Preview environment [deploying]($RUN_URL)..." --repo "$GITHUB_REPOSITORY"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          RUN_URL: https://github.com/johnnyreilly/poorclaresarundel-aca/actions/runs/${{ github.run_id }}
 
   deploy:
-    # check if the comment comes from a pull request and contains the command `/deploy`
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     needs: [get-pr-branch-name, pre-deploy]
     uses: ./.github/workflows/util-build-and-deploy.yaml
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     with:
       deploy: true
       branchName: ${{ needs.get-pr-branch-name.outputs.branchName }}
@@ -45,11 +71,16 @@ jobs:
   post-deploy:
     runs-on: ubuntu-latest
     needs: deploy
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - run: |
-          gh issue comment ${{ github.event.issue.number }} --body "Preview environment deployed: https://${{ needs.deploy.outputs.containerAppUrl }}" --repo ${{ github.repository }}
+          gh issue comment "$PR_NUMBER" --body "Preview environment deployed: https://$CONTAINER_APP_URL" --repo "$GITHUB_REPOSITORY"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          CONTAINER_APP_URL: ${{ needs.deploy.outputs.containerAppUrl }}
 
   #   output-context:
   #     runs-on: ubuntu-latest

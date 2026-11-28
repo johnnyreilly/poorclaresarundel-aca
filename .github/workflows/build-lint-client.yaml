@@ -5,14 +5,15 @@ on:
     branches:
       - main
   pull_request:
-    types: [opened, synchronize, reopened, closed]
     branches:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   client_build_and_test_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: client build and test ⚙️
     steps:
@@ -28,6 +29,7 @@ jobs:
         with:
           node-version: "26"
           cache: "pnpm"
+          cache-dependency-path: src/client/pnpm-lock.yaml
 
       - name: client install
         working-directory: src/client

@@ -8,9 +8,16 @@ on:
     tags: ["v*.*.*"]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build-and-deploy:
     uses: ./.github/workflows/util-build-and-deploy.yaml
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     with:
       deploy: true
       branchName: ${{ github.head_ref || github.ref_name }}

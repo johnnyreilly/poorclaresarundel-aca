@@ -5,14 +5,20 @@ on:
     branches:
       - main
   pull_request:
-    types: [opened, synchronize, reopened, closed]
     branches:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   container-build:
     uses: ./.github/workflows/util-build-and-deploy.yaml
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     with:
       deploy: false
       branchName: ${{ github.head_ref || github.ref_name }}

@@ -20,7 +20,8 @@ jobs:
     steps:
       - id: get-pr-branch-name
         run: |
-          branchName=$(gh pr view ${{ inputs.pullRequestNumber }} --json "headRefName" --jq ".headRefName" --repo ${{ github.repository }})
-          echo "branchName=$branchName" >> $GITHUB_OUTPUT
+          branchName=$(gh pr view "$PR_NUMBER" --json "headRefName" --jq ".headRefName" --repo "$GITHUB_REPOSITORY")
+          echo "branchName=$branchName" >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ inputs.pullRequestNumber }}
