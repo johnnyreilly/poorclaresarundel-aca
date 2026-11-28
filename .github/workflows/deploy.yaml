@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    # Publish semver tags as releases.
-    tags: ["v*.*.*"]
   workflow_dispatch:
 
 permissions:
@@ -20,11 +18,5 @@ jobs:
       id-token: write
     with:
       deploy: true
-      branchName: ${{ github.head_ref || github.ref_name }}
+      branchName: ${{ github.ref_name }}
     secrets: inherit
-
-  # get-container-app-url:
-  #   runs-on: ubuntu-latest
-  #   needs: build-and-deploy
-  #   steps:
-  #     - run: echo "container-app-url=${{ needs.build-and-deploy.outputs.containerAppUrl }}"
