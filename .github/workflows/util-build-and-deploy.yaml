@@ -40,7 +40,8 @@ jobs:
         run: |
           image_name=$(echo "${{ env.REGISTRY }}/${{ github.repository }}/node-service" | tr '[:upper:]' '[:lower:]')
           echo "image_name=$image_name" >> $GITHUB_OUTPUT
-          sha_short=$(echo "$(git rev-parse --short HEAD)" | tr '[:upper:]' '[:lower:]')
+          # 7 characters, to match the `type=sha` tag that docker/metadata-action generates
+          sha_short=$(git rev-parse --short=7 HEAD)
           echo "sha_short=$sha_short" >> $GITHUB_OUTPUT
           echo "built_at=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_OUTPUT
 
@@ -83,10 +84,33 @@ jobs:
             VITE_GIT_SHA=${{ steps.vars.outputs.sha_short }}
             VITE_BUILT_AT=${{ steps.vars.outputs.built_at }}
 
+      # Start the image that was just built and check that the server responds
+      - name: Smoke test the container
+        env:
+          IMAGE: ${{ steps.vars.outputs.image_name }}:sha-${{ steps.vars.outputs.sha_short }}
+        run: |
+          docker run --detach --name smoke-test --publish 3000:3000 "$IMAGE"
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error http://localhost:3000/api/status; then
+              echo
+              echo "Container responded on attempt $attempt"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Container did not respond on /api/status"
+          docker logs smoke-test
+          exit 1
+
   deploy:
     runs-on: ubuntu-latest
     if: inputs.deploy == true
     needs: build
+    # one deployment at a time to each container app; a second one waits.
+    # runs that do not deploy get a group of their own, so they never queue
+    concurrency:
+      group: ${{ inputs.deploy && format('deploy-{0}', inputs.branchName == 'main' && 'main-web' || 'preview-web') || format('no-deploy-{0}', github.run_id) }}
+      cancel-in-progress: false
     outputs:
       containerAppUrl: ${{ steps.deploy.outputs.CONTAINER_APP_URL }}
     permissions:
