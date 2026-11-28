@@ -39,7 +39,7 @@ RUN pnpm run build
 ## IMAGE: runtime
 ##
 FROM base AS runtime
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 WORKDIR /app
 COPY --from=build-client client/dist ./client/dist
