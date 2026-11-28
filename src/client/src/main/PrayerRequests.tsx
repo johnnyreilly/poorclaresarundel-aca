@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import smalltau from './images/smalltau.jpg';
-import { Alert } from 'reactstrap';
+import { Alert, Button, Stack, Textarea, TextInput } from '@mantine/core';
 export const prayerRequestsPath = '/prayer-requests';
 
 interface IPrayerRequestResult {
@@ -51,42 +51,47 @@ export function PrayerRequests() {
             <p>If you would like to ask the community to pray for a special intention mail us a prayer request:</p>
 
             {message && (
-                <Alert color={message.ok ? 'success' : 'danger'}>
-                    <img className="img-thumbnail" src={smalltau} alt={message.ok ? 'success' : 'failure'} />
+                <Alert
+                    color={message.ok ? 'green' : 'red'}
+                    mb="md"
+                    icon={<img src={smalltau} alt={message.ok ? 'success' : 'failure'} />}
+                    styles={{ icon: { width: 'auto', height: 'auto' }, message: { fontSize: 'inherit' } }}
+                    role="alert"
+                >
                     {message.text}
                 </Alert>
             )}
 
             <form name="form" noValidate onSubmit={handleSubmit}>
-                <div className={`form-group has-feedback ${formSubmitAttempted && !requestEmail ? 'has-error' : ''}`}>
-                    <label className="control-label">Email address</label>
-                    <input
+                <Stack gap="sm" align="flex-start" mb="md">
+                    <TextInput
+                        w="100%"
+                        label="Email address"
                         name="emailAddr"
                         type="email"
-                        className="form-control"
                         placeholder="Enter email"
                         value={requestEmail}
                         onChange={handleEmailChange}
+                        error={formSubmitAttempted && !requestEmail && 'Tell us your email.'}
                         required
+                        withAsterisk={false}
                     />
-                    {formSubmitAttempted && !requestEmail && <span>Tell us your email.</span>}
-                </div>
-                <div>
-                    <label className="control-label">Your prayer request</label>
-                    <textarea
+                    <Textarea
+                        w="100%"
+                        label="Your prayer request"
                         name="prayForText"
-                        className="form-control"
                         rows={3}
                         placeholder="Enter prayer request"
                         value={requestPrayFor}
                         onChange={handlePrayForChange}
+                        error={formSubmitAttempted && !requestPrayFor && 'You must tell us something to pray for!'}
                         required
+                        withAsterisk={false}
                     />
-                    {formSubmitAttempted && !requestPrayFor && <span>You must tell us something to pray for!</span>}
-                </div>
-                <button disabled={!requestEmail || !requestPrayFor} type="submit" className="btn btn-primary">
-                    Send us your prayer request
-                </button>
+                    <Button disabled={!requestEmail || !requestPrayFor} type="submit">
+                        Send us your prayer request
+                    </Button>
+                </Stack>
             </form>
 
             <p>Although you may only receive a standardised reply, you can be confident that we will indeed pray.</p>

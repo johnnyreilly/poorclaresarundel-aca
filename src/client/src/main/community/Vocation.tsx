@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import { addressesPath } from '../misc/Addresses';
 import chapel from './images/Chapel.jpg';
 
@@ -10,12 +10,9 @@ export const Vocation: React.FC<React.PropsWithChildren<unknown>> = (_props) => 
     <>
         <h3>Vocation</h3>
 
-        <Card className="float-end">
-            <CardImg top src={chapel} />
-            <CardBody>
-                <CardText>In Chapel</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={chapel}>
+            In Chapel
+        </PictureCard>
 
         <p>
             If a person feels drawn by God to offer herself to him in a life of prayer and contemplation, together with

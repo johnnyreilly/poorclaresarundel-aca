@@ -1,14 +1,20 @@
 import * as React from 'react';
+import { AspectRatio } from '@mantine/core';
 
 export const faqsPath = '/misc-faqs';
 
-export const FAQs: React.FC<React.PropsWithChildren<unknown>> = _props => (
+export const FAQs: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
         <h3>FAQs</h3>
 
-        <div className="embed-responsive embed-responsive-16by9">
-            <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/y_d-T74WEO0" allowFullScreen title="Sister Gabriel interview on LADbible" />
-        </div>
+        <AspectRatio ratio={16 / 9} maw={640} mb="md">
+            <iframe
+                src="https://www.youtube.com/embed/y_d-T74WEO0"
+                allowFullScreen
+                title="Sister Gabriel interview on LADbible"
+                style={{ border: 0 }}
+            />
+        </AspectRatio>
 
         <h4>Do you miss male company/Do you ever feel attracted to others in a romantic way?</h4>
 

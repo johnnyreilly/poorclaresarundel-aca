@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../components/PictureCard';
 import communityPhoto from './images/CommunityPhoto.jpg';
 
 export const whyPath = '/why';
@@ -37,11 +37,8 @@ export const Why: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             channels of that love in our world of today.
         </p>
 
-        <Card className="float-start">
-            <CardImg top src={communityPhoto} />
-            <CardBody>
-                <CardText>The Community</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="start" src={communityPhoto}>
+            The Community
+        </PictureCard>
     </>
 );

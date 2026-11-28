@@ -1,4 +1,4 @@
-import { Container } from 'reactstrap';
+import { PageContent } from '../components/PageContent';
 import { Navigate, Route, Routes } from 'react-router';
 import { Menu } from './Menu';
 import { Us, usPath } from './Us';
@@ -38,7 +38,7 @@ function Main() {
     return (
         <>
             <Menu />
-            <Container>
+            <PageContent>
                 <Routes>
                     <Route path={usPath} element={<Us />} />
                     <Route path={ourPrayerPath} element={<OurPrayer />} />
@@ -73,7 +73,7 @@ function Main() {
                     <Route path={myPeaceIGiveYouPath} element={<MyPeaceIGiveYou />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
-            </Container>
+            </PageContent>
             <Footer />
         </>
     );

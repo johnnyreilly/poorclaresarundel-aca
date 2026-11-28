@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import srGabriel from './images/SrGabriel.jpg';
 
 export const sisterGabrielPath = '/community-sister-gabriel';
 
 export const SisterGabriel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={srGabriel} />
-            <CardBody>
-                <CardText>Sister Gabriel</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={srGabriel}>
+            Sister Gabriel
+        </PictureCard>
         <h3>Sister Gabriel&apos;s Story</h3>
         <p>
             My name is Sr Gabriel, I am 35 years old, I was born and brought up in Newcastle and I have been a Poor

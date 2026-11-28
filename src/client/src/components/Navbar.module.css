@@ -1,0 +1,31 @@
+.navbar {
+    padding: var(--mantine-spacing-xs) 0;
+    color: var(--mantine-color-white);
+}
+
+.items {
+    flex: 1;
+}
+
+.brand {
+    color: var(--mantine-color-white);
+    font-size: var(--mantine-font-size-xl);
+    text-decoration: none;
+    white-space: nowrap;
+    margin-right: var(--mantine-spacing-xs);
+}
+
+.link {
+    display: block;
+    padding: 0.25rem 0.4rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: var(--mantine-font-size-md);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.link:hover,
+.link:focus-visible,
+.link[aria-expanded='true'] {
+    color: var(--mantine-color-white);
+}

@@ -1,41 +1,37 @@
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Anchor, Text } from '@mantine/core';
 import './Footer.css';
 
 export function Footer() {
     return (
-        // <div className="text-center">
-        // <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-
-        <footer className="cover-container d-flex w-100 flex-column text-center mastfoot mt-auto">
-            <div className="inner">
-                <p>
-                    © Community of Poor Clares, Arundel 2014-{new Date().getFullYear()}
-                    <br /> Convent of Poor Clares, Crossbush, Arundel, BN18 9PJ
-                </p>
-                <p>
-                    <a href="mailto:arundel.poorclares@gmail.com">
-                        <FontAwesomeIcon icon={faEnvelope} /> arundel.poorclares@gmail.com
-                    </a>{' '}
-                    |{' '}
-                    <a href="https://www.facebook.com/poorclaresarundel">
-                        <FontAwesomeIcon icon={faFacebook} /> Facebook
-                    </a>{' '}
-                    |{' '}
-                    <a target="_blank" href="/safeguarding-statement.docx">
-                        safeguarding statement
-                    </a>{' '}
-                    |{' '}
-                    <a target="_blank" href="/safeguarding-policy-and-procedures-2025.docx">
-                        safeguarding policy
-                    </a>
-                    |{' '}
-                    <a target="_blank" href="/poor-clares-arundel-audit.pdf">
-                        safeguarding report
-                    </a>
-                </p>
-            </div>
+        <footer>
+            <Text size="sm" mb="sm">
+                © Community of Poor Clares, Arundel 2014-{new Date().getFullYear()}
+                <br /> Convent of Poor Clares, Crossbush, Arundel, BN18 9PJ
+            </Text>
+            <Text size="sm">
+                <Anchor inherit href="mailto:arundel.poorclares@gmail.com">
+                    <FontAwesomeIcon icon={faEnvelope} /> arundel.poorclares@gmail.com
+                </Anchor>{' '}
+                |{' '}
+                <Anchor inherit href="https://www.facebook.com/poorclaresarundel">
+                    <FontAwesomeIcon icon={faFacebook} /> Facebook
+                </Anchor>{' '}
+                |{' '}
+                <Anchor inherit target="_blank" href="/safeguarding-statement.docx">
+                    safeguarding statement
+                </Anchor>{' '}
+                |{' '}
+                <Anchor inherit target="_blank" href="/safeguarding-policy-and-procedures-2025.docx">
+                    safeguarding policy
+                </Anchor>{' '}
+                |{' '}
+                <Anchor inherit target="_blank" href="/poor-clares-arundel-audit.pdf">
+                    safeguarding report
+                </Anchor>
+            </Text>
         </footer>
     );
 }

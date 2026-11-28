@@ -1,0 +1,35 @@
+.card {
+    /* shrink to the width of the picture, but never wider than the page */
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: var(--mantine-spacing-md);
+}
+
+.card[data-float='start'] {
+    float: left;
+    margin-right: var(--mantine-spacing-md);
+}
+
+.card[data-float='end'] {
+    float: right;
+    margin-left: var(--mantine-spacing-md);
+}
+
+.image {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.caption {
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+}
+
+/* on phones there is no room for text beside a picture, so the picture sits on its own line */
+@media (max-width: 36em) {
+    .card[data-float] {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

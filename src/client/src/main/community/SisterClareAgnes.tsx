@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import srClareAgnes from './images/SrClareAgnes.jpg';
 
 export const sisterClareAgnesPath = '/community-sister-clare-agnes';
 
 export const SisterClareAgnes: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={srClareAgnes} />
-            <CardBody>
-                <CardText>Sister Clare Agnes</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={srClareAgnes}>
+            Sister Clare Agnes
+        </PictureCard>
         <h3>Sister Clare Agnes&apos; Story</h3>
         <p>
             Well, I was 58 when I joined the Poor Clares in Arundel. Before that I had been in a teaching Order, called

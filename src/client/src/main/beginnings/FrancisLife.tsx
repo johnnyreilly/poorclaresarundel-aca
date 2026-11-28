@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import stFrancis from './images/StFrancis.jpg';
 import sanDamianoCrucifix from './images/SanDamianoCrucifix.jpg';
 import theBible from './images/TheBible.jpg';
@@ -8,12 +8,9 @@ export const francisLifePath = '/beginnings-francis-life';
 
 export const FrancisLife: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={stFrancis} />
-            <CardBody>
-                <CardText>St Francis</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={stFrancis}>
+            St Francis
+        </PictureCard>
 
         <h3>St Francis of Assisi – His Life</h3>
 
@@ -41,12 +38,9 @@ export const FrancisLife: React.FC<React.PropsWithChildren<unknown>> = (_props) 
             understood it was God who was calling him to serve Him, and not another man.
         </p>
 
-        <Card className="float-start">
-            <CardImg top src={sanDamianoCrucifix} />
-            <CardBody>
-                <CardText>San Damiano Crucifix</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="start" src={sanDamianoCrucifix}>
+            San Damiano Crucifix
+        </PictureCard>
 
         <p>
             Very gradually he began to discover what God wanted of him. To do this he began to pray. He would find a
@@ -69,12 +63,9 @@ export const FrancisLife: React.FC<React.PropsWithChildren<unknown>> = (_props) 
             sin and evil.
         </p>
 
-        <Card className="float-end">
-            <CardImg top src={theBible} />
-            <CardBody>
-                <CardText>The Bible</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={theBible}>
+            The Bible
+        </PictureCard>
 
         <p>
             This did not become evident to him for some time. First, he had to begin with himself and come to new way of

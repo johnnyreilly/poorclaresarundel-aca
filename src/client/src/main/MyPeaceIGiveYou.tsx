@@ -2,16 +2,19 @@
 // import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import { Card, CardImg } from 'reactstrap';
+import { PictureCard } from '../components/PictureCard';
 import myPeaceIGiveYou from '../images/my-peace-i-give-you.avif';
 
 export const myPeaceIGiveYouPath = '/my-peace-i-give-you';
 
 export const MyPeaceIGiveYou: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end" style={{ marginLeft: '1em' }}>
-            <CardImg top src={myPeaceIGiveYou} alt="My Peace I Give You album cover" />
-        </Card>
+        <PictureCard
+            float="end"
+            style={{ marginLeft: '1em' }}
+            src={myPeaceIGiveYou}
+            alt="My Peace I Give You album cover"
+        />
 
         <h3>My Peace I Give You</h3>
 

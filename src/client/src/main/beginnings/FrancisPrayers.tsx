@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import statue from './images/Statue.jpg';
 
 export const francisPrayersPath = '/beginnings-francis-prayers';
 
 export const FrancisPrayers: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={statue} />
-            <CardBody>
-                <CardText>St Francis the Poor Man of God</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={statue}>
+            St Francis the Poor Man of God
+        </PictureCard>
 
         <h3>St Francis of Assisi – His Prayers</h3>
 

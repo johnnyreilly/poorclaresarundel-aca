@@ -1,0 +1,5 @@
+.content {
+    /* contain floated pictures so that the footer always sits beneath them */
+    display: flow-root;
+    margin-bottom: var(--mantine-spacing-md);
+}

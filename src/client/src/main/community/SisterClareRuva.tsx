@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import srClareRuva from './images/SrClareRuva.jpg';
 
 export const sisterClareRuvaPath = '/community-sister-clare-ruva';
 
 export const SisterClareRuva: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={srClareRuva} />
-            <CardBody>
-                <CardText>Sister Clare Ruva</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={srClareRuva}>
+            Sister Clare Ruva
+        </PictureCard>
         <h3>Sister Clare Ruva&apos;s Story</h3>
         <p>
             First things first!! - I never wanted to be a nun: my desire was to get married and have my three children,

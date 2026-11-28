@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import tiggers1 from './images/Tiggers1.jpg';
 import tiggers2 from './images/Tiggers2.jpg';
 import tiggers3 from './images/Tiggers3.jpg';
@@ -20,20 +20,12 @@ export const PhotoGallery: React.FC<React.PropsWithChildren<unknown>> = (_props)
             at work:
         </p>
 
-        <Card className="float-start">
-            <CardImg top src={tiggers1} style={{ maxWidth: '500px' }} />
-        </Card>
+        <PictureCard float="start" src={tiggers1} imageStyle={{ maxWidth: '500px' }} />
 
-        <Card className="float-start">
-            <CardImg top src={tiggers2} style={{ maxWidth: '500px' }} />
-        </Card>
+        <PictureCard float="start" src={tiggers2} imageStyle={{ maxWidth: '500px' }} />
 
-        <Card className="float-start">
-            <CardImg top src={tiggers3} style={{ maxWidth: '500px' }} />
-        </Card>
+        <PictureCard float="start" src={tiggers3} imageStyle={{ maxWidth: '500px' }} />
 
-        <Card className="float-start">
-            <CardImg top src={tiggers4} style={{ maxWidth: '500px' }} />
-        </Card>
+        <PictureCard float="start" src={tiggers4} imageStyle={{ maxWidth: '500px' }} />
     </>
 );

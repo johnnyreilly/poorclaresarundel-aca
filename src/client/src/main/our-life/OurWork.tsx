@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Card, CardText, CardImg, CardBody } from 'reactstrap';
+import { Grid } from '@mantine/core';
+import { PictureCard } from '../../components/PictureCard';
 import sisterCooking from './images/sister-cooking.webp';
 import work1 from './images/Work1.jpg';
 import work2 from './images/Work2.jpg';
@@ -13,12 +14,9 @@ export const ourWorkPath = '/our-work';
 
 export const OurWork: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end" style={{ marginLeft: '1em', marginTop: '1em' }}>
-            <CardImg top src={sisterCooking} />
-            <CardBody>
-                <CardText>Sister cooking</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" style={{ marginLeft: '1em', marginTop: '1em' }} src={sisterCooking}>
+            Sister cooking
+        </PictureCard>
 
         <h3>Our Work</h3>
 
@@ -47,40 +45,34 @@ export const OurWork: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             request (eg. leather work).
         </p>
 
-        <div className="row">
-            <div className="col-md-4">
-                <div className="thumbnail">
-                    <img src={work1} alt="Sister painting an ikon" />
-                    <p>Sister painting an ikon</p>
-                </div>
-            </div>
-            <div className="col-md-4">
-                <div className="thumbnail">
-                    <img src={work2} alt="Candles" />
-                    <p>Candles</p>
-                </div>
-            </div>
-            <div className="col-md-4">
+        <Grid>
+            <Grid.Col span={{ base: 12, sm: 4 }}>
+                <img src={work1} alt="Sister painting an ikon" />
+                <p>Sister painting an ikon</p>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, sm: 4 }}>
+                <img src={work2} alt="Candles" />
+                <p>Candles</p>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, sm: 4 }}>
                 <img src={knittedBabyClothes} alt="Knitted baby clothes photo" />
                 <p>Knitted baby clothes</p>
-            </div>
-        </div>
+            </Grid.Col>
+        </Grid>
 
-        <div className="row">
-            <div className="col-md-4">
-                <div className="thumbnail">
-                    <img src={leatherWork} alt="Leather work photo" />
-                    <p>Leather work</p>
-                </div>
-            </div>
-            <div className="col-md-4">
+        <Grid>
+            <Grid.Col span={{ base: 12, sm: 4 }}>
+                <img src={leatherWork} alt="Leather work photo" />
+                <p>Leather work</p>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, sm: 4 }}>
                 <img src={vestments2} alt="Small alter linen photo" />
                 <p>Small alter linen</p>
-            </div>
-            <div className="col-md-4">
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, sm: 4 }}>
                 <img src={selectionOfCards} alt="Selection of cards photo" />
                 <p>Selection of cards</p>
-            </div>
-        </div>
+            </Grid.Col>
+        </Grid>
     </>
 );

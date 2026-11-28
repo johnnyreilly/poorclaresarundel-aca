@@ -2,7 +2,7 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 // import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import { Card, CardImg } from 'reactstrap';
+import { PictureCard } from '../components/PictureCard';
 import lightForTheWorldSmall from '../images/light-for-the-world-small.jpg';
 import oComeEmmanuelSmall from '../images/o-come-emmanuel-small.jpg';
 
@@ -10,9 +10,7 @@ export const lightForTheWorldPath = '/light-for-the-world';
 
 export const LightForTheWorld: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={new Date().getMonth() === 11 ? oComeEmmanuelSmall : lightForTheWorldSmall} />
-        </Card>
+        <PictureCard float="end" src={new Date().getMonth() === 11 ? oComeEmmanuelSmall : lightForTheWorldSmall} />
 
         <h3>Light for the World</h3>
 

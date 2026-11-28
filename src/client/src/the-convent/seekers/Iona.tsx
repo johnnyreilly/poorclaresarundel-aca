@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import seekerIona from './images/SeekerIona.jpg';
 
 export const ionaPath = '/iona';
 
 export const Iona: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={seekerIona} />
-            <CardBody>
-                <CardText>Iona</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={seekerIona}>
+            Iona
+        </PictureCard>
 
         <h3>Iona</h3>
 

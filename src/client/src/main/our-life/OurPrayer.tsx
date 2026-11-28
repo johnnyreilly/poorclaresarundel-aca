@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PictureCard } from '../../components/PictureCard';
 import { Link } from 'react-router';
 import prayerOur1 from './images/prayerOur1.jpg';
 import prayerOur2 from './images/prayerOur2.webp';
@@ -10,11 +11,7 @@ export const ourPrayerPath = '/our-prayer';
 export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
         <h3>Our Prayer</h3>
-        <img
-            className="float-end img-thumbnail img-space-right-and-bottom"
-            src={prayerOur2}
-            alt="Helen sitting in the cemetary"
-        />
+        <PictureCard float="end" src={prayerOur2} alt="Helen sitting in the cemetary" />
 
         <p>Our life of prayer falls into three natural parts. These are:</p>
 
@@ -35,11 +32,7 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
         </p>
 
         <h3>Our usual timetable</h3>
-        <img
-            className="float-end img-thumbnail img-space-right-and-bottom"
-            src={prayerOur3}
-            alt="ikon of Clare washing the sisters feet"
-        />
+        <PictureCard float="end" src={prayerOur3} alt="ikon of Clare washing the sisters feet" />
 
         <ul>
             <li>5.30 Rise. A quick breakfast followed by time for personal prayer, reading, study until 7.30</li>
@@ -62,7 +55,7 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
                 2.15 back to work with a tea break at 3.30 and a short prayer together in the refectory at 4.00 to
                 sanctify our work
             </li>
- 
+
             <li>5.30 Evening Prayer</li>
 
             <li>6pm Supper, followed by an hour of personal prayer time.</li>
@@ -94,7 +87,7 @@ export const OurPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
             Taize style prayer meeting: last Friday of each month (except December), c.7.15pm – 8.30pm. All are welcome.
         </p>
 
-        <img className="float-end img-thumbnail img-space-right-and-bottom" src={prayerOur1} alt="" />
+        <PictureCard float="end" src={prayerOur1} alt="" />
         <h3>Prayer Requests</h3>
 
         <p>

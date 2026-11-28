@@ -1,4 +1,4 @@
-import { Container } from 'reactstrap';
+import { PageContent } from '../components/PageContent';
 import { Navigate, Route, Routes } from 'react-router';
 import { Menu } from './Menu';
 import { Home, homePath } from './Home';
@@ -16,20 +16,20 @@ export default function TheConvent() {
     return (
         <>
             <Menu conventRootPath={conventRootPath} />
-            <Container>
+            <PageContent>
                 <Routes>
-                    <Route path={`${conventRootPath}${homePath}`} element={<Home />} />
-                    <Route path={`${conventRootPath}${whyPath}`} element={<Why />} />
-                    <Route path={`${conventRootPath}${angelaPath}`} element={<Angela />} />
-                    <Route path={`${conventRootPath}${debiPath}`} element={<Debi />} />
-                    <Route path={`${conventRootPath}${ionaPath}`} element={<Iona />} />
-                    <Route path={`${conventRootPath}${vikPath}`} element={<Vik />} />
-                    <Route path={`${conventRootPath}${producersCommentsPath}`} element={<ProducerComments />} />
-                    <Route path={`${conventRootPath}${photoGalleryPath}`} element={<PhotoGallery />} />
-                    <Route path={`${conventRootPath}${guidedPrayerPath}`} element={<GuidedPrayer />} />
+                    <Route path={homePath} element={<Home />} />
+                    <Route path={whyPath} element={<Why />} />
+                    <Route path={angelaPath} element={<Angela />} />
+                    <Route path={debiPath} element={<Debi />} />
+                    <Route path={ionaPath} element={<Iona />} />
+                    <Route path={vikPath} element={<Vik />} />
+                    <Route path={producersCommentsPath} element={<ProducerComments />} />
+                    <Route path={photoGalleryPath} element={<PhotoGallery />} />
+                    <Route path={guidedPrayerPath} element={<GuidedPrayer />} />
                     <Route path="*" element={<Navigate to={`${conventRootPath}${homePath}`} replace />} />
                 </Routes>
-            </Container>
+            </PageContent>
         </>
     );
 }

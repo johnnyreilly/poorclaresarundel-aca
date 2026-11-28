@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { Grid } from '@mantine/core';
+import { PictureCard } from '../../components/PictureCard';
 import dukeNDuchess from './images/DukeNDuchess.jpg';
 import motherAbbessAgnesGasquet from './images/MotherAbbessAgnesGasquet.jpg';
 import motherClareCampbell from './images/MotherClareCampbell.jpg';
@@ -30,16 +31,11 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
 
         <h4>Our History</h4>
 
-        <Card className="float-end">
-            <CardImg top src={dukeNDuchess} />
-            <CardBody>
-                <CardText>
-                    Henry and Flora
-                    <br />
-                    Duke and Duchess of Norfolk
-                </CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={dukeNDuchess}>
+            Henry and Flora
+            <br />
+            Duke and Duchess of Norfolk
+        </PictureCard>
 
         <h4>1886</h4>
         <p>
@@ -69,20 +65,16 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             building and the garden was gradually coaxed out of its wilderness condition.
         </p>
 
-        <div className="row">
-            <div className="col-xs-6 col-md-2">
-                <div className="thumbnail text-center">
-                    <img src={motherAbbessAgnesGasquet} alt="Mother Abbess Agnes Gasquet" />
-                    <div className="caption">Mother Abbess Agnes Gasquet</div>
-                </div>
-            </div>
-            <div className="col-xs-6 col-md-2">
-                <div className="thumbnail text-center">
-                    <img src={motherClareCampbell} alt="Mother Clare Campbell" />
-                    <div className="caption">Mother Clare Campbell</div>
-                </div>
-            </div>
-        </div>
+        <Grid mb="md">
+            <Grid.Col span={{ base: 6, sm: 2 }} ta="center">
+                <img src={motherAbbessAgnesGasquet} alt="Mother Abbess Agnes Gasquet" />
+                <div>Mother Abbess Agnes Gasquet</div>
+            </Grid.Col>
+            <Grid.Col span={{ base: 6, sm: 2 }} ta="center">
+                <img src={motherClareCampbell} alt="Mother Clare Campbell" />
+                <div>Mother Clare Campbell</div>
+            </Grid.Col>
+        </Grid>
 
         <h4>1951</h4>
         <p>
@@ -101,40 +93,28 @@ export const Arundel: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             consolidation and expansion, and soon the community numbered 44 sisters.
         </p>
 
-        <div className="row">
-            <div className="col-xs-6 col-md-2">
-                <div className="thumbnail text-center">
-                    <img src={motherAustinGibson} alt="Mother Austin Gibson" />
-                    <div className="caption">Mother Austin Gibson</div>
-                </div>
-            </div>
-            <div className="col-xs-6 col-md-2">
-                <div className="thumbnail text-center">
-                    <img src={motherCampionFleet} alt="Mother Campion Fleet" />
-                    <div className="caption">Mother Campion Fleet</div>
-                </div>
-            </div>
-        </div>
+        <Grid mb="md">
+            <Grid.Col span={{ base: 6, sm: 2 }} ta="center">
+                <img src={motherAustinGibson} alt="Mother Austin Gibson" />
+                <div>Mother Austin Gibson</div>
+            </Grid.Col>
+            <Grid.Col span={{ base: 6, sm: 2 }} ta="center">
+                <img src={motherCampionFleet} alt="Mother Campion Fleet" />
+                <div>Mother Campion Fleet</div>
+            </Grid.Col>
+        </Grid>
 
-        <Card style={{ maxWidth: '430px' }}>
-            <CardImg top src={conventFromTheBack} />
-            <CardBody>
-                <CardText>
-                    Arundel Convent from the back
-                    <br />
-                    <a href={communityTripAroundHouse}>Please take a look round our house.</a>
-                </CardText>
-            </CardBody>
-        </Card>
+        <PictureCard style={{ maxWidth: '430px' }} src={conventFromTheBack}>
+            Arundel Convent from the back
+            <br />
+            <a href={communityTripAroundHouse}>Please take a look round our house.</a>
+        </PictureCard>
 
         <h4>1990</h4>
 
-        <Card className="float-end">
-            <CardImg top src={spire} />
-            <CardBody>
-                <CardText>The Spire</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={spire}>
+            The Spire
+        </PictureCard>
 
         <p>
             At this time we needed urgent work done on our chapel spire and the estimate was £40,000. We had just

@@ -1,10 +1,10 @@
-main img
-{
+.home-cover img {
+    max-width: 100%;
     max-height: 400px;
-    transition: 0.20s ease-out;
+    vertical-align: middle;
+    transition: 0.2s ease-out;
 }
 
-    main img:hover
-    {
-        transform: scale(0.9);
-    }
+.home-cover img:hover {
+    transform: scale(0.9);
+}
