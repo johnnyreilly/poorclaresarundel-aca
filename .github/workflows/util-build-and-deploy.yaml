@@ -79,6 +79,10 @@ jobs:
           push: ${{ inputs.deploy }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          # reuse image layers between runs through the GitHub Actions cache;
+          # mode=max also caches the intermediate build stages
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           build-args: |
             VITE_BRANCH_NAME=${{ inputs.branchName }}
             VITE_GIT_SHA=${{ steps.vars.outputs.sha_short }}
