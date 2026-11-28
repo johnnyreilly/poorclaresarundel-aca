@@ -25,4 +25,4 @@ jobs:
     with:
       deploy: false
       branchName: ${{ github.head_ref || github.ref_name }}
-    secrets: inherit
+    # no secrets: this only builds and smoke tests the image
