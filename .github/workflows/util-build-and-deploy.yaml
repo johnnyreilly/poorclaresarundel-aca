@@ -108,7 +108,7 @@ jobs:
 
       - name: Deploy to Azure
         id: deploy
-        uses: azure/CLI@v2
+        uses: azure/CLI@v3
         with:
           inlineScript: |
             RESOURCE_GROUP="${{ env.RESOURCE_GROUP }}"
