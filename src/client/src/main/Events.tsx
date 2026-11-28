@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg } from 'reactstrap';
+import { PictureCard } from '../components/PictureCard';
 import stClareStatue from './images/StClareStatue.jpg';
 import stFrancis from './images/StFrancis.jpg';
 import strewnCross from './images/strewnCross.jpg';
@@ -119,17 +119,13 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <h4>Franciscan Celebrations</h4>
 
-            <Card className="float-end">
-                <CardImg top src={stClareStatue} />
-            </Card>
+            <PictureCard float="end" src={stClareStatue} />
 
             <h5>Solemnity of St Clare</h5>
 
             <p>11th August - 8:30 Mass of St Clare</p>
 
-            <Card className="float-end">
-                <CardImg top src={stFrancis} />
-            </Card>
+            <PictureCard float="end" src={stFrancis} />
 
             <h5>Solemnity of St. Francis: 4th October</h5>
 
@@ -143,18 +139,14 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>Mass of the Lord’s Supper: 6.30pm</p>
 
-            <Card className="float-end">
-                <CardImg top src={strewnCross} />
-            </Card>
+            <PictureCard float="end" src={strewnCross} />
 
             <h6>Good Friday</h6>
 
             <p>Liturgy of the Passion: 3pm</p>
             <p>Way of the Cross: 5.30pm</p>
 
-            <Card className="float-end">
-                <CardImg top src={easterVigil} />
-            </Card>
+            <PictureCard float="end" src={easterVigil} />
 
             <h6>Holy Saturday</h6>
 
@@ -172,9 +164,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>8pm Office of Readings and blessing of the Crib</p>
 
-            <Card className="float-end">
-                <CardImg top src={crib} />
-            </Card>
+            <PictureCard float="end" src={crib} />
 
             <h5>Christmas Day</h5>
 
@@ -182,9 +172,7 @@ Christmas Day - 8.30am: Christmas Morning Mass, please join us for refreshments 
 
             <p>8.30am Holy Mass</p>
 
-            <Card className="float-start">
-                <CardImg top src={taize} />
-            </Card>
+            <PictureCard float="start" src={taize} />
 
             <h5>Taize Evening</h5>
 

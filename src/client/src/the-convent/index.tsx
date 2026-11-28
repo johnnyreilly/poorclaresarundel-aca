@@ -1,4 +1,4 @@
-import { Container } from 'reactstrap';
+import { PageContent } from '../components/PageContent';
 import { Navigate, Route, Routes } from 'react-router';
 import { Menu } from './Menu';
 import { Home, homePath } from './Home';
@@ -16,7 +16,7 @@ export default function TheConvent() {
     return (
         <>
             <Menu conventRootPath={conventRootPath} />
-            <Container>
+            <PageContent>
                 <Routes>
                     <Route path={`${conventRootPath}${homePath}`} element={<Home />} />
                     <Route path={`${conventRootPath}${whyPath}`} element={<Why />} />
@@ -29,7 +29,7 @@ export default function TheConvent() {
                     <Route path={`${conventRootPath}${guidedPrayerPath}`} element={<GuidedPrayer />} />
                     <Route path="*" element={<Navigate to={`${conventRootPath}${homePath}`} replace />} />
                 </Routes>
-            </Container>
+            </PageContent>
         </>
     );
 }

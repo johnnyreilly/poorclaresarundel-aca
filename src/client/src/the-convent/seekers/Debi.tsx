@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import seekerDebi from './images/SeekerDebi.jpg';
 import theConventDebiRecipe from './images/TheConventDebiRecipe.jpg';
 
@@ -7,12 +7,9 @@ export const debiPath = '/debi';
 
 export const Debi: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={seekerDebi} />
-            <CardBody>
-                <CardText>Debi</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={seekerDebi}>
+            Debi
+        </PictureCard>
 
         <h3>Debi</h3>
 
@@ -83,12 +80,9 @@ export const Debi: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             had learned to cook, despite my relatively little time with the Aga. This is what I made.
         </p>
 
-        <Card className="float-end">
-            <CardImg top src={theConventDebiRecipe} alt="© Tiger Aspect Productions" />
-            <CardBody>
-                <CardText>Debi mixing</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={theConventDebiRecipe} alt="© Tiger Aspect Productions">
+            Debi mixing
+        </PictureCard>
 
         <h4>Debi Cake</h4>
 

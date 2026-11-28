@@ -1,4 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '@mantine/core/styles.css';
+import { MantineProvider } from '@mantine/core';
 import * as ReactGA from 'react-ga';
 import { createBrowserRouter } from 'react-router';
 import { createBrowserHistory } from 'history';
@@ -7,6 +8,7 @@ import { RouterProvider } from 'react-router/dom';
 import { Home } from './Home';
 import React, { Suspense } from 'react';
 import { Loading } from './components/Loading';
+import { theme } from './theme';
 
 const Main = React.lazy(() => import('./main'));
 const TheConvent = React.lazy(() => import('./the-convent'));
@@ -50,7 +52,11 @@ const router = createBrowserRouter([
     },
 ]);
 
-createRoot(document.getElementById('root')!).render(<RouterProvider router={router} />);
+createRoot(document.getElementById('root')!).render(
+    <MantineProvider theme={theme}>
+        <RouterProvider router={router} />
+    </MantineProvider>,
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

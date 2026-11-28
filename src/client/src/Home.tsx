@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
+import { Anchor, Container, Text, Title } from '@mantine/core';
 import house from './images/house.jpg';
-// import lightForTheWorldSmall from './images/light-for-the-world-small.jpg';
-// import oComeEmmanuelSmall from './images/o-come-emmanuel-small.jpg';
 import myPeaceIGiveYou from './images/my-peace-i-give-you.avif';
 import { myPeaceIGiveYouPath } from './main/MyPeaceIGiveYou';
 import './Home.css';
@@ -30,63 +29,33 @@ export function Home() {
     return (
         <>
             <script type="application/ld+json">{JSON.stringify(catholicChurchStructuredData)}</script>
-            <div className="text-center">
-                <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-                    <header className="masthead mb-auto">
-                        <div className="inner">
-                            <h2 className="masthead-brand">Welcome to the Poor Clares of Arundel</h2>
-                        </div>
-                    </header>
+            <Container size="lg" p="md" ta="center">
+                <header>
+                    <Title order={2} fw={500} mb="xs">
+                        Welcome to the Poor Clares of Arundel
+                    </Title>
+                </header>
 
-                    <main role="main" className="inner cover">
-                        {/* {new Date().getMonth() !== 11 ? (
-                    <Link to="/light-for-the-world" title="We made an album...">
-                        <img
-                            id="light-of-the-world"
-                            src={lightForTheWorldSmall}
-                            alt="We made an album..."
-                            className="img-fluid img-rounded"
-                        />
+                <main role="main" className="home-cover">
+                    <Link to={myPeaceIGiveYouPath} title="We made an album...">
+                        <img id="my-peace-i-give-you" src={myPeaceIGiveYou} alt="We made an album..." />
                     </Link>
-                ) : (
-                    <Link to="/light-for-the-world" title="We made a Christmas song...">
-                        <img
-                            id="o-come-emmanuel"
-                            src={oComeEmmanuelSmall}
-                            alt="We made an album..."
-                            className="img-fluid img-rounded"
-                        />
+
+                    <Link to="/us" title="Learn more about us...">
+                        <img id="house" src={house} alt="Click here to enter..." />
                     </Link>
-                )} */}
-
-                        <Link to={myPeaceIGiveYouPath} title="We made an album...">
-                            <img
-                                id="my-peace-i-give-you"
-                                src={myPeaceIGiveYou}
-                                alt="We made an album..."
-                                className="img-fluid img-rounded"
-                            />
-                        </Link>
-
-                        <Link to="/us" title="Learn more about us...">
-                            <img
-                                id="house"
-                                src={house}
-                                alt="Click here to enter..."
-                                className="img-fluid img-rounded"
-                            />
-                        </Link>
-                        <p className="lead">
-                            We are sisters, who share prayer, work, laughter and struggles,
-                            <br />
-                            and live according to the Form of Life drawn up by St Clare of Assisi in 1253.
-                        </p>
-                        <p className="lead">
-                            <Link to="/us">Learn more about us...</Link>
-                        </p>
-                    </main>
-                </div>
-            </div>
+                    <Text size="xl" fw={300} mb="md">
+                        We are sisters, who share prayer, work, laughter and struggles,
+                        <br />
+                        and live according to the Form of Life drawn up by St Clare of Assisi in 1253.
+                    </Text>
+                    <Text size="xl" fw={300}>
+                        <Anchor inherit component={Link} to="/us">
+                            Learn more about us...
+                        </Anchor>
+                    </Text>
+                </main>
+            </Container>
             <Footer />
         </>
     );

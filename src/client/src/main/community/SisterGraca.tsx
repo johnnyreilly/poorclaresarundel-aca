@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import srGraca from './images/SrGraca.jpg';
 
 export const sisterGracaPath = '/community-sister-graca';
 
 export const SisterGraca: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={srGraca} />
-            <CardBody>
-                <CardText>Sister Graça</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={srGraca}>
+            Sister Graça
+        </PictureCard>
 
         <h3>Sister Graça&apos;s Story</h3>
 

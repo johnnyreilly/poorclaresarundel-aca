@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import kenyaContractSigning from './images/KenyaContractSigning.jpg';
 import kenyaHomePic from './images/KenyaHomePic.jpg';
 import whereWeLive from './images/where-we-live-kenya.avif';
@@ -17,36 +17,34 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             Monastery of Our Lady of Light, Myanga
         </h3>
 
-        <Card style={{ maxWidth: '700px', marginBottom: '1em' }}>
-            <CardImg top src={communityKenya} />
-            <CardBody>
-                <CardText>
-                    <a target="_blank" href="https://poorclaresmonastery.co.ke" rel="noreferrer">
-                        poorclaresmonastery.co.ke
-                    </a>
-                </CardText>
-            </CardBody>
-        </Card>
+        <PictureCard style={{ maxWidth: '700px', marginBottom: '1em' }} src={communityKenya}>
+            <a target="_blank" href="https://poorclaresmonastery.co.ke" rel="noreferrer">
+                poorclaresmonastery.co.ke
+            </a>
+        </PictureCard>
         <h4>Learn more about us</h4>
 
         <p>Here is a video about our community:</p>
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/tC0CK9XY4gU?si=mP_XJb5CuxHHIjlw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+        <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/tC0CK9XY4gU?si=mP_XJb5CuxHHIjlw"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+        ></iframe>
 
         <h4>Beginnings</h4>
 
-        <Card className="float-end">
-            <CardImg top src={kenyaContractSigning} />
-            <CardBody>
-                <CardText>
-                    Bishop Longinus and Sr
-                    <br />
-                    Aelred(Abbess) sign the
-                    <br />
-                    contract
-                </CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={kenyaContractSigning}>
+            Bishop Longinus and Sr
+            <br />
+            Aelred(Abbess) sign the
+            <br />
+            contract
+        </PictureCard>
 
         <p>
             On 3 June 1990 the Arundel community voted to make a foundation in Kenya. In October 1991 three sisters
@@ -67,16 +65,10 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             which was consecrated on 19 July 2001
         </p>
 
-        <Card style={{ maxWidth: '430px' }}>
-            <CardImg top src={kenyaHomePic} />
-            <CardBody>
-                <CardText>
-                    Before the Mass of Missioning with Cardinal Cormac Murphy O’Connor (then our Archbishop) and Bishop
-                    (now Cardinal) Vincent Nichols, the three foundresses and the (then) Abbess of Arundel and the
-                    vicaress
-                </CardText>
-            </CardBody>
-        </Card>
+        <PictureCard style={{ maxWidth: '430px' }} src={kenyaHomePic}>
+            Before the Mass of Missioning with Cardinal Cormac Murphy O’Connor (then our Archbishop) and Bishop (now
+            Cardinal) Vincent Nichols, the three foundresses and the (then) Abbess of Arundel and the vicaress
+        </PictureCard>
 
         <h4>Where We Live</h4>
 
@@ -86,12 +78,9 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             small plots of land of the local people.
         </p>
 
-        <Card style={{ maxWidth: '430px' }}>
-            <CardImg top src={whereWeLive} />
-            <CardBody>
-                <CardText>The House and the Church</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard style={{ maxWidth: '430px' }} src={whereWeLive}>
+            The House and the Church
+        </PictureCard>
 
         <h4>The Community</h4>
 
@@ -108,12 +97,9 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             closely in contact with us.
         </p>
 
-        <Card className="float-end">
-            <CardImg top src={africanStClare} />
-            <CardBody>
-                <CardText>African St Clare</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={africanStClare}>
+            African St Clare
+        </PictureCard>
 
         <h4>Our daily life</h4>
 
@@ -133,12 +119,9 @@ export const Kenya: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
             would like more information about our community and way of life.
         </p>
 
-        <Card style={{ maxWidth: '700px' }}>
-            <CardImg top src={guestHouseKenya} />
-            <CardBody>
-                <CardText>The guesthouse</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard style={{ maxWidth: '700px' }} src={guestHouseKenya}>
+            The guesthouse
+        </PictureCard>
 
         <address>
             <strong>Monastery of Poor Clares</strong>

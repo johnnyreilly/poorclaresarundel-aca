@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { PictureCard } from '../../components/PictureCard';
 import seekerVik from './images/SeekerVik.jpg';
 
 export const vikPath = '/vik';
 
 export const Vik: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={seekerVik} />
-            <CardBody>
-                <CardText>Vik</CardText>
-            </CardBody>
-        </Card>
+        <PictureCard float="end" src={seekerVik}>
+            Vik
+        </PictureCard>
 
         <h3>Vik</h3>
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg } from 'reactstrap';
+import { PictureCard } from '../components/PictureCard';
 import hodieChristusSmall from '../images/hodie-christus-small.jpg';
 import silentNightSmall from '../images/silent-night-small.jpg';
 
@@ -7,9 +7,7 @@ export const christmasPath = '/christmas';
 
 export const Christmas: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={silentNightSmall} />
-        </Card>
+        <PictureCard float="end" src={silentNightSmall} />
 
         <h3>Silent Night</h3>
 
@@ -29,9 +27,7 @@ export const Christmas: React.FC<React.PropsWithChildren<unknown>> = (_props) =>
 
         <hr />
 
-        <Card className="float-end">
-            <CardImg top src={hodieChristusSmall} />
-        </Card>
+        <PictureCard float="end" src={hodieChristusSmall} />
 
         <h3>Hodie Christus Natus Est</h3>
 

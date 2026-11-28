@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardImg } from 'reactstrap';
+import { PictureCard } from '../components/PictureCard';
 import smallRoom from './images/SmallRoom.jpg';
 import smallSanDamianoCrucifix from './images/SmallSanDamianoCrucifix.jpg';
 
@@ -7,9 +7,7 @@ export const guidedPrayerPath = '/guided-prayer';
 
 export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props) => (
     <>
-        <Card className="float-end">
-            <CardImg top src={smallRoom} style={{ maxWidth: '500px' }} />
-        </Card>
+        <PictureCard float="end" src={smallRoom} imageStyle={{ maxWidth: '500px' }} />
 
         <h3>Guided Prayer - Praying With the Seekers</h3>
 
@@ -44,9 +42,7 @@ export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props)
             Someone passing by
         </p>
 
-        <Card className="float-end">
-            <CardImg top src={smallSanDamianoCrucifix} />
-        </Card>
+        <PictureCard float="end" src={smallSanDamianoCrucifix} />
 
         <p>
             Now listen to the sounds in the room
@@ -106,9 +102,7 @@ export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props)
 
         <h4>Imaginative Prayer</h4>
 
-        <Card className="float-end">
-            <CardImg top src={smallSanDamianoCrucifix} />
-        </Card>
+        <PictureCard float="end" src={smallSanDamianoCrucifix} />
         <p>
             Read John 1:35-42: <br />
             John was there with two of his disciples. When he saw Jesus passing by, he said, ‘Look, the Lamb of God!’
@@ -192,9 +186,7 @@ export const GuidedPrayer: React.FC<React.PropsWithChildren<unknown>> = (_props)
 
         <h4>Examen of Consciousness</h4>
 
-        <Card className="float-end">
-            <CardImg top src={smallSanDamianoCrucifix} />
-        </Card>
+        <PictureCard float="end" src={smallSanDamianoCrucifix} />
 
         <p>
             St Ignatius of Loyola developed a pattern of looking back over the day, the week, the year, to see what is

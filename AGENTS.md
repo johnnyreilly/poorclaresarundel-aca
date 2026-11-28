@@ -12,7 +12,7 @@ Most changes are content edits to the client (text, images, new pages). The serv
 
 | Path                 | What lives there                                                                   |
 | -------------------- | ---------------------------------------------------------------------------------- |
-| `src/client/`        | React 18 + TypeScript + Vite SPA, styled with Bootstrap 5 / reactstrap             |
+| `src/client/`        | React 19 + TypeScript + Vite SPA, styled with Mantine                              |
 | `src/server/`        | Fastify 5 + TypeScript (ESM) server: serves the built client and the `/api` routes |
 | `infra/main.bicep`   | Azure infrastructure (Container Apps)                                              |
 | `.github/workflows/` | CI (build + lint for client and server), container build, deploy                   |
@@ -48,7 +48,8 @@ There are no automated tests. Before finishing a change, run `pnpm run build` an
   1. Create the component file, exporting `somethingPath` and `Something`.
   2. Add a `<Route>` in `src/client/src/main/index.tsx`.
   3. Add a link in `src/client/src/main/Menu.tsx` if it should appear in the navigation.
-- Page content is written directly in JSX; there is no CMS or markdown layer.
+- Page content is written directly in JSX; there is no CMS or markdown layer. Plain HTML (headings, paragraphs, lists, links) is styled by Mantine's `Typography`, which `components/PageContent.tsx` wraps around every page.
+- UI components come from Mantine (`@mantine/core`); the theme, including the brand brown, is in `src/client/src/theme.ts`. For a picture with an optional caption use `components/PictureCard.tsx` (`float="end"` wraps text around it); navigation bars are built from `components/Navbar.tsx`.
 - Images sit in an `images/` folder beside the pages that use them and are imported as modules.
 - The dev server (`pnpm start`) does not proxy `/api`, so the prayer request form only works under `pnpm run preview` or Docker.
 

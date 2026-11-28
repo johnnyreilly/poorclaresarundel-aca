@@ -1,16 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router';
-import {
-    Navbar,
-    NavbarToggler,
-    Collapse,
-    Nav,
-    NavItem,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-} from 'reactstrap';
+import { Container, Menu as Dropdown } from '@mantine/core';
+import { Navbar, NavBrand, NavDropdown, NavLink } from '../components/Navbar';
 import { whyPath } from './Why';
 import { angelaPath } from './seekers/Angela';
 import { debiPath } from './seekers/Debi';
@@ -25,77 +15,39 @@ interface IProps {
 }
 
 export function Menu({ conventRootPath }: IProps) {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggle = () => setIsOpen(!isOpen);
-
     return (
-        <>
+        <div className="header">
             <div className="header-image header-image-the-convent" />
+            <Container size="lg">
+                <Navbar brand={<NavBrand to={conventRootPath}>The Convent</NavBrand>}>
+                    <NavLink to={`${conventRootPath}${whyPath}`}>Why</NavLink>
+                    <NavDropdown label="Seekers">
+                        <Dropdown.Item component={Link} to={`${conventRootPath}${angelaPath}`}>
+                            Angela
+                        </Dropdown.Item>
+                        <Dropdown.Item component={Link} to={`${conventRootPath}${debiPath}`}>
+                            Debi
+                        </Dropdown.Item>
+                        <Dropdown.Item component={Link} to={`${conventRootPath}${ionaPath}`}>
+                            Iona
+                        </Dropdown.Item>
+                        <Dropdown.Item component={Link} to={`${conventRootPath}${vikPath}`}>
+                            Vik
+                        </Dropdown.Item>
+                    </NavDropdown>
+                    <NavDropdown label="Production Team">
+                        <Dropdown.Item component={Link} to={`${conventRootPath}${producersCommentsPath}`}>
+                            Producer&apos;s Comments
+                        </Dropdown.Item>
+                        <Dropdown.Item component={Link} to={`${conventRootPath}${photoGalleryPath}`}>
+                            Photo Gallery
+                        </Dropdown.Item>
+                    </NavDropdown>
+                    <NavLink to={`${conventRootPath}${guidedPrayerPath}`}>Guided Prayer</NavLink>
 
-            <Navbar dark className="bg-primary" expand="md">
-                <div className="rounded px-3 px-sm-4 py-3 py-sm-5">
-                    <Link to={conventRootPath} className="navbar-brand">
-                        The Convent
-                    </Link>
-                    <NavbarToggler onClick={toggle} />
-                    <Collapse isOpen={isOpen} navbar>
-                        <Nav className="mr-auto" navbar>
-                            <NavItem>
-                                <Link className="nav-link" to={`${conventRootPath}${whyPath}`}>
-                                    Why
-                                </Link>
-                            </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    Seekers
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem>
-                                        <Link to={`${conventRootPath}${angelaPath}`}>Angela</Link>
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <Link to={`${conventRootPath}${debiPath}`}>Debi</Link>
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <Link to={`${conventRootPath}${ionaPath}`}>Iona</Link>
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <Link to={`${conventRootPath}${vikPath}`}>Vik</Link>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    Production Team
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem>
-                                        <Link to={`${conventRootPath}${producersCommentsPath}`}>
-                                            Producer&apos;s Comments
-                                        </Link>
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <Link to={`${conventRootPath}${photoGalleryPath}`}>Photo Gallery</Link>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-                            <NavItem>
-                                <Link className="nav-link" to={`${conventRootPath}${guidedPrayerPath}`}>
-                                    Guided Prayer
-                                </Link>
-                            </NavItem>
-                        </Nav>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <Link className="nav-link" to="/">
-                                    Back to main site
-                                </Link>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-                </div>
-            </Navbar>
-        </>
+                    <NavLink to="/">Back to main site</NavLink>
+                </Navbar>
+            </Container>
+        </div>
     );
 }

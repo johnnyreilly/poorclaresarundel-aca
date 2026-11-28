@@ -1,4 +1,8 @@
-import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
+import '@mantine/carousel/styles.css';
+import { Button, Divider, Grid, Text, Title } from '@mantine/core';
+import { Carousel } from '@mantine/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import type { EmblaCarouselType } from 'embla-carousel';
 import communityAtPrayer from './images/Page2CommunityAtPrayer.jpg';
 import prayingInChapel from './images/praying_in_chapel.jpg';
 import coffeeTime from './images/coffee_time.jpg';
@@ -6,33 +10,31 @@ import librarian from './images/librarian.jpg';
 import vegTeam from './images/veg_team.jpg';
 import providenceGroup from './images/graca_and_yohanna.jpg';
 import './Us.css';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const usPath = '/us';
 
 export function Us() {
     return (
-        <div className="row">
-            <div className="col-lg-6 col-md-5 col-sm-3 col-xs-12">
-                <div className="rounded px-3 px-sm-4 py-3 py-sm-5">
-                    <h1 className="display-4">About Us</h1>
-                    <p className="lead">
-                        Called to a life of prayer we seek to live the Gospel in and for our world of today. We share
-                        our lives and all that we do.
-                    </p>
-                    <hr className="my-2" />
-                    <p>We are the Poor Clares of Arundel.</p>
-                    <p className="lead">
-                        <a className="btn btn-primary" href="http://youtu.be/u_RlaYfJGbc">
-                            See a slideshow of us here...
-                        </a>
-                    </p>
-                </div>
-            </div>
-            <div className="col-lg-6 col-md-7 col-sm-9 col-xs-12">
+        <Grid gap="xl">
+            <Grid.Col span={{ base: 12, xs: 3, sm: 5, md: 6 }} py={{ base: 0, xs: 'xl' }}>
+                <Title order={1} fz={{ base: 36, sm: 56 }} fw={300} lh={1.2} mb="xs">
+                    About Us
+                </Title>
+                <Text size="xl" fw={300}>
+                    Called to a life of prayer we seek to live the Gospel in and for our world of today. We share our
+                    lives and all that we do.
+                </Text>
+                <Divider my="sm" />
+                <Text mb="md">We are the Poor Clares of Arundel.</Text>
+                <Button component="a" href="http://youtu.be/u_RlaYfJGbc" c="white" td="none">
+                    See a slideshow of us here...
+                </Button>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, xs: 9, sm: 7, md: 6 }}>
                 <UsCarousel />
-            </div>
-        </div>
+            </Grid.Col>
+        </Grid>
     );
 }
 
@@ -64,41 +66,60 @@ const items = [
 ];
 
 function UsCarousel() {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [animating, setAnimating] = useState(false);
+    const [embla, setEmbla] = useState<EmblaCarouselType>();
+    // As before, the slides only start to advance by themselves (every 5 seconds)
+    // once the visitor has changed slide, and they pause while the mouse is over them.
+    const [autoplay] = useState(() => Autoplay({ delay: 5000, playOnInit: false, stopOnInteraction: false }));
+    const cycling = useRef(false);
+    const hovering = useRef(false);
 
-    const next = () => {
-        if (animating) return;
-        const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
-        setActiveIndex(nextIndex);
+    const handleSlideChange = () => {
+        cycling.current = true;
+        if (!hovering.current) autoplay.play();
     };
 
-    const previous = () => {
-        if (animating) return;
-        const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
-        setActiveIndex(nextIndex);
+    const handleMouseEnter = () => {
+        hovering.current = true;
+        autoplay.stop();
     };
 
-    const goToIndex = (newIndex: number) => {
-        if (animating) return;
-        setActiveIndex(newIndex);
+    const handleMouseLeave = () => {
+        hovering.current = false;
+        if (cycling.current) autoplay.play();
     };
 
-    const slides = items.map((item) => {
-        return (
-            <CarouselItem onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)} key={item.src}>
-                <img src={item.src} alt={item.caption} />
-                <CarouselCaption captionText="" captionHeader={item.caption} />
-            </CarouselItem>
-        );
-    });
+    // the left and right arrow keys change slide wherever the focus is on the page
+    useEffect(() => {
+        if (!embla) return;
+
+        const handleKeyUp = (event: KeyboardEvent) => {
+            if (event.key === 'ArrowLeft') embla.scrollPrev();
+            if (event.key === 'ArrowRight') embla.scrollNext();
+        };
+
+        document.addEventListener('keyup', handleKeyUp);
+        return () => document.removeEventListener('keyup', handleKeyUp);
+    }, [embla]);
 
     return (
-        <Carousel activeIndex={activeIndex} next={next} previous={previous}>
-            <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
-            {slides}
-            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+        <Carousel
+            withIndicators
+            withKeyboardEvents={false}
+            emblaOptions={{ loop: true }}
+            plugins={[autoplay]}
+            getEmblaApi={setEmbla}
+            onSlideChange={handleSlideChange}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            nextControlProps={{ 'aria-label': 'Next' }}
+            previousControlProps={{ 'aria-label': 'Previous' }}
+        >
+            {items.map((item) => (
+                <Carousel.Slide key={item.src} className="us-slide">
+                    <img src={item.src} alt={item.caption} />
+                    <h3>{item.caption}</h3>
+                </Carousel.Slide>
+            ))}
         </Carousel>
     );
 }
