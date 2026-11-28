@@ -17,7 +17,7 @@ if (config.appInsightsConnectionString) {
     appInsights
         .setup(config.appInsightsConnectionString)
         .setAutoCollectRequests(true)
-        .setAutoCollectPerformance(true, true)
+        .setAutoCollectPerformance(true, false)
         .setAutoCollectExceptions(true)
         .setAutoCollectDependencies(true)
         .setAutoCollectConsole(true, true) // this will enable console logging

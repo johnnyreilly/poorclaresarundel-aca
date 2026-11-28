@@ -1,8 +1,8 @@
-FROM node:22-slim AS base
+FROM node:26-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+RUN npm install --global pnpm@11
 
 FROM base AS prod
 
@@ -39,7 +39,7 @@ RUN pnpm run build
 ## IMAGE: runtime
 ##
 FROM base AS runtime
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 WORKDIR /app
 COPY --from=build-client client/dist ./client/dist
